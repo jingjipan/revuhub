@@ -105,14 +105,10 @@ In line with our design philosophy, we will consider our system successful if us
 
 
 ## Iteration 1 User Stories (5-10)
-
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
-9. 
-10. 
+1. As a user, I want to be able to view the synopsis of a movie.(high)
+2. As a user, I want to be able to view the casts of a movie.(high)
+3. As a user, I want to be able to view the photos of a movie.(high)
+4. As a user, I want to be able to view the news of a movie.(high)
+5. As a user, I want to be able to view reviews about a movie.(high)
+6. As a user, I want to be able to rate reviews about a movie.(high)
+7. As a user, I want to be able to search movies based on title.(high)
