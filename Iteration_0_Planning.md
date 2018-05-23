@@ -28,14 +28,14 @@ In line with our design philosophy, we will consider our system successful if us
  
 *Features:*
 1. Look at movie info
-2. look at movie reviews
-3. leave a review on a movie
-4. search for a movie
-5. create an account
-6. login to an account
-7. view your profile
-8. browse top-rated movies
-9. browse movies by category
+2. Look at movie reviews
+3. Leave a review on a movie
+4. Search for a movie
+5. Create an account
+6. Login to an account
+7. View your profile
+8. Browse top-rated movies
+9. Browse movies by category
 10. Add movies to favorites
  
 ### *Iteration 1*
