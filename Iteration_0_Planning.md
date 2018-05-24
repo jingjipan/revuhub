@@ -12,10 +12,11 @@ Movie Review App
 
 > summary overall scope of project(including who the user are, and why we designed it)
 
-`253/500 words:`
-`befor we submit it, might be change the temp app name`
+> befor we submit it, might be change the temp app name
 
-The Movie Reviewer is an APP for help user find best film. The reason we designed this APP is collecting people who already watch a movie and leave the comment for the film, and show these comment to other user, that help people distinguish which movie is good which is suit them. 
+`252/500 words:`
+
+The Movie Reviewer is an APP for help user find best film. The reason we designed this APP is collecting people who already watch a movie and leave the comment for the film, and show these comment to other user who did not watch this film and prepare to watch this film, these comments and rate number can help people distinguish which movie is good which is suit them. 
 
 Just bring the pleasure of feeling, Movie Reviewer help you find the best movie. You can review movie brief introduction, trailers and other information like director, writers, stars. Also you can see the film rating and comments from other users. Base these rating and comment, you can find best film you like. After watch film, you can leave your comment of the movie and rating the film. 
 
