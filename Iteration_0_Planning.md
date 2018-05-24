@@ -10,6 +10,17 @@ Movie Review App
 * why the project is valuable
 * the success criteria that indicate the goal(s) of the project
 
+> summary overall scope of project(including who the user are, and why we designed it)
+
+`253/500 words:`
+
+The Movie Reviewer is an APP for help user find best film. The reason we designed this APP is collecting people who already watch a movie and leave the comment for the film, and show these comment to other user, that help people distinguish which movie is good which is suit them. 
+
+Just bring the pleasure of feeling, Movie Reviewer help you find the best movie. You can review movie brief introduction, trailers and other information like director, writers, stars. Also you can see the film rating and comments from other users. Base these rating and comment, you can find best film you like. After watch film, you can leave your comment of the movie and rating the film. 
+
+For all user who want to overview a movie before walk-in to cinema, user can search the movie before watch it. This application will show many other user’s rating and comments, these information can help user find which is the best movie. User can also leave a rating and comments after watch the film. 
+
+Sometimes, user just want find a good movie for weekend, user can browse top-rated movies or browse movies by category, save time to watch a good film not spend time to watch a boring film. Also user can create an account in this APP, and add movie in his own Favorites List. Easy to find the movie information next time.
 
 > Why the project is valuable
 
