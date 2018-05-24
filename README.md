@@ -1,16 +1,18 @@
-Movie Review App
+Team J: Rev-U-Hub
 ================
 
 ## Our vision for our Movie Review App
 
-**This is a summary sentence for our movie app.**
+**Rev-U-Hub is an app that helps users to find the films best suited to them.**
 
 500 words:
 * description of what the project is (including who the users are)
 * why the project is valuable
 * the success criteria that indicate the goal(s) of the project
 
-> summary overall scope of project(including who the user are, and why we designed it)
+> Summary
+
+> Overall scope of project (including who the user are, and why we designed it)
 
 Rev-U-Hub is an app that helps users to find the films best suited to them. The reason that we designed this app is to allow people who have already watched movies share their opinions with others who have not yet seen them by providing ratings and reviews. This will then allow other users to discern which movies are well-received by the community and furthermore, which will best suit them.
 
@@ -21,7 +23,6 @@ Even in situations where users just want find a good movie for weekend, instead 
 > Why the project is valuable
 
 > The success criteria that indicate the goal(s) of the project
-
 
 The development of our movie categorization system will satisfy a much-needed niche in the movies and reviews ecosystem.  Current solutions for users seeking to research, review, and discover movies are typically feature-laden, resource intensive and overwhelming to view, especially on mobile devices.  These features, while sometimes useful, can be cumbersome for users seeking a more responsive system. Many of these aspects of current movie apps and websites are also very focused on external media, such as trailers or reviews by professional critics.
 
@@ -44,7 +45,9 @@ In line with our design philosophy, we will consider our system successful if us
 8. Browse top-rated movies
 9. Browse movies by category
 10. Add movies to favorites
- 
+
+---
+
 ### *Iteration 1*
 #### Viewing movie information
 * **Title:** Viewing movie information
@@ -64,6 +67,7 @@ In line with our design philosophy, we will consider our system successful if us
 * **Priority:** High
 * **Estimate:** 4 Days
 
+---
 
 ### *Iteration 2*
 #### Create an account
@@ -90,6 +94,7 @@ In line with our design philosophy, we will consider our system successful if us
 * **Priority:** Medium
 * **Estimate:** 1 Week
 
+---
 
 ### *Iteration 3*
 #### Browse top-rated movies
