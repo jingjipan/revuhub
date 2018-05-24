@@ -13,6 +13,7 @@ Movie Review App
 > summary overall scope of project(including who the user are, and why we designed it)
 
 `253/500 words:`
+`befor we submit it, might be change the temp app name`
 
 The Movie Reviewer is an APP for help user find best film. The reason we designed this APP is collecting people who already watch a movie and leave the comment for the film, and show these comment to other user, that help people distinguish which movie is good which is suit them. 
 
