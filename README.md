@@ -1,6 +1,6 @@
 Team J: Rev-U-Hub
 ================
-test
+
 ## Our vision for our Movie Review App
 
 **Rev-U-Hub is an app that helps users to find the films best suited to them.**
