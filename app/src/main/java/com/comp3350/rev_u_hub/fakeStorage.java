@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class fakeStorage {
-    HashMap<String,movie> map;
+    HashMap<String,movie> movieMap;
     public fakeStorage(){
-        map = new HashMap<String,movie>();
+        movieMap = new HashMap<String,movie>();
         this.addStaticInfo();
     }
 
@@ -31,19 +31,19 @@ public class fakeStorage {
         reviews3.add("Movie is fine.");
         movie m3 = new movie("Thor", "A Marvel movie",null,reviews2);
 
-        map.put("The Avengers",m1);
-        map.put("DeadPool",m1);
-        map.put("Thor",m1);
+        movieMap.put("The Avengers",m1);
+        movieMap.put("DeadPool",m1);
+        movieMap.put("Thor",m1);
     }
 
     ///Search for specific movie in the map
     public movie searchMovie(String movieName){
-        return map.get(movieName);  //If the movie does not exist in the storage, a null would be returned.
+        return movieMap.get(movieName);  //If the movie does not exist in the storage, a null would be returned.
     }
 
     ///Add a new movie into the storage
     public void addNewMovie(String movieName, movie m){
-        map.put(movieName,m);
+        movieMap.put(movieName,m);
     }
 
 }
