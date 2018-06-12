@@ -43,6 +43,7 @@ public class fakeStorageTest {
         movie = new movie("Iron Man", null, null, null);
         assertTrue(storage.searchMovie("Iron Man") == null);
         System.out.println("Finished test the movie is not in the Storage");
+
     }
     }
 
