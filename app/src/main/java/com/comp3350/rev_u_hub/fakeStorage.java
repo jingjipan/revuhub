@@ -17,7 +17,7 @@ public class fakeStorage {
         reviews1.add("Nice Movie.");
         reviews1.add("Poor Movie.");
         reviews1.add("Movie is fine.");
-        String[]pic1 = new String[]{"a.jpg","b.jpg"};
+        String[]pic1 = new String[]{"aa.jpg","bb.jpg"};
         movie m1 = new movie("The Avengers", "A Marvel movie",pic1,reviews1);
 
         List<String> reviews2 = new ArrayList<String>();
