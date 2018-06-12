@@ -2,31 +2,56 @@ package com.comp3350.rev_u_hub.LogicLayer;
 
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
-import com.comp3350.rev_u_hub.LogicLayer.LogicInterface;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class SearchHandler implements LogicInterface {
-    TypoEngine myTypoEngine;
+    private MovieSearcher myMovieSearcher;
+    private ReviewProcessor myReviewProcessor;
 
-    public SearchHandler() {
-        myTypoEngine = new TypoEngine();
+    SearchHandler() {
+        myMovieSearcher = new TypoEngine();
     }
 
-    public String getSynopsis(MovieDMObject movie) {return null;} //temporary
+    SearchHandler(MovieSearcher setMovieSearcher) {
+        myMovieSearcher = setMovieSearcher;
+    }
 
-    public ArrayList<String> getCast(MovieDMObject movie) {return null;} //temporary
+    SearchHandler(MovieSearcher setMovieSearcher, ReviewProcessor setReviewProcessor) {
+        myMovieSearcher = setMovieSearcher;
+        myReviewProcessor = setReviewProcessor;
+    }
 
-    public File getPhoto(MovieDMObject movie) {return null;} //temporary
+    SearchHandler(ReviewProcessor setReviewProcessor) {
+        myReviewProcessor = setReviewProcessor;
+    }
 
-    public String getNews(MovieDMObject movie) {return null;} //temporary
+    public String getSynopsis(MovieDMObject movie) {return movie.getSynopsis();}
 
-    public ReviewDMObject getReview(MovieDMObject movie) {return null;} //temporary
+    public ArrayList<String> getCast(MovieDMObject movie) {return movie.getCast();}
 
-    public boolean setReview(MovieDMObject movie, ReviewDMObject review) {return false;} //temporary
+    public File getPhoto(MovieDMObject movie) {return movie.getPhoto();}
+
+    public String getNews(MovieDMObject movie) {return movie.getNews();}
+
+    public ReviewDMObject getReview(MovieDMObject movie) {
+        return myReviewProcessor.getReview(movie);
+    }
+
+    public boolean setReview(MovieDMObject movie, ReviewDMObject review) {
+        return myReviewProcessor.setReview(movie, review);
+    }
+
+    public boolean setReview(MovieDMObject movie, String reviewText) {
+        return myReviewProcessor.setReview(movie, reviewText);
+    }
 
     public MovieDMObject getMovie(String title) {
-        return myTypoEngine.searchDefault(title);
+        return myMovieSearcher.getMovieSimple(title);
+    }
+
+    public MovieDMObject getMovieFast(String title) {
+        return myMovieSearcher.getMovie(title);
     }
 }
