@@ -1,8 +1,10 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.LogicLayer;
 
-import android.graphics.Movie;
+import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
 
 import java.util.ArrayList;
+import java.io.File;
 
 public interface LogicInterface {
     //As a user, I want to be able to view the synopsis of a movie. (high)
