@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.PersistenceLayer;
 
 import java.util.List;
 
