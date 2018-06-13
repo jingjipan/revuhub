@@ -8,16 +8,21 @@ import java.io.File;
 
 public interface LogicInterface {
 
-    interface MovieInfoGetter {
+    interface MovieSynopsis{
         //As a user, I want to be able to view the synopsis of a movie. (high)
-        String getSynopsis(MovieDMObject movie);
-
+        MovieDMObject getSynopsis(MovieDMObject movie);
+    }
+    interface MovieCasts{
         //As a user, I want to be able to view the casts of a movie. (high)
         ArrayList<String> getCast(MovieDMObject movie);
+    }
 
+    interface MoviePhoto{
         //As a user, I want to be able to view the photos of a movie. (high)
-        File getPhoto(MovieDMObject movie); //returns file path to movie
+        File getPhoto(MovieDMObject movie);
+    }
 
+    interface MovieNews{
         //As a user, I want to be able to view the news of a movie. (high)
         String getNews(MovieDMObject movie);
     }
