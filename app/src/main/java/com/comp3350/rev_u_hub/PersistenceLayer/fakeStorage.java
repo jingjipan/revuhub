@@ -1,10 +1,10 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.PersistenceLayer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class fakeStorage {
+public class fakeStorage implements PersistenceInterface{
     HashMap<String,movie> movieMap;
     public fakeStorage(){
         movieMap = new HashMap<String,movie>();

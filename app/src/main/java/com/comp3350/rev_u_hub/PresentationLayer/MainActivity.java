@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.PresentationLayer;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.comp3350.rev_u_hub.R;
 
 public class MainActivity extends AppCompatActivity {
 
