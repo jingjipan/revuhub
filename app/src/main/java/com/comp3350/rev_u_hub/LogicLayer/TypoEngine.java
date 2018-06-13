@@ -4,7 +4,7 @@ import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.PersistenceLayer.PersistenceInterface;
 import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
 
-public class TypoEngine implements LogicInterface.MovieSearcher{
+public class TypoEngine implements MovieSearcher{
 
     private PersistenceInterface myPersistenceLayer;
 
@@ -20,20 +20,30 @@ public class TypoEngine implements LogicInterface.MovieSearcher{
         return sanitizeMovie(fetchPersistent(title));
     }
 
+    // Uses Damerau–Levenshtein_distance 1 permutations of a title to search
+    // https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
     public MovieDMObject getMovie(String title) {
         MovieDMObject movieFound;
 
         movieFound = deletionSearch(title);
-        if (movieFound==null) movieFound = transpositionSearch(title);
+        if (isEmpty(movieFound)) movieFound = transpositionSearch(title);
 
-        if (movieFound==null) movieFound = insertionSearch(title, LogicConstants.lowercaseAlphabet);
-        if (movieFound==null) movieFound = substitutionSearch(title, LogicConstants.lowercaseAlphabet);
-        if (movieFound==null) movieFound = insertionSearch(title, LogicConstants.uppercaseAlphabet);
-        if (movieFound==null) movieFound = substitutionSearch(title, LogicConstants.uppercaseAlphabet);
-        if (movieFound==null) movieFound = insertionSearch(title, LogicConstants.numbers);
-        if (movieFound==null) movieFound = substitutionSearch(title, LogicConstants.numbers);
-        if (movieFound==null) movieFound = insertionSearch(title, LogicConstants.symbols);
-        if (movieFound==null) movieFound = substitutionSearch(title, LogicConstants.symbols);
+        if (isEmpty(movieFound))
+            movieFound = insertionSearch(title, LogicConstants.lowercaseAlphabet);
+        if (isEmpty(movieFound))
+            movieFound = substitutionSearch(title, LogicConstants.lowercaseAlphabet);
+        if (isEmpty(movieFound))
+            movieFound = insertionSearch(title, LogicConstants.uppercaseAlphabet);
+        if (isEmpty(movieFound))
+            movieFound = substitutionSearch(title, LogicConstants.uppercaseAlphabet);
+        if (isEmpty(movieFound))
+            movieFound = insertionSearch(title, LogicConstants.numbers);
+        if (isEmpty(movieFound))
+        movieFound = substitutionSearch(title, LogicConstants.numbers);
+        if (isEmpty(movieFound))
+            movieFound = insertionSearch(title, LogicConstants.symbols);
+        if (isEmpty(movieFound))
+            movieFound = substitutionSearch(title, LogicConstants.symbols);
 
         return sanitizeMovie(movieFound);
     }
@@ -48,19 +58,71 @@ public class TypoEngine implements LogicInterface.MovieSearcher{
         else return theMovie;
     }
 
+    private boolean isEmpty(MovieDMObject theMovie) {
+        return theMovie==null || theMovie.isEmpty();
+    }
+
+    // removing one character in the title
     private MovieDMObject deletionSearch(String title) {
-        return null;
+        MovieDMObject movieFound = null;
+        String attempt;
+
+        for (int i=0; i<title.length() && isEmpty(movieFound); i++) {
+            attempt = title.substring(0,i) + title.substring(i+1,title.length());
+            movieFound = fetchPersistent(attempt);
+        }
+
+        return movieFound;
     }
 
+    // swapping two adjacent characters in the title
     private MovieDMObject transpositionSearch(String title) {
-        return null;
+        MovieDMObject movieFound = null;
+        String attempt;
+
+        for (int i=0; i<title.length()-1 && isEmpty(movieFound); i++) {
+            attempt = title.substring(0,i) +
+                    title.substring(i+1,i+2) + title.substring(i,i+1) +
+                    title.substring(i+2,title.length());
+            movieFound = fetchPersistent(attempt);
+        }
+
+        return movieFound;
     }
 
+    // inserting one character somewhere in the title
     private MovieDMObject insertionSearch(String title, String validChars) {
-        return null;
+        MovieDMObject movieFound = null;
+        String attempt;
+
+        for (int i=0; i<=title.length() && isEmpty(movieFound); i++) {
+
+            for (int j=0; i<validChars.length() && isEmpty(movieFound); j++) {
+                attempt = title.substring(0, i) +
+                        validChars.charAt(j) +
+                        title.substring(i, title.length());
+                movieFound = fetchPersistent(attempt);
+            }
+        }
+
+        return movieFound;
     }
 
+    // changing one character in the title
     private MovieDMObject substitutionSearch(String title, String validChars) {
-        return null;
+        MovieDMObject movieFound = null;
+        String attempt;
+
+        for (int i=0; i<title.length() && isEmpty(movieFound); i++) {
+
+            for (int j=0; i<validChars.length() && isEmpty(movieFound); j++) {
+                attempt = title.substring(0, i) +
+                        validChars.charAt(j) +
+                        title.substring(i+1, title.length());
+                movieFound = fetchPersistent(attempt);
+            }
+        }
+
+        return movieFound;
     }
 }
