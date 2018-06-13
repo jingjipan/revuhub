@@ -26,4 +26,6 @@ public class EmptyMovieDMObject extends MovieDMObject {
     public String getNews() {
         return "N/A";
     }
+
+    public String getTitle() {return "No Movie Found";}
 }

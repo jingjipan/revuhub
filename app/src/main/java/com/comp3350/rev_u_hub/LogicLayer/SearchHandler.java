@@ -47,11 +47,11 @@ public class SearchHandler implements LogicInterface {
         return myReviewProcessor.setReview(movie, reviewText);
     }
 
-    public MovieDMObject getMovie(String title) {
+    public MovieDMObject getMovieSimple(String title) {
         return myMovieSearcher.getMovieSimple(title);
     }
 
-    public MovieDMObject getMovieFast(String title) {
+    public MovieDMObject getMovie(String title) {
         return myMovieSearcher.getMovie(title);
     }
 }
