@@ -1,14 +1,15 @@
 package com.comp3350.rev_u_hub;
-import com.comp3350.rev_u_hub.movie;
-import com.comp3350.rev_u_hub.fakeStorage;
+import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
+import com.comp3350.rev_u_hub.PersistenceLayer.movie;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.ArrayList;
 
 public class fakeStorageTest {
-    private movie movie;
+    private com.comp3350.rev_u_hub.PersistenceLayer.movie movie;
     private fakeStorage storage = new fakeStorage();
 
     @Test
