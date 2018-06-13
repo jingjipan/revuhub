@@ -12,7 +12,7 @@ public interface LogicInterface {
     ArrayList<String> getCast(MovieDMObject movie);
 
     //As a user, I want to be able to view the photos of a movie. (high)
-    File getPhoto(MovieDMObject movie); //returns file path to movie
+   // File getPhoto(MovieDMObject movie); //returns file path to movie
 
     //As a user, I want to be able to view the news of a movie. (high)
     String getNews(MovieDMObject movie);
