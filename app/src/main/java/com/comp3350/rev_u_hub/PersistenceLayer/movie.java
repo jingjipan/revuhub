@@ -3,47 +3,71 @@ package com.comp3350.rev_u_hub.PersistenceLayer;
 import java.util.List;
 
 public class movie {
-	String movieName; String intro; String[] pics; List<String> reviews;
-	public movie(String movieName, String intro, String[] pics, List<String> reviews){
-		this.movieName=movieName;
-		this.intro=intro;
-		this.pics=pics;
-		this.reviews=reviews;
-	}
-	
-	public void addReviews(String newReview){
-		reviews.add(newReview);
-	}
+    String movieName;
+    String intro, cast;
+    String[] pics;
+    List<String> reviews, news;
 
-	public String getMovieName(){
-		return movieName;
-	}
+    public movie(String movieName, String intro, String[] pics, String cast, List<String> news, List<String> reviews) {
+        this.movieName = movieName;
+        this.intro = intro;
+        this.pics = pics;
+        this.reviews = reviews;
+        this.cast = cast;
+        this.news = news;
+    }
 
-	public String getIntro(){
-		return intro;
-	}
+    public void addReviews(String newReview) {
+        reviews.add(newReview);
+    }
 
-	public List<String> getReviews(){
-		return reviews;
-	}
+    public String getMovieName() {
+        return movieName;
+    }
 
-	public String[] getPicsUrls(){
-		return pics;
-	}
+    public String getIntro() {
+        return intro;
+    }
 
-	public void changeMovieName(String movieName){
-		this.movieName=movieName;
-	}
+    public List<String> getReviews() {
+        return reviews;
+    }
 
-	public void changeReviews(List<String> reviews){
-		this.reviews=reviews;
-	}
+    public String[] getPicsUrls() {
+        return pics;
+    }
 
-	public void changePicUrls(String[] pics){
-		this.pics=pics;
-	}
+    public String getCast() {
+        return cast;
+    }
 
-	public void changeIntro(String intro){
-		this.intro=intro;
-	}
+    public List<String> getNews() {
+        return news;
+    }
+
+    public void changeMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public void changeReviews(List<String> reviews) {
+        this.reviews = reviews;
+    }
+
+    public void changePicUrls(String[] pics) {
+        this.pics = pics;
+    }
+
+    public void changeIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public void changeNews(List<String> news) {
+        this.news = news;
+    }
+
+    public void changeCast(String cast) {
+        this.cast = cast;
+    }
+
+    ;
 }
