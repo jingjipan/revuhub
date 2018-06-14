@@ -1,18 +1,21 @@
-package com.comp3350.rev_u_hub.PersistenceLayer;
+package com.comp3350.rev_u_hub.PersistenceLayer.stubs;
+
+import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
+import com.comp3350.rev_u_hub.PersistenceLayer.movie;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-public class fakeStorage implements PersistenceInterface {
-    TreeMap<String, movie> movieMap;
+public class MoviePersistenceStub implements MoviePersistence {
+    private TreeMap<String, movie> movieMap;
 
-    public fakeStorage() {
+    public MoviePersistenceStub() {
         movieMap = new TreeMap<String, movie>(String.CASE_INSENSITIVE_ORDER);
         this.addStaticInfo();
     }
 
-    ///Add default movies objects into the HashMap
+    @Override
     public void addStaticInfo() {
         List<String> reviews1 = new ArrayList<String>();
         List<String> news1 = new ArrayList<String>();
@@ -49,14 +52,13 @@ public class fakeStorage implements PersistenceInterface {
         movieMap.put("Thor", m1);
     }
 
-    ///Search for specific movie in the map
+    @Override
     public movie searchMovie(String movieName) {
         return movieMap.get(movieName);  //If the movie does not exist in the storage, a null would be returned.
     }
 
-    ///Add a new movie into the storage
+    @Override
     public void addNewMovie(String movieName, movie m) {
         movieMap.put(movieName, m);
     }
-
 }

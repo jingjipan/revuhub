@@ -7,16 +7,16 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comp3350.rev_u_hub.LogicLayer.AccessMovies;
 import com.comp3350.rev_u_hub.R;
-import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private SearchView movieSearch;
+    private AccessMovies accessMovies;
 
-    //Set up temporary fake database
-    protected fakeStorage db = new fakeStorage();
+
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,11 +43,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Set up temporary fake database
+        accessMovies = new AccessMovies();
+
         movieSearch = (SearchView)findViewById(R.id.movieSearch);
         movieSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String movieName) {
-                if(db.searchMovie(movieName) != null) {
+                if(accessMovies.searchMovie(movieName) != null) {
                     showMovieOverview(movieName);
                 } else {
                     Toast.makeText(MainActivity.this, "Movie not found", Toast.LENGTH_SHORT).show();
