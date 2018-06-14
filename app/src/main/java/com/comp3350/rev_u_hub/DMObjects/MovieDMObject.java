@@ -42,7 +42,7 @@ public class MovieDMObject implements Serializable {
     }
 
     public boolean isEmpty() {
-        return title == "" && synopsis == "" && cast == "" && reviews.isEmpty();
+        return title.equals("") && synopsis.equals("") && cast.equals("") && reviews.isEmpty();
     }
 
     public String getSynopsis() {

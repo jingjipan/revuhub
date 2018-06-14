@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         movieSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String movieName) {
-                if(accessMovies.searchMovie(movieName) != null) {
+                if(!accessMovies.searchMovie(movieName).isEmpty()) {
                     showMovieOverview(movieName);
                 } else {
                     Toast.makeText(MainActivity.this, "Movie not found", Toast.LENGTH_SHORT).show();
