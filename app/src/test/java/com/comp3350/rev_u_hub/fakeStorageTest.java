@@ -33,11 +33,21 @@ public class fakeStorageTest {
         reviews.add("Movie is fine.");
 
         movie = new movie("The Avengers", "A Marvel movie",  pic1, "Robert Downey Jr.", news, reviews);
+
         assertTrue("The Avengers".equals(storage.searchMovie("The Avengers").getMovieName()));
+
         assertTrue("A Marvel movie".equals(storage.searchMovie("The Avengers").getIntro()));
+
         assertTrue(pic1[0].equals(storage.searchMovie("The Avengers").getPicsUrls()[0]));
+
         assertTrue(pic1[1].equals(storage.searchMovie("The Avengers").getPicsUrls()[1]));
+
+        assertTrue("Robert Downey Jr.".equals(storage.searchMovie("The Avengers").getCast()));
+
+        assertTrue(news.equals(storage.searchMovie("The Avengers").getNews()));
+
         assertTrue(reviews.equals(storage.searchMovie("The Avengers").getReviews()));
+
         System.out.println("Finished test the movie movie's information is in the Storage");
     }
     @Test
