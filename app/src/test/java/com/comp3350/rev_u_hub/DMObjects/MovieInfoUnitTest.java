@@ -1,6 +1,5 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.DMObjects;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.LogicLayer.UnitTestHelper;
 
 import org.junit.Test;

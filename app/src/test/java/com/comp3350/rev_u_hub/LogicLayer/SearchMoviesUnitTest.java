@@ -1,12 +1,8 @@
-package com.comp3350.rev_u_hub;
+package com.comp3350.rev_u_hub.LogicLayer;
 
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.LogicLayer.InitializeBackend;
-import com.comp3350.rev_u_hub.LogicLayer.LogicInterface;
-import com.comp3350.rev_u_hub.LogicLayer.UnitTestHelper;
-import com.comp3350.rev_u_hub.LogicLayer.LogicConstants;
-import com.comp3350.rev_u_hub.PersistenceLayer.PersistenceInterface;
-import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
+import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
+import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
 
 import org.junit.Test;
 
@@ -14,7 +10,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class SearchMoviesUnitTest {
-    private PersistenceInterface persistenceLayer = new fakeStorage();
+    private MoviePersistence persistenceLayer = new MoviePersistenceStub();
     private LogicInterface logicLayer = InitializeBackend.createLogicLayer(persistenceLayer);
 
     @Test

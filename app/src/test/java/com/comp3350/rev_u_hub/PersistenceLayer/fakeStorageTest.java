@@ -1,23 +1,24 @@
-package com.comp3350.rev_u_hub;
-import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
-import com.comp3350.rev_u_hub.PersistenceLayer.movie;
+package com.comp3350.rev_u_hub.PersistenceLayer;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class fakeStorageTest {
     private com.comp3350.rev_u_hub.PersistenceLayer.movie movie;
     private fakeStorage storage = new fakeStorage();
 
     @Test
-    public void testNotNullStorage(){
+    public void testNotNullStorage() {
         System.out.println("\nStarting test the fake Storage is not empty");
         assertNotNull(storage);
         System.out.println("Finished test the fake Storage is not empty");
     }
+
     @Test
     public void testStorage() {
 
@@ -33,7 +34,7 @@ public class fakeStorageTest {
         reviews.add("Poor Movie.");
         reviews.add("Movie is fine.");
 
-        movie = new movie("The Avengers", "A Marvel movie",  pic1, "Robert Downey Jr.", news, reviews);
+        movie = new movie("The Avengers", "A Marvel movie", pic1, "Robert Downey Jr.", news, reviews);
 
         assertTrue("The Avengers".equals(storage.searchMovie("The Avengers").getMovieName()));
 
@@ -51,6 +52,7 @@ public class fakeStorageTest {
 
         System.out.println("Finished test the movie movie's information is in the Storage");
     }
+
     @Test
     public void testMovieNotInStorage() {
 
@@ -60,5 +62,5 @@ public class fakeStorageTest {
         System.out.println("Finished test the movie is not in the Storage");
 
     }
-    }
+}
 

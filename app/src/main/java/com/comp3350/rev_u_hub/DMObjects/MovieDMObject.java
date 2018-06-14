@@ -1,9 +1,10 @@
 package com.comp3350.rev_u_hub.DMObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDMObject {
+public class MovieDMObject implements Serializable {
     String title;
     String synopsis, cast;
     List<String> reviews;
@@ -30,7 +31,7 @@ public class MovieDMObject {
         if (other != null && !other.isEmpty()) {
             this.title = other.getTitle();
             this.synopsis = other.getSynopsis();
-            this.reviews = getReviews();
+            this.reviews = other.getReviews();
             this.cast = other.getCast();
         } else {
             title = "";
@@ -76,10 +77,10 @@ public class MovieDMObject {
     public String toString() {return getTitle();}
 
     public boolean equals(MovieDMObject other) {
-        return title.equals(other.getTitle()) &&
-                synopsis.equals(other.getSynopsis()) &&
-                cast.equals(other.getCast()) &&
-                reviews.equals(other.getReviews());
+        return this.getTitle().equals(other.getTitle()) &&
+                this.getSynopsis().equals(other.getSynopsis()) &&
+                this.getCast().equals(other.getCast()) &&
+                this.getReviews().equals(other.getReviews());
     }
 
     public static boolean validateMovie(MovieDMObject theMovie) {
@@ -89,5 +90,9 @@ public class MovieDMObject {
                 theMovie.getReviews()!=null &&
                 theMovie.getCast()!=null &&
                 theMovie.getSynopsis()!=null;
+    }
+
+    public MovieDMObject getMovie() {
+        return this;
     }
 }

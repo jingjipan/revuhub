@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private SearchView movieSearch;
     private AccessMovies accessMovies;
 
-
-
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 //
