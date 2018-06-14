@@ -9,31 +9,37 @@ import java.util.ArrayList;
 public class SearchHandler implements LogicInterface {
     private MovieSearcher myMovieSearcher;
     private ReviewProcessor myReviewProcessor;
+    private MovieInfoGetter myMovieInfoGetter;
 
     SearchHandler() {
-        myMovieSearcher = new TypoEngine();
+        buildSearchHandler();
     }
 
-    SearchHandler(MovieSearcher setMovieSearcher) {
-        myMovieSearcher = setMovieSearcher;
+    SearchHandler(LogicComponent first) {
+        install(first);
+        buildSearchHandler();
     }
 
-    SearchHandler(MovieSearcher setMovieSearcher, ReviewProcessor setReviewProcessor) {
-        myMovieSearcher = setMovieSearcher;
-        myReviewProcessor = setReviewProcessor;
+    SearchHandler(LogicComponent first, LogicComponent second) {
+        install(first);
+        install(second);
+        buildSearchHandler();
     }
 
-    SearchHandler(ReviewProcessor setReviewProcessor) {
-        myReviewProcessor = setReviewProcessor;
+    SearchHandler(LogicComponent first, LogicComponent second, LogicComponent third) {
+        install(first);
+        install(second);
+        install(third);
+        buildSearchHandler();
     }
 
-    public String getSynopsis(MovieDMObject movie) {return movie.getSynopsis();}
+    public String getSynopsis(MovieDMObject movie) {return myMovieInfoGetter.getSynopsis(movie);}
 
-    public ArrayList<String> getCast(MovieDMObject movie) {return movie.getCast();}
+    public ArrayList<String> getCast(MovieDMObject movie) {return myMovieInfoGetter.getCast(movie);}
 
-    public File getPhoto(MovieDMObject movie) {return movie.getPhoto();}
+    public File getPhoto(MovieDMObject movie) {return myMovieInfoGetter.getPhoto(movie);}
 
-    public String getNews(MovieDMObject movie) {return movie.getNews();}
+    public String getNews(MovieDMObject movie) {return myMovieInfoGetter.getNews(movie);}
 
     public ReviewDMObject getReview(MovieDMObject movie) {
         return myReviewProcessor.getReview(movie);
@@ -53,5 +59,20 @@ public class SearchHandler implements LogicInterface {
 
     public MovieDMObject getMovie(String title) {
         return myMovieSearcher.getMovie(title);
+    }
+
+    private void buildSearchHandler() {
+        if (myMovieSearcher==null) myMovieSearcher = new TypoEngine();
+        if (myReviewProcessor==null) myReviewProcessor = new ReviewManager();
+        if (myMovieInfoGetter==null) myMovieInfoGetter = new MovieInfoConverter();
+    }
+
+    private void install(LogicComponent component) {
+        if (component instanceof MovieSearcher)
+            myMovieSearcher = (MovieSearcher) component;
+        if (component instanceof ReviewProcessor)
+            myReviewProcessor = (ReviewProcessor) component;
+        if (component instanceof MovieInfoGetter)
+            myMovieInfoGetter = (MovieInfoGetter) component;
     }
 }

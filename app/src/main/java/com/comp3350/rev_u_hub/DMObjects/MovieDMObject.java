@@ -14,21 +14,27 @@ public class MovieDMObject {
     MovieDMObject() {}
 
     public MovieDMObject(movie setMovie) {
-        myMovie = setMovie;
+        myMovie = validateMovie(setMovie);
     }
 
-    public boolean isEmpty() {return myMovie!=null;}
+    public MovieDMObject(MovieDMObject other) {
+        if (other.isEmpty()) myMovie = null;
+        else myMovie = new movie(other.getTitle(),
+                other.getSynopsis(),
+                other.getPhotoList(),
+                other.getCast(),
+                other.getNews(),
+                other.getReviews());
+    }
+
+    public boolean isEmpty() {return myMovie==null;}
 
     public String getSynopsis() {
         return myMovie.getIntro();
     }
 
-    public ArrayList<String> getCast() {
-        ArrayList<String> cast = new ArrayList<>();
-        cast.add("A");
-        cast.add("B");
-        cast.add("C");
-        return cast;
+    public String getCast() {
+        return myMovie.getCast();
     }
 
     public File getPhoto() {
@@ -41,17 +47,42 @@ public class MovieDMObject {
 
     public String[] getPhotoList() { return myMovie.getPicsUrls();}
 
-    public String getNews() {
-        return "This movie has been released to the public!";
+    public List<String> getNews() {
+        return myMovie.getNews();
     }
 
     public List<String> getReviews() { return myMovie.getReviews();}
 
-    public String getTitle() {return myMovie.getMovieName();}
+    public int setReviews(List<String> setReviews) {
+        myMovie.changeReviews(setReviews);
+        return myMovie.getReviews().size();
+    }
+
+    public int setReviews(String setReview) {
+        List<String> reviews = new ArrayList<>();
+        reviews.add(setReview);
+        myMovie.changeReviews(reviews);
+        return myMovie.getReviews().size();
+    }
+
+    public int setReviews(ReviewDMObject other) {
+        myMovie.changeReviews(other.getReviews());
+        return myMovie.getReviews().size();
+    }
+
+    public boolean hasReviews() {
+        return myMovie.getReviews()!=null && !myMovie.getReviews().isEmpty();
+    }
+
+    public String getTitle() {return isEmpty() ? "No Movie Found" : myMovie.getMovieName();}
 
     public String toString() {return getTitle();}
 
+    public movie getMovie() {return myMovie;}
+
     public boolean equals(MovieDMObject other) {
+        if (other.isEmpty()) return isEmpty();
+
         return isEmpty()==other.isEmpty() &&
                 getTitle().equals(other.getTitle()) &&
                 getSynopsis().equals(other.getSynopsis()) &&
@@ -59,5 +90,16 @@ public class MovieDMObject {
                 getCast().equals(other.getCast()) &&
                 getReviews().equals(other.getReviews()) &&
                 Arrays.equals(getPhotoList(),other.getPhotoList());
+    }
+
+    movie validateMovie(movie theMovie) {
+        return theMovie!=null &&
+                theMovie.getMovieName()!=null &&
+                !theMovie.getMovieName().equals("") &&
+                theMovie.getReviews()!=null &&
+                theMovie.getPicsUrls()!=null &&
+                theMovie.getCast()!=null &&
+                theMovie.getIntro()!=null &&
+                theMovie.getNews()!=null ? theMovie : null;
     }
 }

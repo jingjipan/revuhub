@@ -6,11 +6,9 @@ import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
 import java.util.ArrayList;
 import java.io.File;
 
-public interface LogicInterface extends MovieInfoGetter, ReviewProcessor, MovieSearcher {
+public interface LogicInterface extends MovieInfoGetter, ReviewProcessor, MovieSearcher {}
 
-}
-
-interface MovieInfoGetter {
+interface MovieInfoGetter extends LogicComponent {
     //As a user, I want to be able to view the synopsis of a movie. (high)
     String getSynopsis(MovieDMObject movie);
 
@@ -18,13 +16,13 @@ interface MovieInfoGetter {
     ArrayList<String> getCast(MovieDMObject movie);
 
     //As a user, I want to be able to view the photos of a movie. (high)
-   // File getPhoto(MovieDMObject movie); //returns file path to movie
+    File getPhoto(MovieDMObject movie); //returns file path to movie
 
     //As a user, I want to be able to view the news of a movie. (high)
     String getNews(MovieDMObject movie);
 }
 
-interface ReviewProcessor {
+interface ReviewProcessor extends LogicComponent {
     //As a user, I want to be able to view reviews about a movie. (high)
     ReviewDMObject getReview(MovieDMObject movie);
 
@@ -33,8 +31,10 @@ interface ReviewProcessor {
     boolean setReview(MovieDMObject movie, String reviewText);
 }
 
-interface MovieSearcher {
+interface MovieSearcher extends LogicComponent{
     //As a user, I want to be able to search movies based on title. (high)
     MovieDMObject getMovie(String title);
     MovieDMObject getMovieSimple(String title);
 }
+
+interface LogicComponent {}

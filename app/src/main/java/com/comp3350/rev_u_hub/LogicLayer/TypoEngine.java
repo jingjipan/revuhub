@@ -39,7 +39,7 @@ public class TypoEngine implements MovieSearcher{
         if (isEmpty(movieFound))
             movieFound = insertionSearch(title, LogicConstants.numbers);
         if (isEmpty(movieFound))
-        movieFound = substitutionSearch(title, LogicConstants.numbers);
+            movieFound = substitutionSearch(title, LogicConstants.numbers);
         if (isEmpty(movieFound))
             movieFound = insertionSearch(title, LogicConstants.symbols);
         if (isEmpty(movieFound))
@@ -97,7 +97,7 @@ public class TypoEngine implements MovieSearcher{
 
         for (int i=0; i<=title.length() && isEmpty(movieFound); i++) {
 
-            for (int j=0; i<validChars.length() && isEmpty(movieFound); j++) {
+            for (int j=0; j<validChars.length() && isEmpty(movieFound); j++) {
                 attempt = title.substring(0, i) +
                         validChars.charAt(j) +
                         title.substring(i, title.length());
@@ -115,7 +115,7 @@ public class TypoEngine implements MovieSearcher{
 
         for (int i=0; i<title.length() && isEmpty(movieFound); i++) {
 
-            for (int j=0; i<validChars.length() && isEmpty(movieFound); j++) {
+            for (int j=0; j<validChars.length() && isEmpty(movieFound); j++) {
                 attempt = title.substring(0, i) +
                         validChars.charAt(j) +
                         title.substring(i+1, title.length());

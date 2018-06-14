@@ -24,12 +24,15 @@ public class fakeStorageTest {
         System.out.println("\nStarting test the movie and movie's information is in the Storage");
         String[] pic1 = new String[]{"aa.jpg", "bb.jpg"};
 
+        List<String> news = new ArrayList<String>();
+        news.add("No news");
+
         List<String> reviews = new ArrayList<String>();
         reviews.add("Nice Movie.");
         reviews.add("Poor Movie.");
         reviews.add("Movie is fine.");
 
-        movie = new movie("The Avengers", "A Marvel movie", pic1, reviews);
+        movie = new movie("The Avengers", "A Marvel movie",  pic1, "Robert Downey Jr.", news, reviews);
         assertTrue("The Avengers".equals(storage.searchMovie("The Avengers").getMovieName()));
         assertTrue("A Marvel movie".equals(storage.searchMovie("The Avengers").getIntro()));
         assertTrue(pic1[0].equals(storage.searchMovie("The Avengers").getPicsUrls()[0]));
@@ -41,7 +44,7 @@ public class fakeStorageTest {
     public void testMovieNotInStorage() {
 
         System.out.println("\nStarting test the movie is not in the Storage");
-        movie = new movie("Iron Man", null, null, null);
+        movie = new movie("Iron Man", null, null, null, null, null);
         assertTrue(storage.searchMovie("Iron Man") == null);
         System.out.println("Finished test the movie is not in the Storage");
 

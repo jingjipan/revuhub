@@ -22,34 +22,30 @@ public class RandomMovieDMObject extends MovieDMObject {
 
     // allChars = all characters, not just words
     public RandomMovieDMObject(boolean allChars, int length) {
+        movie randMovie;
         if (allChars) {
-            ArrayList<String> cast = new ArrayList<>();
-            cast.add(UnitTestHelper.randomString(length));
-            cast.add(UnitTestHelper.randomString(length));
-            cast.add(UnitTestHelper.randomString(length));
-
-            myMovie = new movie(
+            randMovie = new movie(
                     UnitTestHelper.randomString(length),
                     UnitTestHelper.randomString(length),
                     new String[]{UnitTestHelper.randomString(length),
                             UnitTestHelper.randomString(length),
                             UnitTestHelper.randomString(length)},
-                    cast
+                    UnitTestHelper.randomString(length),
+                    UnitTestHelper.randomStringList(3, length),
+                    UnitTestHelper.randomStringList(3, length)
             );
         } else {
-            ArrayList<String> cast = new ArrayList<>();
-            cast.add(UnitTestHelper.randomWord(length));
-            cast.add(UnitTestHelper.randomWord(length));
-            cast.add(UnitTestHelper.randomWord(length));
-
-            myMovie = new movie(
+            randMovie = new movie(
                     UnitTestHelper.randomWord(length),
                     UnitTestHelper.randomWord(length),
                     new String[]{UnitTestHelper.randomWord(length),
                             UnitTestHelper.randomWord(length),
                             UnitTestHelper.randomWord(length)},
-                    cast
+                    UnitTestHelper.randomWord(length),
+                    UnitTestHelper.randomWordList(3, length),
+                    UnitTestHelper.randomWordList(3, length)
             );
         }
+        myMovie = validateMovie(randMovie);
     }
 }

@@ -7,7 +7,6 @@ import com.comp3350.rev_u_hub.LogicLayer.UnitTestHelper;
 import com.comp3350.rev_u_hub.LogicLayer.LogicConstants;
 import com.comp3350.rev_u_hub.PersistenceLayer.PersistenceInterface;
 import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
-import com.comp3350.rev_u_hub.PersistenceLayer.movie;
 
 import org.junit.Test;
 
@@ -19,19 +18,20 @@ public class SearchMoviesUnitTest {
     private LogicInterface logicLayer = InitializeBackend.createLogicLayer(persistenceLayer);
 
     @Test
-    public void testSearch(){
-        System.out.println("\nTesting SearchHandler getMovie functionality.");
+    public void testSearches(){
+        MovieDMObject[] testMovies = UnitTestHelper.getMovieTestArray();
+        for (int i=0; i<UnitTestHelper.TEST_DESCRIPTORS.length; i++) {
+            testSearch(testMovies[i],UnitTestHelper.TEST_DESCRIPTORS[i]);
+        }
+    }
 
-        MovieDMObject testMovie = UnitTestHelper.randomMovie(true);
+    private void testSearch(MovieDMObject testMovie, String description) {
         String testTitle = testMovie.getTitle();
 
-        persistenceLayer.addNewMovie(testTitle,
-                new movie(testMovie.getTitle(),
-                    testMovie.getSynopsis(),
-                    testMovie.getPhotoList(),
-                    testMovie.getReviews()
-                )
-        );
+        System.out.println("\nTesting SearchHandler getMovie functionality with " +
+                description + ".");
+
+        persistenceLayer.addNewMovie(testTitle, (new MovieDMObject(testMovie)).getMovie());
 
         assertNotNull(testMovie);
         assertNotNull(testTitle);
@@ -47,6 +47,7 @@ public class SearchMoviesUnitTest {
         assertTrue(testMovie.equals(logicLayer.getMovie(
                 UnitTestHelper.randomSubstitution(testTitle, LogicConstants.allChars))));
 
-        System.out.println("Completed testing SearchHandler getMovie functionality.");
+        System.out.println("Completed testing SearchHandler getMovie functionality with " +
+                description + ".");
     }
 }

@@ -3,11 +3,19 @@ package com.comp3350.rev_u_hub.LogicLayer;
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.DMObjects.RandomMovieDMObject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class UnitTestHelper {
     private static Random random = new Random();
     private static final int DEFAULT_LENGTH = 64;
+
+    public static final String[] TEST_DESCRIPTORS = {"a random movie",
+            "a random movie with numbers and symbols",
+            "no movie",
+            "a random movie with zero length contents",
+            "a random movie with short contents",
+            "a random movie with long contents"};
 
     public static int randomInteger() {
         return randomInteger(1,DEFAULT_LENGTH+1);
@@ -46,6 +54,22 @@ public abstract class UnitTestHelper {
             randString += (char) randomInteger(97,123);
         }
         return randString;
+    }
+
+    public static ArrayList<String> randomStringList(int quantity, int length) {
+        ArrayList<String> output = new ArrayList<>();
+        for (int i=0; i<quantity; i++) {
+            output.add(UnitTestHelper.randomString(length));
+        }
+        return output;
+    }
+
+    public static ArrayList<String> randomWordList(int quantity, int length) {
+        ArrayList<String> output = new ArrayList<>();
+        for (int i=0; i<quantity; i++) {
+            output.add(UnitTestHelper.randomWord(length));
+        }
+        return output;
     }
 
     public static MovieDMObject randomMovie() {
@@ -128,5 +152,16 @@ public abstract class UnitTestHelper {
         return theString.substring(0, position) +
                 validChars.charAt(randomInteger(0,validChars.length())) +
                 theString.substring(position+1, theString.length());
+    }
+
+    public static MovieDMObject[] getMovieTestArray() {
+        return new MovieDMObject[]{
+                UnitTestHelper.randomMovie(true),
+                UnitTestHelper.randomMovie(true),
+                LogicConstants.noMovie,
+                UnitTestHelper.randomMovie(true,0),
+                UnitTestHelper.randomMovie(true,1),
+                UnitTestHelper.randomMovie(true,168)
+        };
     }
 }
