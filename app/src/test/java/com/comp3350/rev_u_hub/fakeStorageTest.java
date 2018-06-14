@@ -22,6 +22,7 @@ public class fakeStorageTest {
     public void testStorage() {
 
         System.out.println("\nStarting test the movie and movie's information is in the Storage");
+
         String[] pic1 = new String[]{"aa.jpg", "bb.jpg"};
 
         List<String> news = new ArrayList<String>();
