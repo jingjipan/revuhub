@@ -3,7 +3,6 @@ package com.comp3350.rev_u_hub.LogicLayer;
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class SearchHandler implements LogicInterface {
@@ -36,10 +35,6 @@ public class SearchHandler implements LogicInterface {
     public String getSynopsis(MovieDMObject movie) {return myMovieInfoGetter.getSynopsis(movie);}
 
     public ArrayList<String> getCast(MovieDMObject movie) {return myMovieInfoGetter.getCast(movie);}
-
-    public File getPhoto(MovieDMObject movie) {return myMovieInfoGetter.getPhoto(movie);}
-
-    public String getNews(MovieDMObject movie) {return myMovieInfoGetter.getNews(movie);}
 
     public ReviewDMObject getReview(MovieDMObject movie) {
         return myReviewProcessor.getReview(movie);

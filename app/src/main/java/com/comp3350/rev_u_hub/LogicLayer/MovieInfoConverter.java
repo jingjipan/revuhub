@@ -16,12 +16,4 @@ public class MovieInfoConverter implements MovieInfoGetter {
     public ArrayList<String> getCast(MovieDMObject movie) {
         return (ArrayList<String>) InfoFormatConverter.convertToStringList(movie.getCast());
     }
-
-    public File getPhoto(MovieDMObject movie) { //returns file path to movie
-        return InfoFormatConverter.convertToFile(movie.getPhoto());
-    }
-
-    public String getNews(MovieDMObject movie) {
-        return InfoFormatConverter.convertToString(movie.getNews());
-    }
 }

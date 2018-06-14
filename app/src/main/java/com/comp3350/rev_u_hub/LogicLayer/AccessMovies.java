@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
+import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
-import com.comp3350.rev_u_hub.PersistenceLayer.movie;
 import com.comp3350.rev_u_hub.application.Services;
 
 public class AccessMovies {
@@ -12,11 +12,13 @@ public class AccessMovies {
         moviePersistence = Services.getmoviePersistence();
     }
 
-    public movie searchMovie(String movieName) {
-        return moviePersistence.searchMovie(movieName);  //If the movie does not exist in the storage, a null would be returned.
+    ///Search for specific movie in the map
+    public MovieDMObject searchMovie(String movieName) {
+        return moviePersistence.searchMovie(movieName);  // If the movie does not exist in the storage, a null would be returned.
     }
 
-    public void addNewMovie(String movieName, movie m) {
+    ///Add a new movie into the storage
+    public void addNewMovie(String movieName, MovieDMObject m) {
         moviePersistence.addNewMovie(movieName, m);
     }
 }

@@ -1,10 +1,6 @@
 package com.comp3350.rev_u_hub.DMObjects;
 
 import com.comp3350.rev_u_hub.LogicLayer.UnitTestHelper;
-import com.comp3350.rev_u_hub.PersistenceLayer.movie;
-
-import java.io.File;
-import java.util.ArrayList;
 
 public class RandomMovieDMObject extends MovieDMObject {
 
@@ -22,30 +18,28 @@ public class RandomMovieDMObject extends MovieDMObject {
 
     // allChars = all characters, not just words
     public RandomMovieDMObject(boolean allChars, int length) {
-        movie randMovie;
+        MovieDMObject randMovie;
         if (allChars) {
-            randMovie = new movie(
+            randMovie = new MovieDMObject(
                     UnitTestHelper.randomString(length),
                     UnitTestHelper.randomString(length),
-                    new String[]{UnitTestHelper.randomString(length),
-                            UnitTestHelper.randomString(length),
-                            UnitTestHelper.randomString(length)},
                     UnitTestHelper.randomString(length),
-                    UnitTestHelper.randomStringList(3, length),
                     UnitTestHelper.randomStringList(3, length)
             );
         } else {
-            randMovie = new movie(
+            randMovie = new MovieDMObject(
                     UnitTestHelper.randomWord(length),
                     UnitTestHelper.randomWord(length),
-                    new String[]{UnitTestHelper.randomWord(length),
-                            UnitTestHelper.randomWord(length),
-                            UnitTestHelper.randomWord(length)},
                     UnitTestHelper.randomWord(length),
-                    UnitTestHelper.randomWordList(3, length),
                     UnitTestHelper.randomWordList(3, length)
             );
         }
-        myMovie = validateMovie(randMovie);
+        if(randMovie != null && validateMovie(randMovie)) {
+            this.title = randMovie.getTitle();
+            this.synopsis = randMovie.getSynopsis();
+            this.cast = randMovie.getCast();
+            this.reviews = randMovie.getReviews();
+        } // else return null?
+
     }
 }

@@ -1,18 +1,18 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.PersistenceLayer.PersistenceInterface;
-import com.comp3350.rev_u_hub.PersistenceLayer.fakeStorage;
+import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
+import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
 
 public class TypoEngine implements MovieSearcher{
 
-    private PersistenceInterface myPersistenceLayer;
+    private MoviePersistence myPersistenceLayer;
 
     TypoEngine() {
-        myPersistenceLayer = new fakeStorage();
+        myPersistenceLayer = new MoviePersistenceStub();
     }
 
-    TypoEngine(PersistenceInterface setPersistenceLayer) {
+    TypoEngine(MoviePersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 
