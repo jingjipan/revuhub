@@ -1,5 +1,7 @@
 package com.comp3350.rev_u_hub.PersistenceLayer.stubs;
 
+import android.util.Log;
+
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
 
@@ -23,10 +25,12 @@ public class MoviePersistenceStub implements MoviePersistence {
         reviews1.add("Nice Movie.");
         reviews1.add("Poor Movie.");
         reviews1.add("Movie is fine.");
-        String[] pic1 = new String[]{"aa.jpg", "bb.jpg"};
         String cast1 = "Robert Downey Jr.";
+        String synopsis1 = "Earth\'s mightiest heroes must come together and learn to fight" +
+                "as a team if they are going to stop the mischievous Loki and his alien army" +
+                "from enslaving humanity.";
 
-        MovieDMObject m1 = new MovieDMObject("The Avengers", "A Marvel movie", cast1, reviews1);
+        MovieDMObject m1 = new MovieDMObject("The Avengers", synopsis1, cast1, reviews1);
 
         List<String> reviews2 = new ArrayList<String>();
         List<String> news2 = new ArrayList<String>();
@@ -35,8 +39,11 @@ public class MoviePersistenceStub implements MoviePersistence {
         reviews2.add("Poor Movie.");
         reviews2.add("Movie is fine.");
         String cast2 = "Ryan Reynolds";
+        String synopsis2 = "A fast-talking mercenary with a morbid sense of humor is subjected to a" +
+                "rogue experiment that leaves him with accelerated healing powers and a" +
+                "quest for revenge.";
 
-        MovieDMObject m2 = new MovieDMObject("DeadPool", "A Marvel movie", cast2, reviews2);
+        MovieDMObject m2 = new MovieDMObject("DeadPool", synopsis2, cast2, reviews2);
 
         List<String> reviews3 = new ArrayList<String>();
         List<String> news3 = new ArrayList<String>();
@@ -44,12 +51,14 @@ public class MoviePersistenceStub implements MoviePersistence {
         reviews3.add("Poor Movie.");
         reviews3.add("Movie is fine.");
         String cast3 = "Chris Hemsworth";
+        String synopsis3 = "The powerful, but arrogant god Thor, is cast out of Asgard to live amongst" +
+                "humans in Midgard (Earth), where he soon becomes one of their finest defenders.";
 
-        MovieDMObject m3 = new MovieDMObject("Thor", "A Marvel movie", cast3, reviews2);
+        MovieDMObject m3 = new MovieDMObject("Thor", synopsis3, cast3, reviews2);
 
         movieMap.put("The Avengers", m1);
-        movieMap.put("DeadPool", m1);
-        movieMap.put("Thor", m1);
+        movieMap.put("DeadPool", m2);
+        movieMap.put("Thor", m3);
     }
 
     @Override
