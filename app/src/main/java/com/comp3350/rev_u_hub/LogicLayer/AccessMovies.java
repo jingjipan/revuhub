@@ -2,7 +2,7 @@ package com.comp3350.rev_u_hub.LogicLayer;
 
 import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
 import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
-import com.comp3350.rev_u_hub.application.Services;
+import com.comp3350.rev_u_hub.Application.Services;
 
 public class AccessMovies {
     private MoviePersistence moviePersistence;

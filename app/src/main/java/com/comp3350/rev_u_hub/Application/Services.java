@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub.application;
+package com.comp3350.rev_u_hub.Application;
 
 import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
 import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
