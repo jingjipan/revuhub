@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub.PresentationLayer;
+package com.comp3350.rev_u_hub.presentation_layer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,26 +6,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieObject;
-import com.comp3350.rev_u_hub.LogicLayer.AccessMovies;
+import com.comp3350.rev_u_hub.Application.Services;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.R;
+import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
 
 import java.util.List;
 
 public class MovieOverviewActivity extends AppCompatActivity {
 
-    private AccessMovies accessMovies;
+    private MovieAccess accessMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_overview);
 
-        accessMovies = new AccessMovies();
+        accessMovies = Services.getMovieAccess();
 
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
-        MovieObject movie = accessMovies.searchMovie(movieName);
+        MovieObject movie = accessMovies.getMovie(movieName);
         movieName = movie.getTitle();
 
         //Set Movie Title

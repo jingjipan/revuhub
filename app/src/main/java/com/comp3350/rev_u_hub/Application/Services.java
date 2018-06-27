@@ -1,13 +1,15 @@
 package com.comp3350.rev_u_hub.Application;
 
-import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
-import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
+import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.MoviePersistenceStub;
 
 public class Services {
 
     private static MoviePersistence moviePersistence = null;
 
-    public static MoviePersistence getmoviePersistence()
+    public static MoviePersistence getMoviePersistence()
     {
         if (moviePersistence == null)
         {
@@ -15,5 +17,13 @@ public class Services {
         }
 
         return moviePersistence;
+    }
+
+    public static MovieAccess getMovieAccess() {
+        return new MovieSearchEngine();
+    }
+
+    public static MovieAccess getMovieAccess(MoviePersistence persistenceLayer) {
+        return new MovieSearchEngine(persistenceLayer);
     }
 }

@@ -1,7 +1,7 @@
-package com.comp3350.rev_u_hub.PersistenceLayer.stubs;
+package com.comp3350.rev_u_hub.persistence_layer.stubs;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieObject;
-import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
+import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 
 import java.util.ArrayList;
 import java.util.List;

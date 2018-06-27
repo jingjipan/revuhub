@@ -1,6 +1,6 @@
-package com.comp3350.rev_u_hub.PersistenceLayer;
+package com.comp3350.rev_u_hub.persistence_layer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieObject;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
 
 public interface MoviePersistence {
 

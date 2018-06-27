@@ -1,6 +1,6 @@
-package com.comp3350.rev_u_hub.LogicLayer;
+package com.comp3350.rev_u_hub.logic_layer;
 
-import com.comp3350.rev_u_hub.DMObjects.ReviewObject;
+import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;

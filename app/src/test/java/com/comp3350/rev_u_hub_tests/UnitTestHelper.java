@@ -1,7 +1,6 @@
-package com.comp3350.rev_u_hub.LogicLayer;
+package com.comp3350.rev_u_hub_tests;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieObject;
-import com.comp3350.rev_u_hub.DMObjects.RandomMovieObject;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -73,21 +72,21 @@ public abstract class UnitTestHelper {
     }
 
     public static MovieObject randomMovie() {
-        return new RandomMovieObject();
+        return randomMovieObject();
     }
 
     // allChars = all characters, not just words
     public static MovieObject randomMovie(boolean allChars) {
-        return new RandomMovieObject(allChars);
+        return randomMovieObject(allChars);
     }
 
     public static MovieObject randomMovie(int length) {
-        return new RandomMovieObject(length);
+        return randomMovieObject(length);
     }
 
     // allChars = all characters, not just words
     public static MovieObject randomMovie(boolean allChars, int length) {
-        return new RandomMovieObject(allChars, length);
+        return randomMovieObject(allChars, length);
     }
 
     public static String randomPermutation(String theString, String validChars) {
@@ -158,10 +157,43 @@ public abstract class UnitTestHelper {
         return new MovieObject[]{
                 UnitTestHelper.randomMovie(true),
                 UnitTestHelper.randomMovie(true),
-                LogicConstants.noMovie,
+                new MovieObject(),
                 UnitTestHelper.randomMovie(true,0),
                 UnitTestHelper.randomMovie(true,1),
                 UnitTestHelper.randomMovie(true,168)
         };
+    }
+
+    public static MovieObject randomMovieObject() {
+        return randomMovieObject(false,UnitTestHelper.randomInteger());
+    }
+
+    public static MovieObject randomMovieObject(boolean allChars) {
+        return randomMovieObject(allChars,UnitTestHelper.randomInteger());
+    }
+
+    public static MovieObject randomMovieObject(int length) {
+        return randomMovieObject(false,length);
+    }
+
+    // allChars = all characters, not just words
+    public static MovieObject randomMovieObject(boolean allChars, int length) {
+        MovieObject randMovie;
+        if (allChars) {
+            randMovie = new MovieObject(
+                    UnitTestHelper.randomString(length),
+                    UnitTestHelper.randomString(length),
+                    UnitTestHelper.randomString(length),
+                    UnitTestHelper.randomStringList(3, length)
+            );
+        } else {
+            randMovie = new MovieObject(
+                    UnitTestHelper.randomWord(length),
+                    UnitTestHelper.randomWord(length),
+                    UnitTestHelper.randomWord(length),
+                    UnitTestHelper.randomWordList(3, length)
+            );
+        }
+        return randMovie.validateMovie(randMovie) ? randMovie : new MovieObject();
     }
 }

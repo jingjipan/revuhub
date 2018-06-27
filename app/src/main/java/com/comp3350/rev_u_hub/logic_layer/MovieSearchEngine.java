@@ -1,19 +1,32 @@
-package com.comp3350.rev_u_hub.LogicLayer;
+package com.comp3350.rev_u_hub.logic_layer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieObject;
-import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
-import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
+import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.MoviePersistenceStub;
 
-public class TypoEngine implements MovieSearcher{
+public class MovieSearchEngine implements MovieAccess {
+
+    public static final String lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
+    public static final String uppercaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String numbers = "0123456789";
+    public static final String symbols = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+    public static final String allChars = "0123456789" +
+            "abcdefghijklmnopqrstuvwxyz" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
     private MoviePersistence myPersistenceLayer;
 
-    TypoEngine() {
+    public MovieSearchEngine() {
         myPersistenceLayer = new MoviePersistenceStub();
     }
 
-    TypoEngine(MoviePersistence setPersistenceLayer) {
+    public MovieSearchEngine(MoviePersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
+    }
+
+    public void addNewMovie(String movieName, MovieObject m) {
+        myPersistenceLayer.addNewMovie(movieName, m);
     }
 
     public MovieObject getMovieSimple(String title) {
@@ -29,21 +42,21 @@ public class TypoEngine implements MovieSearcher{
         if (isEmpty(movieFound)) movieFound = transpositionSearch(title);
 
         if (isEmpty(movieFound))
-            movieFound = insertionSearch(title, LogicConstants.lowercaseAlphabet);
+            movieFound = insertionSearch(title, lowercaseAlphabet);
         if (isEmpty(movieFound))
-            movieFound = substitutionSearch(title, LogicConstants.lowercaseAlphabet);
+            movieFound = substitutionSearch(title, lowercaseAlphabet);
         if (isEmpty(movieFound))
-            movieFound = insertionSearch(title, LogicConstants.uppercaseAlphabet);
+            movieFound = insertionSearch(title, uppercaseAlphabet);
         if (isEmpty(movieFound))
-            movieFound = substitutionSearch(title, LogicConstants.uppercaseAlphabet);
+            movieFound = substitutionSearch(title, uppercaseAlphabet);
         if (isEmpty(movieFound))
-            movieFound = insertionSearch(title, LogicConstants.numbers);
+            movieFound = insertionSearch(title, numbers);
         if (isEmpty(movieFound))
-            movieFound = substitutionSearch(title, LogicConstants.numbers);
+            movieFound = substitutionSearch(title, numbers);
         if (isEmpty(movieFound))
-            movieFound = insertionSearch(title, LogicConstants.symbols);
+            movieFound = insertionSearch(title, symbols);
         if (isEmpty(movieFound))
-            movieFound = substitutionSearch(title, LogicConstants.symbols);
+            movieFound = substitutionSearch(title, symbols);
 
         return sanitizeMovie(movieFound);
     }
