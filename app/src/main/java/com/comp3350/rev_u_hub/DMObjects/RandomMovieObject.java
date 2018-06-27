@@ -2,39 +2,39 @@ package com.comp3350.rev_u_hub.DMObjects;
 
 import com.comp3350.rev_u_hub.LogicLayer.UnitTestHelper;
 
-public class RandomMovieDMObject extends MovieDMObject {
+public class RandomMovieObject extends MovieObject {
 
-    public RandomMovieDMObject() {
+    public RandomMovieObject() {
         this(false,UnitTestHelper.randomInteger());
     }
 
-    public RandomMovieDMObject(boolean allChars) {
+    public RandomMovieObject(boolean allChars) {
         this(allChars,UnitTestHelper.randomInteger());
     }
 
-    public RandomMovieDMObject(int length) {
+    public RandomMovieObject(int length) {
         this(false,length);
     }
 
     // allChars = all characters, not just words
-    public RandomMovieDMObject(boolean allChars, int length) {
-        MovieDMObject randMovie;
+    public RandomMovieObject(boolean allChars, int length) {
+        MovieObject randMovie;
         if (allChars) {
-            randMovie = new MovieDMObject(
+            randMovie = new MovieObject(
                     UnitTestHelper.randomString(length),
                     UnitTestHelper.randomString(length),
                     UnitTestHelper.randomString(length),
                     UnitTestHelper.randomStringList(3, length)
             );
         } else {
-            randMovie = new MovieDMObject(
+            randMovie = new MovieObject(
                     UnitTestHelper.randomWord(length),
                     UnitTestHelper.randomWord(length),
                     UnitTestHelper.randomWord(length),
                     UnitTestHelper.randomWordList(3, length)
             );
         }
-        if(randMovie != null && validateMovie(randMovie)) {
+        if(validateMovie(randMovie)) {
             this.title = randMovie.getTitle();
             this.synopsis = randMovie.getSynopsis();
             this.cast = randMovie.getCast();

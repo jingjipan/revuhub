@@ -1,14 +1,14 @@
 package com.comp3350.rev_u_hub.PersistenceLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
 
 public interface MoviePersistence {
 
     void addStaticInfo();
 
     ///Search for specific movie in the map
-    MovieDMObject searchMovie(String movieName);
+    MovieObject searchMovie(String movieName);
 
     ///Add a new movie into the storage
-    void addNewMovie(String movieName, MovieDMObject m);
+    void addNewMovie(String movieName, MovieObject m);
 }

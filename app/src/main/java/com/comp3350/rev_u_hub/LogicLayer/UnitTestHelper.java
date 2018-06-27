@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.DMObjects.RandomMovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
+import com.comp3350.rev_u_hub.DMObjects.RandomMovieObject;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -72,22 +72,22 @@ public abstract class UnitTestHelper {
         return output;
     }
 
-    public static MovieDMObject randomMovie() {
-        return new RandomMovieDMObject();
+    public static MovieObject randomMovie() {
+        return new RandomMovieObject();
     }
 
     // allChars = all characters, not just words
-    public static MovieDMObject randomMovie(boolean allChars) {
-        return new RandomMovieDMObject(allChars);
+    public static MovieObject randomMovie(boolean allChars) {
+        return new RandomMovieObject(allChars);
     }
 
-    public static MovieDMObject randomMovie(int length) {
-        return new RandomMovieDMObject(length);
+    public static MovieObject randomMovie(int length) {
+        return new RandomMovieObject(length);
     }
 
     // allChars = all characters, not just words
-    public static MovieDMObject randomMovie(boolean allChars, int length) {
-        return new RandomMovieDMObject(allChars, length);
+    public static MovieObject randomMovie(boolean allChars, int length) {
+        return new RandomMovieObject(allChars, length);
     }
 
     public static String randomPermutation(String theString, String validChars) {
@@ -154,8 +154,8 @@ public abstract class UnitTestHelper {
                 theString.substring(position+1, theString.length());
     }
 
-    public static MovieDMObject[] getMovieTestArray() {
-        return new MovieDMObject[]{
+    public static MovieObject[] getMovieTestArray() {
+        return new MovieObject[]{
                 UnitTestHelper.randomMovie(true),
                 UnitTestHelper.randomMovie(true),
                 LogicConstants.noMovie,

@@ -1,6 +1,6 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
+import com.comp3350.rev_u_hub.DMObjects.ReviewObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ public abstract class InfoFormatConverter {
     public static String convertToString(Object target) {
         if (target instanceof String) return convertToString((String) target);
         if (target instanceof List) return convertToString((List<String>) target);
-        if (target instanceof ReviewDMObject) return convertToString((ReviewDMObject) target);
+        if (target instanceof ReviewObject) return convertToString((ReviewObject) target);
         if (target instanceof File) return convertToString((File) target);
         return target.toString();
     }
@@ -19,15 +19,15 @@ public abstract class InfoFormatConverter {
     public static List<String> convertToStringList(Object target) {
         if (target instanceof String) return convertToStringList((String) target);
         if (target instanceof List) return convertToStringList((List<String>) target);
-        if (target instanceof ReviewDMObject) return convertToStringList((ReviewDMObject) target);
+        if (target instanceof ReviewObject) return convertToStringList((ReviewObject) target);
         if (target instanceof File) return convertToStringList((File) target);
         return convertToStringList(target.toString());
     }
 
-    public static ReviewDMObject convertToReviewDMObject(Object target) {
+    public static ReviewObject convertToReviewDMObject(Object target) {
         if (target instanceof String) return convertToReviewDMObject((String) target);
         if (target instanceof List) return convertToReviewDMObject((List<String>) target);
-        if (target instanceof ReviewDMObject) return convertToReviewDMObject((ReviewDMObject) target);
+        if (target instanceof ReviewObject) return convertToReviewDMObject((ReviewObject) target);
         if (target instanceof File) return convertToReviewDMObject((File) target);
         return convertToReviewDMObject(target.toString());
     }
@@ -35,7 +35,7 @@ public abstract class InfoFormatConverter {
     public static File convertToFile(Object target) {
         if (target instanceof String) return convertToFile((String) target);
         if (target instanceof List) return convertToFile((List<String>) target);
-        if (target instanceof ReviewDMObject) return convertToFile((ReviewDMObject) target);
+        if (target instanceof ReviewObject) return convertToFile((ReviewObject) target);
         if (target instanceof File) return convertToFile((File) target);
         return convertToFile(target.toString());
     }
@@ -48,7 +48,7 @@ public abstract class InfoFormatConverter {
         return buildString(target.toArray(),", ");
     }
 
-    private static String convertToString(ReviewDMObject target) {
+    private static String convertToString(ReviewObject target) {
         return convertToString(target.getReviews());
     }
 
@@ -64,7 +64,7 @@ public abstract class InfoFormatConverter {
         return new ArrayList<>(target);
     }
 
-    private static List<String> convertToStringList(ReviewDMObject target) {
+    private static List<String> convertToStringList(ReviewObject target) {
         return target.getReviews();
     }
 
@@ -72,20 +72,20 @@ public abstract class InfoFormatConverter {
         return new ArrayList<>(Arrays.asList(target.getPath().split("\\\\")));
     }
 
-    private static ReviewDMObject convertToReviewDMObject(String target) {
-        return new ReviewDMObject(target);
+    private static ReviewObject convertToReviewDMObject(String target) {
+        return new ReviewObject(target);
     }
 
-    private static ReviewDMObject convertToReviewDMObject(List<String> target) {
-        return new ReviewDMObject(target);
+    private static ReviewObject convertToReviewDMObject(List<String> target) {
+        return new ReviewObject(target);
     }
 
-    private static ReviewDMObject convertToReviewDMObject(ReviewDMObject target) {
-        return new ReviewDMObject(target);
+    private static ReviewObject convertToReviewDMObject(ReviewObject target) {
+        return new ReviewObject(target);
     }
 
-    private static ReviewDMObject convertToReviewDMObject(File target) {
-        return new ReviewDMObject(convertToStringList(target));
+    private static ReviewObject convertToReviewDMObject(File target) {
+        return new ReviewObject(convertToStringList(target));
     }
 
     private static File convertToFile(String target) {
@@ -96,7 +96,7 @@ public abstract class InfoFormatConverter {
         return new File(buildString(target.toArray(),"\\\\"));
     }
 
-    private static File convertToFile(ReviewDMObject target) {
+    private static File convertToFile(ReviewObject target) {
         return convertToFile(target.getReviews());
     }
 

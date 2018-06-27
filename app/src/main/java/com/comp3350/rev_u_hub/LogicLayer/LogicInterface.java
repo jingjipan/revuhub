@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
+import com.comp3350.rev_u_hub.DMObjects.ReviewObject;
 
 import java.util.ArrayList;
 
@@ -9,25 +9,25 @@ public interface LogicInterface extends MovieInfoGetter, ReviewProcessor, MovieS
 
 interface MovieInfoGetter extends LogicComponent {
     //As a user, I want to be able to view the synopsis of a movie. (high)
-    String getSynopsis(MovieDMObject movie);
+    String getSynopsis(MovieObject movie);
 
     //As a user, I want to be able to view the casts of a movie. (high)
-    ArrayList<String> getCast(MovieDMObject movie);
+    ArrayList<String> getCast(MovieObject movie);
 }
 
 interface ReviewProcessor extends LogicComponent {
     //As a user, I want to be able to view reviews about a movie. (high)
-    ReviewDMObject getReview(MovieDMObject movie);
+    ReviewObject getReview(MovieObject movie);
 
     //As a user, I want to be able to rate reviews about a movie. (high)
-    boolean setReview(MovieDMObject movie, ReviewDMObject review);
-    boolean setReview(MovieDMObject movie, String reviewText);
+    boolean setReview(MovieObject movie, ReviewObject review);
+    boolean setReview(MovieObject movie, String reviewText);
 }
 
 interface MovieSearcher extends LogicComponent{
     //As a user, I want to be able to search movies based on title. (high)
-    MovieDMObject getMovie(String title);
-    MovieDMObject getMovieSimple(String title);
+    MovieObject getMovie(String title);
+    MovieObject getMovieSimple(String title);
 }
 
 interface LogicComponent {}

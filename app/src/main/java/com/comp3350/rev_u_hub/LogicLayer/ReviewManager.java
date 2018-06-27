@@ -1,22 +1,22 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
+import com.comp3350.rev_u_hub.DMObjects.ReviewObject;
 
 public class ReviewManager implements ReviewProcessor {
 
     public ReviewManager() {}
 
-    public ReviewDMObject getReview(MovieDMObject movie) {
+    public ReviewObject getReview(MovieObject movie) {
         return InfoFormatConverter.convertToReviewDMObject(movie.getReviews());
     }
 
-    public boolean setReview(MovieDMObject movie, ReviewDMObject review) {
+    public boolean setReview(MovieObject movie, ReviewObject review) {
         movie.setReviews(review);
         return movie.hasReviews();
     }
 
-    public boolean setReview(MovieDMObject movie, String reviewText) {
+    public boolean setReview(MovieObject movie, String reviewText) {
         movie.setReviews(reviewText);
         return movie.hasReviews();
     }

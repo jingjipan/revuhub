@@ -1,18 +1,15 @@
 package com.comp3350.rev_u_hub.PresentationLayer;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
 import com.comp3350.rev_u_hub.LogicLayer.AccessMovies;
 import com.comp3350.rev_u_hub.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieOverviewActivity extends AppCompatActivity {
@@ -28,7 +25,7 @@ public class MovieOverviewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
-        MovieDMObject movie = accessMovies.searchMovie(movieName);
+        MovieObject movie = accessMovies.searchMovie(movieName);
         movieName = movie.getTitle();
 
         //Set Movie Title

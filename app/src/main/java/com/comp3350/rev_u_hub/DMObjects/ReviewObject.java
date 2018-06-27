@@ -3,24 +3,24 @@ package com.comp3350.rev_u_hub.DMObjects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDMObject {
+public class ReviewObject {
 
     private List<String> myReviews;
 
-    public ReviewDMObject() {
+    public ReviewObject() {
         myReviews = new ArrayList<>();
     }
 
-    public ReviewDMObject(String setReview) {
+    public ReviewObject(String setReview) {
         myReviews = new ArrayList<>();
         myReviews.add(setReview);
     }
 
-    public ReviewDMObject(List<String> setReviews) {
+    public ReviewObject(List<String> setReviews) {
         myReviews = new ArrayList<>(setReviews);
     }
 
-    public ReviewDMObject(ReviewDMObject other) {
+    public ReviewObject(ReviewObject other) {
         myReviews = new ArrayList<>(other.getReviews());
     }
 
@@ -39,7 +39,7 @@ public class ReviewDMObject {
         return myReviews.size();
     }
 
-    public int setReviews(ReviewDMObject other) {
+    public int setReviews(ReviewObject other) {
         myReviews = new ArrayList<>(other.getReviews());
         return myReviews.size();
     }
@@ -54,12 +54,12 @@ public class ReviewDMObject {
         return myReviews.size();
     }
 
-    public int addReviews(ReviewDMObject other) {
+    public int addReviews(ReviewObject other) {
         myReviews.addAll(other.getReviews());
         return myReviews.size();
     }
 
-    public boolean equals(ReviewDMObject other) {
+    public boolean equals(ReviewObject other) {
         return getReviews().equals(other.getReviews());
     }
 

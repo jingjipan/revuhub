@@ -1,7 +1,6 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.EmptyMovieDMObject;
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
 
 public abstract class LogicConstants {
     public static final String lowercaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -13,5 +12,5 @@ public abstract class LogicConstants {
                     "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
                     " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
-    public static MovieDMObject noMovie = new EmptyMovieDMObject();
+    public static MovieObject noMovie = new MovieObject();
 }

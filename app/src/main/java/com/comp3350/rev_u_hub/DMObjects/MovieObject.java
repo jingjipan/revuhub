@@ -4,30 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDMObject implements Serializable {
+public class MovieObject implements Serializable {
     String title;
     String synopsis, cast;
     List<String> reviews;
 
-    MovieDMObject() {
+    public MovieObject() {
         title = "";
         synopsis = "";
         cast = "";
         reviews = new ArrayList<String>();
     }
 
-    public MovieDMObject(String movieName, String synopsis, String cast, List<String> reviews) {
+    public MovieObject(String movieName, String synopsis, String cast, List<String> reviews) {
         this.title = movieName;
         this.synopsis = synopsis;
         this.reviews = reviews;
         this.cast = cast;
     }
 
-//    public MovieDMObject(movie setMovie) {
+//    public MovieObject(movie setMovie) {
 //        myMovie = validateMovie(setMovie);
 //    }
 
-    public MovieDMObject(MovieDMObject other) {
+    public MovieObject(MovieObject other) {
         if (other != null && !other.isEmpty()) {
             this.title = other.getTitle();
             this.synopsis = other.getSynopsis();
@@ -64,7 +64,7 @@ public class MovieDMObject implements Serializable {
         reviews.add(setReview);
     }
 
-    public void setReviews(ReviewDMObject other) {
+    public void setReviews(ReviewObject other) {
         reviews.addAll(other.getReviews());
     }
 
@@ -76,14 +76,14 @@ public class MovieDMObject implements Serializable {
 
     public String toString() {return getTitle();}
 
-    public boolean equals(MovieDMObject other) {
+    public boolean equals(MovieObject other) {
         return this.getTitle().equals(other.getTitle()) &&
                 this.getSynopsis().equals(other.getSynopsis()) &&
                 this.getCast().equals(other.getCast()) &&
                 this.getReviews().equals(other.getReviews());
     }
 
-    public static boolean validateMovie(MovieDMObject theMovie) {
+    public static boolean validateMovie(MovieObject theMovie) {
         return theMovie != null &&
                 theMovie.getTitle()!= null &&
                 !theMovie.getTitle().equals("") &&
@@ -92,7 +92,7 @@ public class MovieDMObject implements Serializable {
                 theMovie.getSynopsis()!=null;
     }
 
-    public MovieDMObject getMovie() {
+    public MovieObject getMovie() {
         return this;
     }
 }

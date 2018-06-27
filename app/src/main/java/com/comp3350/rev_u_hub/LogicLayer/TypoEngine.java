@@ -1,6 +1,6 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
 import com.comp3350.rev_u_hub.PersistenceLayer.MoviePersistence;
 import com.comp3350.rev_u_hub.PersistenceLayer.stubs.MoviePersistenceStub;
 
@@ -16,14 +16,14 @@ public class TypoEngine implements MovieSearcher{
         myPersistenceLayer = setPersistenceLayer;
     }
 
-    public MovieDMObject getMovieSimple(String title) {
+    public MovieObject getMovieSimple(String title) {
         return sanitizeMovie(fetchPersistent(title));
     }
 
     // Uses Damerau–Levenshtein_distance 1 permutations of a title to search
     // https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
-    public MovieDMObject getMovie(String title) {
-        MovieDMObject movieFound;
+    public MovieObject getMovie(String title) {
+        MovieObject movieFound;
 
         movieFound = deletionSearch(title);
         if (isEmpty(movieFound)) movieFound = transpositionSearch(title);
@@ -48,23 +48,23 @@ public class TypoEngine implements MovieSearcher{
         return sanitizeMovie(movieFound);
     }
 
-    private MovieDMObject fetchPersistent(String title) {
-        return new MovieDMObject(myPersistenceLayer.searchMovie(title));
+    private MovieObject fetchPersistent(String title) {
+        return new MovieObject(myPersistenceLayer.searchMovie(title));
     }
 
-    private MovieDMObject sanitizeMovie(MovieDMObject theMovie) {
-        if (theMovie==null) return LogicConstants.noMovie;
-        else if (theMovie.isEmpty()) return LogicConstants.noMovie;
+    private MovieObject sanitizeMovie(MovieObject theMovie) {
+        if (theMovie==null) return new MovieObject();
+        else if (theMovie.isEmpty()) return new MovieObject();
         else return theMovie;
     }
 
-    private boolean isEmpty(MovieDMObject theMovie) {
+    private boolean isEmpty(MovieObject theMovie) {
         return theMovie==null || theMovie.isEmpty();
     }
 
     // removing one character in the title
-    private MovieDMObject deletionSearch(String title) {
-        MovieDMObject movieFound = null;
+    private MovieObject deletionSearch(String title) {
+        MovieObject movieFound = null;
         String attempt;
 
         for (int i=0; i<title.length() && isEmpty(movieFound); i++) {
@@ -76,8 +76,8 @@ public class TypoEngine implements MovieSearcher{
     }
 
     // swapping two adjacent characters in the title
-    private MovieDMObject transpositionSearch(String title) {
-        MovieDMObject movieFound = null;
+    private MovieObject transpositionSearch(String title) {
+        MovieObject movieFound = null;
         String attempt;
 
         for (int i=0; i<title.length()-1 && isEmpty(movieFound); i++) {
@@ -91,8 +91,8 @@ public class TypoEngine implements MovieSearcher{
     }
 
     // inserting one character somewhere in the title
-    private MovieDMObject insertionSearch(String title, String validChars) {
-        MovieDMObject movieFound = null;
+    private MovieObject insertionSearch(String title, String validChars) {
+        MovieObject movieFound = null;
         String attempt;
 
         for (int i=0; i<=title.length() && isEmpty(movieFound); i++) {
@@ -109,8 +109,8 @@ public class TypoEngine implements MovieSearcher{
     }
 
     // changing one character in the title
-    private MovieDMObject substitutionSearch(String title, String validChars) {
-        MovieDMObject movieFound = null;
+    private MovieObject substitutionSearch(String title, String validChars) {
+        MovieObject movieFound = null;
         String attempt;
 
         for (int i=0; i<title.length() && isEmpty(movieFound); i++) {

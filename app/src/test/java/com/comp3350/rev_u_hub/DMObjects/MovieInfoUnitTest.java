@@ -11,24 +11,24 @@ public class MovieInfoUnitTest {
 
     @Test
     public void testMovieEquality(){
-        MovieDMObject[] testMovies = UnitTestHelper.getMovieTestArray();
+        MovieObject[] testMovies = UnitTestHelper.getMovieTestArray();
         for (int i=0; i<UnitTestHelper.TEST_DESCRIPTORS.length; i++) {
             testEquality(testMovies[i],UnitTestHelper.TEST_DESCRIPTORS[i]);
         }
     }
 
-    private void testEquality(MovieDMObject leftMovie, String description) {
-        System.out.println("\nTesting MovieDMObject's getters and equals() function with " +
+    private void testEquality(MovieObject leftMovie, String description) {
+        System.out.println("\nTesting MovieObject's getters and equals() function with " +
                 description + ".");
 
-        MovieDMObject rightMovie =  new MovieDMObject(leftMovie);
+        MovieObject rightMovie =  new MovieObject(leftMovie);
 
         assertNotNull(leftMovie);
         assertNotNull(rightMovie);
         assertTrue(leftMovie.equals(rightMovie));
         assertTrue(rightMovie.equals(leftMovie));
 
-        System.out.println("Completed testing MovieDMObject's getters and equals() function with " +
+        System.out.println("Completed testing MovieObject's getters and equals() function with " +
                 description + ".");
     }
 }

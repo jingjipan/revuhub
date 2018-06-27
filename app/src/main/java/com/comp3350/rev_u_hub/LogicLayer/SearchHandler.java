@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub.LogicLayer;
 
-import com.comp3350.rev_u_hub.DMObjects.MovieDMObject;
-import com.comp3350.rev_u_hub.DMObjects.ReviewDMObject;
+import com.comp3350.rev_u_hub.DMObjects.MovieObject;
+import com.comp3350.rev_u_hub.DMObjects.ReviewObject;
 
 import java.util.ArrayList;
 
@@ -32,27 +32,27 @@ public class SearchHandler implements LogicInterface {
         buildSearchHandler();
     }
 
-    public String getSynopsis(MovieDMObject movie) {return myMovieInfoGetter.getSynopsis(movie);}
+    public String getSynopsis(MovieObject movie) {return myMovieInfoGetter.getSynopsis(movie);}
 
-    public ArrayList<String> getCast(MovieDMObject movie) {return myMovieInfoGetter.getCast(movie);}
+    public ArrayList<String> getCast(MovieObject movie) {return myMovieInfoGetter.getCast(movie);}
 
-    public ReviewDMObject getReview(MovieDMObject movie) {
+    public ReviewObject getReview(MovieObject movie) {
         return myReviewProcessor.getReview(movie);
     }
 
-    public boolean setReview(MovieDMObject movie, ReviewDMObject review) {
+    public boolean setReview(MovieObject movie, ReviewObject review) {
         return myReviewProcessor.setReview(movie, review);
     }
 
-    public boolean setReview(MovieDMObject movie, String reviewText) {
+    public boolean setReview(MovieObject movie, String reviewText) {
         return myReviewProcessor.setReview(movie, reviewText);
     }
 
-    public MovieDMObject getMovieSimple(String title) {
+    public MovieObject getMovieSimple(String title) {
         return myMovieSearcher.getMovieSimple(title);
     }
 
-    public MovieDMObject getMovie(String title) {
+    public MovieObject getMovie(String title) {
         return myMovieSearcher.getMovie(title);
     }
 
