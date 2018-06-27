@@ -36,6 +36,8 @@ public class SearchMoviesUnitTest {
 
         persistenceLayer.addNewMovie(testTitle, (new MovieObject(testMovie)).getMovie());
 
+        System.out.println("    Movie title: \"" + testTitle + "\"");
+
         assertNotNull(testMovie);
         assertNotNull(testTitle);
 
