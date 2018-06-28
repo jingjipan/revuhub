@@ -20,14 +20,14 @@ public class MovieSearchEngine extends SearchEngine implements MovieAccess {
         myPersistenceLayer.addNewMovie(movieName, m);
     }
 
-    public MovieObject getMovieSimple(String title) {
-        return (MovieObject) getObjectSimple(title);
+    public MovieObject getMovieSimple(String movieName) {
+        return (MovieObject) getObjectSimple(movieName);
     }
 
     // Uses Damerau–Levenshtein_distance 1 permutations of a title to search
     // https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
-    public MovieObject getMovie(String title) {
-        return (MovieObject) getObject(title);
+    public MovieObject getMovie(String movieName) {
+        return (MovieObject) getObject(movieName);
     }
 
     // Required to allow SearchEngine methods to search the persistence layer
