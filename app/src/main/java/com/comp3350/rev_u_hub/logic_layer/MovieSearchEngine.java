@@ -3,13 +3,13 @@ package com.comp3350.rev_u_hub.logic_layer;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.SearchableObject;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
-import com.comp3350.rev_u_hub.persistence_layer.stubs.MoviePersistenceStub;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 
 public class MovieSearchEngine extends SearchEngine implements MovieAccess {
     private MoviePersistence myPersistenceLayer;
 
     public MovieSearchEngine() {
-        myPersistenceLayer = new MoviePersistenceStub();
+        myPersistenceLayer = new MovieHSQLDB();
     }
 
     public MovieSearchEngine(MoviePersistence setPersistenceLayer) {

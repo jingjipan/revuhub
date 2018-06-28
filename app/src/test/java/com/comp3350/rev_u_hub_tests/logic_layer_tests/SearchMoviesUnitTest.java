@@ -5,7 +5,7 @@ import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
 import com.comp3350.rev_u_hub_tests.UnitTestHelper;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
-import com.comp3350.rev_u_hub.persistence_layer.stubs.MoviePersistenceStub;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class SearchMoviesUnitTest {
-    private MoviePersistence persistenceLayer = new MoviePersistenceStub();
+    private MoviePersistence persistenceLayer = new MovieHSQLDB();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
