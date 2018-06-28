@@ -68,4 +68,7 @@ public class MoviePersistenceStub implements MoviePersistence {
     public void addNewMovie(String movieName, MovieObject m) {
         movieMap.put(movieName, m);
     }
+
+    //Temporary behaviour to fit interface
+    public void updateMovie(String movieName, MovieObject m) {addNewMovie(movieName, m);}
 }
