@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3350.rev_u_hub.Application.Services;
-import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
 import com.comp3350.rev_u_hub.R;
 
 public class MainActivity extends AppCompatActivity {

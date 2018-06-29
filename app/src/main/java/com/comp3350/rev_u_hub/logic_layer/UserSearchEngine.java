@@ -2,6 +2,7 @@ package com.comp3350.rev_u_hub.logic_layer;
 
 import com.comp3350.rev_u_hub.data_objects.SearchableObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserAccess;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 
 public class UserSearchEngine extends SearchEngine implements UserAccess {

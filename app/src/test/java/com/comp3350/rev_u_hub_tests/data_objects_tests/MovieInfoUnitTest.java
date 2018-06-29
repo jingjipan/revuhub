@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub_tests.data_objects_tests;
 
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
-import com.comp3350.rev_u_hub_tests.UnitTestHelper;
+import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 
 import org.junit.Test;
 
@@ -12,9 +12,9 @@ public class MovieInfoUnitTest {
 
     @Test
     public void testMovieEquality(){
-        MovieObject[] testMovies = UnitTestHelper.getMovieTestArray();
-        for (int i=0; i<UnitTestHelper.TEST_DESCRIPTORS.length; i++) {
-            testEquality(testMovies[i],UnitTestHelper.TEST_DESCRIPTORS[i]);
+        MovieObject[] testMovies = MovieTestHelper.getMovieTestArray();
+        for (int i = 0; i< MovieTestHelper.TEST_DESCRIPTORS.length; i++) {
+            testEquality(testMovies[i], MovieTestHelper.TEST_DESCRIPTORS[i]);
         }
     }
 

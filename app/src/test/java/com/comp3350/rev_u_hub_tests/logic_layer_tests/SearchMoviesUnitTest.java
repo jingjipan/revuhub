@@ -2,8 +2,8 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
-import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
-import com.comp3350.rev_u_hub_tests.UnitTestHelper;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
+import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 
@@ -22,9 +22,9 @@ public class SearchMoviesUnitTest {
 
     @Test
     public void testSearches(){
-        MovieObject[] testMovies = UnitTestHelper.getMovieTestArray();
-        for (int i=0; i<UnitTestHelper.TEST_DESCRIPTORS.length; i++) {
-            testSearch(testMovies[i],UnitTestHelper.TEST_DESCRIPTORS[i]);
+        MovieObject[] testMovies = MovieTestHelper.getMovieTestArray();
+        for (int i = 0; i< MovieTestHelper.TEST_DESCRIPTORS.length; i++) {
+            testSearch(testMovies[i], MovieTestHelper.TEST_DESCRIPTORS[i]);
         }
     }
 
@@ -44,13 +44,13 @@ public class SearchMoviesUnitTest {
         assertTrue(testMovie.equals(movieSearch.getMovieSimple(testTitle)));
 
         assertTrue(testMovie.equals(movieSearch.getMovie(
-                UnitTestHelper.randomDeletion(testTitle))));
+                MovieTestHelper.randomDeletion(testTitle))));
         assertTrue(testMovie.equals(movieSearch.getMovie(
-                UnitTestHelper.randomTransposition(testTitle))));
+                MovieTestHelper.randomTransposition(testTitle))));
         assertTrue(testMovie.equals(movieSearch.getMovie(
-                UnitTestHelper.randomInsertion(testTitle, allChars))));
+                MovieTestHelper.randomInsertion(testTitle, allChars))));
         assertTrue(testMovie.equals(movieSearch.getMovie(
-                UnitTestHelper.randomSubstitution(testTitle, allChars))));
+                MovieTestHelper.randomSubstitution(testTitle, allChars))));
 
         System.out.println("Completed testing MovieSearchEngine getMovie functionality with " +
                 description + ".");

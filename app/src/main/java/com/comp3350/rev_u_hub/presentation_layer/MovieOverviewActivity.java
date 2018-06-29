@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.R;
-import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
 
 import java.util.List;
 

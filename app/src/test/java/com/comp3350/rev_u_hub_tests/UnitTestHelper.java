@@ -1,20 +1,12 @@
 package com.comp3350.rev_u_hub_tests;
 
-import com.comp3350.rev_u_hub.data_objects.MovieObject;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class UnitTestHelper {
+
     private static Random random = new Random();
     private static final int DEFAULT_LENGTH = 64;
-
-    public static final String[] TEST_DESCRIPTORS = {"a random movie",
-            "a random movie with numbers and symbols",
-            "no movie",
-            "a random movie with zero length contents",
-            "a random movie with short contents",
-            "a random movie with long contents"};
 
     public static int randomInteger() {
         return randomInteger(1,DEFAULT_LENGTH+1);
@@ -58,7 +50,7 @@ public abstract class UnitTestHelper {
     public static ArrayList<String> randomStringList(int quantity, int length) {
         ArrayList<String> output = new ArrayList<>();
         for (int i=0; i<quantity; i++) {
-            output.add(UnitTestHelper.randomString(length));
+            output.add(MovieTestHelper.randomString(length));
         }
         return output;
     }
@@ -66,27 +58,9 @@ public abstract class UnitTestHelper {
     public static ArrayList<String> randomWordList(int quantity, int length) {
         ArrayList<String> output = new ArrayList<>();
         for (int i=0; i<quantity; i++) {
-            output.add(UnitTestHelper.randomWord(length));
+            output.add(MovieTestHelper.randomWord(length));
         }
         return output;
-    }
-
-    public static MovieObject randomMovie() {
-        return randomMovieObject();
-    }
-
-    // allChars = all characters, not just words
-    public static MovieObject randomMovie(boolean allChars) {
-        return randomMovieObject(allChars);
-    }
-
-    public static MovieObject randomMovie(int length) {
-        return randomMovieObject(length);
-    }
-
-    // allChars = all characters, not just words
-    public static MovieObject randomMovie(boolean allChars, int length) {
-        return randomMovieObject(allChars, length);
     }
 
     public static String randomPermutation(String theString, String validChars) {
@@ -151,49 +125,5 @@ public abstract class UnitTestHelper {
         return theString.substring(0, position) +
                 validChars.charAt(randomInteger(0,validChars.length())) +
                 theString.substring(position+1, theString.length());
-    }
-
-    public static MovieObject[] getMovieTestArray() {
-        return new MovieObject[]{
-                UnitTestHelper.randomMovie(true),
-                UnitTestHelper.randomMovie(true),
-                new MovieObject(),
-                UnitTestHelper.randomMovie(true,0),
-                UnitTestHelper.randomMovie(true,1),
-                UnitTestHelper.randomMovie(true,168)
-        };
-    }
-
-    public static MovieObject randomMovieObject() {
-        return randomMovieObject(false,UnitTestHelper.randomInteger());
-    }
-
-    public static MovieObject randomMovieObject(boolean allChars) {
-        return randomMovieObject(allChars,UnitTestHelper.randomInteger());
-    }
-
-    public static MovieObject randomMovieObject(int length) {
-        return randomMovieObject(false,length);
-    }
-
-    // allChars = all characters, not just words
-    public static MovieObject randomMovieObject(boolean allChars, int length) {
-        MovieObject randMovie;
-        if (allChars) {
-            randMovie = new MovieObject(
-                    UnitTestHelper.randomString(length),
-                    UnitTestHelper.randomString(length),
-                    UnitTestHelper.randomString(length),
-                    UnitTestHelper.randomStringList(3, length)
-            );
-        } else {
-            randMovie = new MovieObject(
-                    UnitTestHelper.randomWord(length),
-                    UnitTestHelper.randomWord(length),
-                    UnitTestHelper.randomWord(length),
-                    UnitTestHelper.randomWordList(3, length)
-            );
-        }
-        return randMovie.validateMovie(randMovie) ? randMovie : new MovieObject();
     }
 }
