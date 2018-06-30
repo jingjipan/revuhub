@@ -123,9 +123,11 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public ReviewObject addNewReview(ReviewObject newReview) {
         try {
             final PreparedStatement st = c.prepareStatement("INSERT INTO reviews VALUES(?, ?, ?)");
-            st.setString(1, newReview.getReview());
+            st.setString(1, newReview.getUserName());
             st.setString(2, newReview.getMovieName());
-            st.setString(3, newReview.getUserName());
+            st.setString(3, newReview.getReview());
+
+
             st.executeUpdate();
 
             return newReview;
