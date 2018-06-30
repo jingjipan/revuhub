@@ -2,17 +2,22 @@ package com.comp3350.rev_u_hub.persistence_layer;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 
+import java.util.List;
+
 public interface UserPersistence {
 
-    ///Initialize default data
-    void addStaticInfo();
+    ///Get all of the users
+    List<UserObject> getUserSequential();
 
-    ///Search for specific user in the map
-    UserObject searchUser(String userName);
+    ///Get user based on userName
+    List<UserObject> searchUser(String userName);
 
-    ///Add a new user into the storage
-    void addNewUser(String userName, UserObject u);
+    ///Add a new user into the system
+    UserObject addNewUser(UserObject newUser);
 
-    ///Update the stored copy of a user
-    void updateUser(String userName, UserObject u);
+    ///Update the password of a specific user
+    UserObject updatePassWord(UserObject currentUser);
+
+    ///Delete a specific user
+    void deleteUser(UserObject currentUser);
 }
