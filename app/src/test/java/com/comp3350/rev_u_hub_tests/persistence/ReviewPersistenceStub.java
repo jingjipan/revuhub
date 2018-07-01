@@ -17,6 +17,7 @@ public class ReviewPersistenceStub implements ReviewPersistence{
         reviews.add(new ReviewObject("perfect","The Avangers","Tom"));
         reviews.add(new ReviewObject("bad movie","Thor","Roy"));
     }
+
     @Override
     public  List<ReviewObject> getReviewsSequential()  {
         return Collections.unmodifiableList(reviews);

@@ -20,6 +20,7 @@ public class UserAccontPersistenceStub implements UserPersistence{
     public List<UserObject> getUserSequential() {
         return Collections.unmodifiableList(users);
     }
+
     @Override
     public List<UserObject> searchUser(String userName) {
         List<UserObject> newUsers = new ArrayList<>();

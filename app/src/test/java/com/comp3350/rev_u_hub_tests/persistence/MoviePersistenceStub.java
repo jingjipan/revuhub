@@ -18,6 +18,7 @@ public class MoviePersistenceStub implements MoviePersistence{
         movies.add(new MovieObject("The Avengers","Heros movie", "Chris Evans",null,98,9.4));
         movies.add(new MovieObject("Thor","Science fiction movie", "Chris Hemsworth",null,89,8.5));
     }
+
     @Override
     public List<MovieObject> getMovieSequential() {
         return Collections.unmodifiableList(movies);
