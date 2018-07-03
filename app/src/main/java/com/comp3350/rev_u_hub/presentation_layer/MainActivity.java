@@ -8,14 +8,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3350.rev_u_hub.Application.Services;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private SearchView movieSearch;
-    private MovieAccess accessMovies;
+    private MovieSearch accessMovies;
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Set up temporary fake database
-        accessMovies = Services.getMovieAccess();
+        accessMovies = Services.getMovieSearch();
 
         movieSearch = (SearchView)findViewById(R.id.movieSearch);
         movieSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

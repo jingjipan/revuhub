@@ -16,5 +16,6 @@ public interface AccountManager {
     UserObject changeUsername(String userName, String password) throws UserDataException;
 
     //throws UserDataException
-    UserObject changePassword(String userName, String passwordOld, String passwordNew) throws UserDataException;
+    UserObject changePassword(String userName, String passwordOld, String passwordNew)
+            throws UserDataException;
 }

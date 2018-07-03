@@ -10,20 +10,20 @@ import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.R;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 
 import java.util.List;
 
 public class MovieOverviewActivity extends AppCompatActivity {
 
-    private MovieAccess accessMovies;
+    private MovieSearch accessMovies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_overview);
 
-        accessMovies = Services.getMovieAccess();
+        accessMovies = Services.getMovieSearch();
 
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
@@ -51,7 +51,7 @@ public class MovieOverviewActivity extends AppCompatActivity {
         //Set Movie
         List<String> reviews = null;
         try {
-            reviews = Services.getReviewInfo().getReviewsText(movie);
+            reviews = Services.getReviewSearch().getReviewsText(movie);
         } catch (ReviewDataException e) {
             e.printStackTrace();
         }

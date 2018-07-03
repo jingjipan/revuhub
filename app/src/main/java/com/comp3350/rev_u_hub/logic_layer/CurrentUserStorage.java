@@ -4,24 +4,24 @@ import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataWrongPasswordException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 
 public class CurrentUserStorage implements UserLogin {
 
-    private UserAccess myUserAccess;
+    private UserSearch myUserSearch;
     private UserObject currentUser;
 
-    public CurrentUserStorage(UserAccess userAccess) {
-        myUserAccess = userAccess;
+    public CurrentUserStorage(UserSearch userSearch) {
+        myUserSearch = userSearch;
     }
 
     // If credentials are correct, sets the current user
     public UserObject userLogin(String username, String password) throws UserDataException {
-        UserObject user = myUserAccess.getUserSimple(username);
+        UserObject user = myUserSearch.getUserSimple(username);
 
         if (user.isEmpty()) {
-            user = myUserAccess.getUser(username);
+            user = myUserSearch.getUser(username);
             if (user.isEmpty())
                 throw new UserDataNotFoundException("No user with that username was found.");
             else throw new UserDataNotFoundException("No user with that username was found." +
@@ -29,7 +29,7 @@ public class CurrentUserStorage implements UserLogin {
         } else {
           if (!user.getPassWord().equals(password))
               throw new UserDataWrongPasswordException(
-                      "The password entered is incorrect for this user");
+                      "The password entered is incorrect for this user.");
         }
 
         currentUser = user;
