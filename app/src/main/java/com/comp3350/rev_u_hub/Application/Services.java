@@ -1,5 +1,6 @@
 package com.comp3350.rev_u_hub.Application;
 
+import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
@@ -24,35 +25,22 @@ public class Services {
 
     private static MovieAccess movieAccess = null;
     private static UserAccess userAccess = null;
+
     private static ReviewInfo reviewInfo = null;
     private static UserLogin userLogin = null;
 
-    public static synchronized MoviePersistence getMoviePersistence()
-    {
-        if (moviePersistence == null)
-        {
-            moviePersistence = new MovieHSQLDB(Main.getDBPathName());
-        }
-
+    private static synchronized MoviePersistence getMoviePersistence() {
+        if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
         return moviePersistence;
     }
 
-    public static synchronized ReviewPersistence getReviewPersistence()
-    {
-        if (reviewPersistence == null)
-        {
-            reviewPersistence = new ReviewHSQLDB(Main.getDBPathName());
-        }
-
+    private static synchronized ReviewPersistence getReviewPersistence() {
+        if (reviewPersistence == null) reviewPersistence = new ReviewHSQLDB(Main.getDBPathName());
         return reviewPersistence;
     }
 
-    public static synchronized UserPersistence getUserPersistence() {
-        if (userPersistence == null)
-        {
-            userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
-        }
-
+    private static synchronized UserPersistence getUserPersistence() {
+        if (userPersistence == null) userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
         return userPersistence;
     }
 
@@ -61,7 +49,7 @@ public class Services {
         return movieAccess;
     }
 
-    public static UserAccess getUserAccess() {
+    private static UserAccess getUserAccess() {
         if ( userAccess == null ) userAccess =  new UserSearchEngine(getUserPersistence());
         return userAccess;
     }
@@ -73,9 +61,10 @@ public class Services {
 
     public static AccountManager getAccountManager() {return null;} //temporary until implemented
 
-    public static UserLogin getUserLogin() {return userLogin;} //temporary until implemented
+    public static UserLogin getUserLogin() {
+        if ( userLogin == null ) userLogin =  new CurrentUserStorage(getUserAccess());
+        return userLogin;
+    }
 
     public static ReviewManager getReviewManager() {return null;} //temporary until implemented
-
 }
-

@@ -22,10 +22,6 @@ public class MovieObject implements Serializable, SearchableObject {
         this.pic=pic;
     }
 
-//    public MovieObject(movie setMovie) {
-//        myMovie = validateMovie(setMovie);
-//    }
-
     public MovieObject(MovieObject other) {
         if (other != null && !other.isEmpty()) {
             this.title = other.getTitle();

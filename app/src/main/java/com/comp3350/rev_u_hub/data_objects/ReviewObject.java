@@ -1,8 +1,5 @@
 package com.comp3350.rev_u_hub.data_objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ReviewObject implements SearchableObject{
 
     private String review;
@@ -11,9 +8,8 @@ public class ReviewObject implements SearchableObject{
 
     public ReviewObject(String setReview,String movieName, String userName) {
         this.review = setReview;
-        this.movieName=movieName;
-        this.userName=userName;
-
+        this.movieName = movieName;
+        this.userName = userName;
     }
 
     public String getReview() {
@@ -30,11 +26,10 @@ public class ReviewObject implements SearchableObject{
 
     public void setReview(String setReview) {
         review = setReview;
-
     }
 
     public boolean isEmpty() {
-        return review.isEmpty();
+        return review.equals("");
     }
 
     public boolean equals(ReviewObject other) {
@@ -42,6 +37,6 @@ public class ReviewObject implements SearchableObject{
     }
 
     public String toString() {
-        return getReview().toString();
+        return getReview();
     }
 }
