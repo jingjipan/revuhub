@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.R;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
 
 import java.util.List;
@@ -48,7 +49,12 @@ public class MovieOverviewActivity extends AppCompatActivity {
         movieTextComponent.setText(movie.getSynopsis());
 
         //Set Movie
-        List<String> reviews = Services.getReviewInfo().getReviewsText(movie);
+        List<String> reviews = null;
+        try {
+            reviews = Services.getReviewInfo().getReviewsText(movie);
+        } catch (ReviewDataException e) {
+            e.printStackTrace();
+        }
 
         movieTextComponent = (TextView)findViewById(R.id.movieReview1);
         movieTextComponent.setText(reviews.get(0));
