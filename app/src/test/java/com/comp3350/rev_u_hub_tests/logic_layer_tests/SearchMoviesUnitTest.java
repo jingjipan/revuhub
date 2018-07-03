@@ -1,11 +1,11 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
-import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
-import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
+import com.comp3350.rev_u_hub_tests.persistence.MoviePersistenceStub;
 
 import org.junit.Test;
 
@@ -13,12 +13,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class SearchMoviesUnitTest {
-    private MoviePersistence persistenceLayer = new MovieHSQLDB();
+    private MoviePersistence persistenceLayer = new MoviePersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
             " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    private MovieAccess movieSearch = Services.getMovieAccess(persistenceLayer);
+    private MovieSearch movieSearch = new MovieSearchEngine(persistenceLayer);
 
     @Test
     public void testSearches(){
@@ -34,7 +34,7 @@ public class SearchMoviesUnitTest {
         System.out.println("\nTesting MovieSearchEngine getMovie functionality with " +
                 description + ".");
 
-        persistenceLayer.addNewMovie(testTitle, (new MovieObject(testMovie)).getMovie());
+        persistenceLayer.addNewMovie(new MovieObject(testMovie).getMovie());
 
         System.out.println("    Movie title: \"" + testTitle + "\"");
 

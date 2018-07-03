@@ -27,10 +27,14 @@ public class MovieObject implements Serializable, SearchableObject {
             this.title = other.getTitle();
             this.synopsis = other.getSynopsis();
             this.cast = other.getCast();
+            this.rating = other.getRating();
+            this.count = other.getCount();
         } else {
             title = "";
             synopsis = "";
             cast = "";
+            rating = 3;
+            count = 0;
         }
     }
 
@@ -80,7 +84,9 @@ public class MovieObject implements Serializable, SearchableObject {
     public boolean equals(MovieObject other) {
         return this.getTitle().equals(other.getTitle()) &&
                 this.getSynopsis().equals(other.getSynopsis()) &&
-                this.getCast().equals(other.getCast());
+                this.getCast().equals(other.getCast()) &&
+                this.getRating()==other.getRating() &&
+                this.getCount()==other.getCount();
     }
 
     public MovieObject getMovie() {

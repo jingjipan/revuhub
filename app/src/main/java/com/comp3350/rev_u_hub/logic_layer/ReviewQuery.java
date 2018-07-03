@@ -7,13 +7,13 @@ import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNoMovieException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNoUserException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNotFoundException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewInfo;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewQuery implements ReviewInfo {
+public class ReviewQuery implements ReviewSearch {
     private ReviewPersistence myPersistenceLayer;
 
     public ReviewQuery(ReviewPersistence setPersistenceLayer) {
@@ -68,26 +68,5 @@ public class ReviewQuery implements ReviewInfo {
             stringList.add(reviewList.get(i).toString());
         }
         return stringList;
-    }
-
-    // Returns true if a movie has any reviews
-    public boolean hasReview(MovieObject movie) throws ReviewDataNoMovieException {
-        if (movie==null || movie.isEmpty())
-            throw new ReviewDataNoMovieException("The selected movie does not exist.");
-        return !myPersistenceLayer.getReviewsOfMovie(movie.getTitle()).isEmpty();
-    }
-
-    // Returns a movie's average review rating
-    public double getAverageRating(MovieObject movie) throws ReviewDataNoMovieException {
-        if (movie==null || movie.isEmpty())
-            throw new ReviewDataNoMovieException("The selected movie does not exist.");
-        return movie.getRating();
-    }
-
-    // Returns the number of reviews a movie has
-    public int getReviewCount(MovieObject movie) throws ReviewDataNoMovieException {
-        if (movie==null || movie.isEmpty())
-            throw new ReviewDataNoMovieException("The selected movie does not exist.");
-        return movie.getCount();
     }
 }

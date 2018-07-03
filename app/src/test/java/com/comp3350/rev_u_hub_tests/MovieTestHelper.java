@@ -63,11 +63,13 @@ public abstract class MovieTestHelper extends UnitTestHelper {
                     randomString(length),
                     randomString(length),
                     randomString(length),
+                    randomString(length),
                     randomInteger(1, 100),
                     randomInteger(1, 200)/20.0
             );
         } else {
             randMovie = new MovieObject(
+                    randomWord(length),
                     randomWord(length),
                     randomWord(length),
                     randomWord(length),

@@ -1,14 +1,17 @@
 package com.comp3350.rev_u_hub.Application;
 
+import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewInfo;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieRatings;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewManager;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserAccess;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
@@ -23,11 +26,13 @@ public class Services {
     private static ReviewPersistence reviewPersistence = null;
     private static UserPersistence userPersistence = null;
 
-    private static MovieAccess movieAccess = null;
-    private static UserAccess userAccess = null;
+    private static MovieSearch movieSearch = null;
+    private static UserSearch userSearch = null;
+    private static ReviewSearch reviewSearch = null;
 
-    private static ReviewInfo reviewInfo = null;
     private static UserLogin userLogin = null;
+    private static MovieRatings movieRatings = null;
+    private static AccountManager accountManager = null;
 
     private static synchronized MoviePersistence getMoviePersistence() {
         if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
@@ -44,27 +49,36 @@ public class Services {
         return userPersistence;
     }
 
-    public static MovieAccess getMovieAccess() {
-        if ( movieAccess == null ) movieAccess =  new MovieSearchEngine(getMoviePersistence());
-        return movieAccess;
+    public static MovieSearch getMovieSearch() {
+        if ( movieSearch == null ) movieSearch = new MovieSearchEngine(getMoviePersistence());
+        return movieSearch;
     }
 
-    private static UserAccess getUserAccess() {
-        if ( userAccess == null ) userAccess =  new UserSearchEngine(getUserPersistence());
-        return userAccess;
+    private static UserSearch getUserSearch() {
+        if ( userSearch == null ) userSearch = new UserSearchEngine(getUserPersistence());
+        return userSearch;
     }
 
-    public static ReviewInfo getReviewInfo() {
-        if ( reviewInfo == null ) reviewInfo =  new ReviewQuery(getReviewPersistence());
-        return reviewInfo;
+    public static ReviewSearch getReviewSearch() {
+        if ( reviewSearch == null ) reviewSearch = new ReviewQuery(getReviewPersistence());
+        return reviewSearch;
     }
 
-    public static AccountManager getAccountManager() {return null;} //temporary until implemented
+    public static AccountManager getAccountManager() {
+        if ( accountManager == null ) accountManager = new AccountManagement(getUserSearch());
+        return accountManager;
+    }
 
     public static UserLogin getUserLogin() {
-        if ( userLogin == null ) userLogin =  new CurrentUserStorage(getUserAccess());
+        if ( userLogin == null ) userLogin = new CurrentUserStorage(getUserSearch());
         return userLogin;
     }
 
     public static ReviewManager getReviewManager() {return null;} //temporary until implemented
+
+    public static MovieRatings getMovieRatings() {
+        if ( movieRatings == null ) movieRatings =
+                new RatingManagement(getMovieSearch(), getMoviePersistence());
+        return movieRatings;
+    }
 }

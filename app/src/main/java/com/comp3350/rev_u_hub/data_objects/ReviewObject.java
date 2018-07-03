@@ -1,10 +1,16 @@
 package com.comp3350.rev_u_hub.data_objects;
 
-public class ReviewObject implements SearchableObject{
+public class ReviewObject implements SearchableObject {
 
     private String review;
     private String movieName;
     private String userName;
+
+    public ReviewObject() {
+        this.review = "";
+        this.movieName = "";
+        this.userName = "";
+    }
 
     public ReviewObject(String setReview,String movieName, String userName) {
         this.review = setReview;
