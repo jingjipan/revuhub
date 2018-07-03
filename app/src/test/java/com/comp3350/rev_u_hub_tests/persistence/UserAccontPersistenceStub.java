@@ -12,9 +12,10 @@ public class UserAccontPersistenceStub implements UserPersistence{
     public  UserAccontPersistenceStub(){
         this.users = new ArrayList<>();
 
-        users.add(new UserObject("Tom","123456"));
-        users.add(new UserObject("Jack","123456"));
-        users.add(new UserObject("Roy","123456"));
+        users.add(new UserObject("admin","123456"));
+        users.add(new UserObject("test1","123456"));
+
+        users.add(new UserObject("test2","123456"));
     }
     @Override
     public List<UserObject> getUserSequential() {
@@ -24,13 +25,15 @@ public class UserAccontPersistenceStub implements UserPersistence{
     @Override
     public List<UserObject> searchUser(String userName) {
         List<UserObject> newUsers = new ArrayList<>();
-        int index;
-
-        index = users.indexOf("userName");
-        if (index >= 0)
-        {
-            newUsers.add(users.get(index));
+        UserObject UserObjects;
+        int counter;
+        for(counter=0;counter< users.size();counter++){
+            UserObjects =  users.get(counter);
+            if(  UserObjects .getUserName().equals(userName)){
+                newUsers.add(users.get(counter));
+            }
         }
+
         return newUsers;
     }
 
@@ -44,7 +47,6 @@ public class UserAccontPersistenceStub implements UserPersistence{
     @Override
     public UserObject updatePassWord(UserObject currentUser) {
         int index;
-
         index = users.indexOf(currentUser);
         if (index >= 0)
         {

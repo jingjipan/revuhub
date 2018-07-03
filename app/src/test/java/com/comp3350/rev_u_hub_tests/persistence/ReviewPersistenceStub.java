@@ -12,10 +12,16 @@ public class ReviewPersistenceStub implements ReviewPersistence{
     public ReviewPersistenceStub(){
         this.reviews = new ArrayList<>();
 
-        reviews.add(new ReviewObject("nice movie","Iron man","Tom"));
-        reviews.add(new ReviewObject("good movie","Iron man","Jack"));
-        reviews.add(new ReviewObject("perfect","The Avangers","Tom"));
-        reviews.add(new ReviewObject("bad movie","Thor","Roy"));
+        reviews.add(new ReviewObject("admin","Thor","good movie"));
+        reviews.add(new ReviewObject("admin","Deadpool","good movie"));
+        reviews.add(new ReviewObject("admin","The Avengers","good movie"));
+        reviews.add(new ReviewObject("test1","Thor","bad movie"));
+        reviews.add(new ReviewObject("test1","Deadpool","bad movie"));
+        reviews.add(new ReviewObject("test1","The Avengers","bad movie"));
+        reviews.add(new ReviewObject("test2","Thor","suck movie"));
+        reviews.add(new ReviewObject("test2","Deadpool","suck movie"));
+        reviews.add(new ReviewObject("test2","The Avengers","suck movie"));
+
     }
 
     @Override
@@ -27,7 +33,6 @@ public class ReviewPersistenceStub implements ReviewPersistence{
     public List<ReviewObject> searchReview(String userName, String movieName){
         List<ReviewObject> newReviews;
         ReviewObject ReviewObjects;
-        int index;
         int counter;
         newReviews = new ArrayList<>();
        for(counter=0;counter< reviews.size();counter++){
