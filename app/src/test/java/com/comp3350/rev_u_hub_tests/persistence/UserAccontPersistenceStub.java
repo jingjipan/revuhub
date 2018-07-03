@@ -47,6 +47,7 @@ public class UserAccontPersistenceStub implements UserPersistence{
     @Override
     public UserObject updatePassWord(UserObject currentUser) {
         int index;
+
         index = users.indexOf(currentUser);
         if (index >= 0)
         {

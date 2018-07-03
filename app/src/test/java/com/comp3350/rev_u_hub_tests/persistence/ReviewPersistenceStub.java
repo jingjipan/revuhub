@@ -32,6 +32,7 @@ public class ReviewPersistenceStub implements ReviewPersistence{
     @Override
     public List<ReviewObject> searchReview(String userName, String movieName){
         List<ReviewObject> newReviews;
+
         ReviewObject ReviewObjects;
         int counter;
         newReviews = new ArrayList<>();
