@@ -2,17 +2,31 @@ package com.comp3350.rev_u_hub.persistence_layer;
 
 import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 
+import java.util.List;
+
 public interface ReviewPersistence {
 
-    ///Search for specific review in the map
-    ReviewObject searchReview(String userName, String movieName);
+    ///get all of the reviews in the database
+    List<ReviewObject> getReviewsSequential();
 
-    ///Add a new review into the storage
-    ReviewObject addNewReview(ReviewObject r);
+    ///Search review of specific user for specific movie
+    List<ReviewObject> searchReview(String userName, String movieName);
 
-    ///Update the stored copy of a review
-    ReviewObject updateReview(ReviewObject r);
+    ///Search review of specific user
+    List<ReviewObject> getReviewsOfUser(String userName);
 
-    ///Delete the stored copy of a review
-    void removeReview(ReviewObject r);
+    ///Search review of specific movie
+    List<ReviewObject> getReviewsOfMovie(String movieName);
+
+    ///Add new review
+    ReviewObject addNewReview(ReviewObject newReview);
+
+    ///Update an old review
+    ReviewObject updateReview(ReviewObject review);
+
+    ///Delete an review
+    void deleteReview(ReviewObject review);
+
+    ///Delete all reviews of a user
+    void deleteAllReview(String userName);
 }

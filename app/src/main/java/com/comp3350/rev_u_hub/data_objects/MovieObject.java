@@ -6,18 +6,20 @@ public class MovieObject implements Serializable, SearchableObject {
     private String title, synopsis, cast;
     private int count;
     private double rating;
+    private String pic;
     public MovieObject() {
         title = "";
         synopsis = "";
         cast = "";
     }
 
-    public MovieObject(String movieName, String synopsis, String cast,int count, double rating) {
+    public MovieObject(String movieName, String synopsis, String cast,String pic,int count, double rating) {
         this.title = movieName;
         this.synopsis = synopsis;
         this.cast = cast;
         this.count=count;
         this.rating=rating;
+        this.pic=pic;
     }
 
 //    public MovieObject(movie setMovie) {
@@ -72,6 +74,10 @@ public class MovieObject implements Serializable, SearchableObject {
     }
 
     public String getTitle() {return !title.equals("") ? title : "No Movie Found";}
+
+    public String getPic(){
+        return pic;
+    }
 
     public String toString() {return getTitle();}
 

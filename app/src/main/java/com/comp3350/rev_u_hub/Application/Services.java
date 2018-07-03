@@ -1,27 +1,48 @@
 package com.comp3350.rev_u_hub.Application;
 
-import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewManager;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieAccess;
+import com.comp3350.rev_u_hub.logic_layer.MovieAccess;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
+import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
+import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewHSQLDB;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccountHSQLDB;
 
 public class Services {
 
-    private static UserLogin userLogin = null;
+    private static MoviePersistence moviePersistence = null;
+    private static ReviewPersistence reviewPersistence = null;
+    private static UserPersistence userPersistence = null;
 
-    public static MovieAccess getMovieAccess() {
-        return new MovieSearchEngine();
+    public static synchronized MoviePersistence getMoviePersistence()
+    {
+        if (moviePersistence == null)
+        {
+            moviePersistence = new MovieHSQLDB(Main.getDBPathName());
+        }
+
+        return moviePersistence;
     }
 
-    public static MovieAccess getMovieAccess(MoviePersistence persistenceLayer) {
-        return new MovieSearchEngine(persistenceLayer);
+    public static synchronized ReviewPersistence getReviewPersistence()
+    {
+        if (reviewPersistence == null)
+        {
+            reviewPersistence = new ReviewHSQLDB(Main.getDBPathName());
+        }
+
+        return reviewPersistence;
     }
 
-    public static AccountManager getAccountManager() {return null;} //temporary until implemented
+    public static synchronized UserPersistence getUserPersistence() {
+        if (userPersistence == null)
+        {
+            userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
+        }
 
-    public static UserLogin getUserLogin() {return userLogin;} //temporary until implemented
-
-    public static ReviewManager getReviewManager() {return null;} //temporary until implemented
+        return userPersistence;
+    }
 }
+

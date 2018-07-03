@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 
-public class UserAccountHSQLDB {
+public class UserAccountHSQLDB implements UserPersistence{
 
 
     private final Connection c;
@@ -45,6 +46,31 @@ public class UserAccountHSQLDB {
 
             return users;
         } catch (final SQLException e) {
+            System.out.println("ERROR: Fail to get DB connection.");
+            throw new PersistenceException(e);
+        }
+
+    }
+
+    public List<UserObject> searchUser(String userName){
+
+        final List<UserObject> users = new ArrayList<>();
+
+        try {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM users WHERE userName = ?" );
+            st.setString(1, userName);
+            final ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                final UserObject user = fromResultSet(rs);
+                users.add(user);
+            }
+            rs.close();
+            st.close();
+
+            return users;
+        } catch (final SQLException e) {
+            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
@@ -60,6 +86,7 @@ public class UserAccountHSQLDB {
 
             return newUser;
         } catch (final SQLException e) {
+            System.out.println("ERROR: Not able to add user "+newUser.getUserName()+" into DB.");
             throw new PersistenceException(e);
         }
     }
@@ -74,6 +101,7 @@ public class UserAccountHSQLDB {
 
             return currentUser;
         } catch (final SQLException e) {
+            System.out.println("ERROR: Not able to update password of user "+currentUser.getUserName());
             throw new PersistenceException(e);
         }
     }
@@ -84,6 +112,7 @@ public class UserAccountHSQLDB {
             st.setString(1, currentUser.getUserName());
             st.executeUpdate();
         } catch (final SQLException e) {
+            System.out.println("ERROR: Not able to delete user "+currentUser.getUserName()+" from DB.");
             throw new PersistenceException(e);
         }
     }

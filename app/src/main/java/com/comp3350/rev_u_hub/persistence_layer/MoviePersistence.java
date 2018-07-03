@@ -1,18 +1,24 @@
 package com.comp3350.rev_u_hub.persistence_layer;
 
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
+import com.comp3350.rev_u_hub.data_objects.ReviewObject;
+
+import java.util.List;
 
 public interface MoviePersistence {
 
-    ///Search for specific movie in the map
-    MovieObject searchMovie(String movieName);
+    ///Get all of the movies in the DB
+    List<MovieObject> getMovieSequential();
 
-    ///Add a new movie into the storage
-    MovieObject addNewMovie(MovieObject m);
+    ///Add a new movie into the DB
+    MovieObject addNewMovie(MovieObject newMovie);
 
-    ///Update the stored copy of a movie
-    MovieObject updateMovie(MovieObject m);
+    ///Search movie by movie's name
+    List<MovieObject> searchMovie(String movieName);
 
-    ///Delete the stored copy of a movie
-    void deleteMovie(MovieObject m);
+    ///Update a movie's info in the DB
+    MovieObject updateMovie(MovieObject movie);
+
+    ///Delete a movie's info from the DB
+    void deleteMovie(MovieObject movie);
 }
