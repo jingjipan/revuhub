@@ -14,9 +14,9 @@ public class MoviePersistenceStub implements MoviePersistence{
     public MoviePersistenceStub() {
         this.movies = new ArrayList<>();
 
-        movies.add(new MovieObject("Iron man","Marvel movie", "Robert Downey",null,95,9.0));
-        movies.add(new MovieObject("The Avengers","Heros movie", "Chris Evans",null,98,9.4));
-        movies.add(new MovieObject("Thor","Science fiction movie", "Chris Hemsworth",null,89,8.5));
+        movies.add(new MovieObject("Deadpool","i","am","deadpool",1,4.3));
+        movies.add(new MovieObject("The Avengers","i","am","invincible",1,4.3));
+        movies.add(new MovieObject("Thor","i", "am","thor",1,4.3));
     }
 
     @Override
@@ -26,12 +26,14 @@ public class MoviePersistenceStub implements MoviePersistence{
     @Override
     public List<MovieObject> searchMovie(String movieName) {
         List<MovieObject> newMovies = new ArrayList<>();
-        int index;
+        MovieObject MovieObjects;
+        int counter;
 
-        index = movies.indexOf("movieName");
-        if (index >= 0)
-        {
-            newMovies.add(movies.get(index));
+        for(counter=0;counter< movies.size();counter++){
+            MovieObjects =  movies.get(counter);
+            if( MovieObjects .getTitle().equals(movieName)){
+                newMovies.add(movies.get(counter));
+            }
         }
         return newMovies;
     }
