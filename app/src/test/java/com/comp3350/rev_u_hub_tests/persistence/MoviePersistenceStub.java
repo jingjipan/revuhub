@@ -25,7 +25,6 @@ public class MoviePersistenceStub implements MoviePersistence{
     }
     @Override
     public List<MovieObject> searchMovie(String movieName) {
-
         List<MovieObject> newMovies = new ArrayList<>();
         MovieObject MovieObjects;
         int counter;
