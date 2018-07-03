@@ -8,16 +8,12 @@ import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 public class UserSearchEngine extends SearchEngine implements UserAccess {
     private UserPersistence myPersistenceLayer;
 
-    public UserSearchEngine() {
-        myPersistenceLayer = null;  //change later
-    }
-
     public UserSearchEngine(UserPersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 
-    public void addNewUser(String userName, UserObject u) {
-        myPersistenceLayer.addNewUser(userName, u);
+    public void addNewUser(UserObject u) {
+        myPersistenceLayer.addNewUser(u);
     }
 
     public UserObject getUserSimple(String userName) {
@@ -32,7 +28,7 @@ public class UserSearchEngine extends SearchEngine implements UserAccess {
 
     // Required to allow SearchEngine methods to search the persistence layer
     protected SearchableObject fetchPersistent(String searchText) {
-        return myPersistenceLayer.searchUser(searchText);
+        return myPersistenceLayer.searchUser(searchText).get(0);
     }
 
     // Required to tell SearchEngine what to return if the search fails

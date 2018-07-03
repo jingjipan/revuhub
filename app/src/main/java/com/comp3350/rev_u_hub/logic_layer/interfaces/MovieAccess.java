@@ -11,5 +11,5 @@ public interface MovieAccess {
     MovieObject getMovieSimple(String movieName);
 
     //Add a new movie into the storage
-    void addNewMovie(String movieName, MovieObject m);
+    void addNewMovie(MovieObject m);
 }

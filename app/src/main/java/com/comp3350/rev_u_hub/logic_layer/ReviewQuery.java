@@ -1,38 +1,69 @@
 package com.comp3350.rev_u_hub.logic_layer;
 
-import com.comp3350.rev_u_hub.data_objects.SearchableObject;
+import com.comp3350.rev_u_hub.data_objects.MovieObject;
+import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserAccess;
-import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewInfo;
+import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 
-public class UserSearchEngine extends SearchEngine implements UserAccess {
-    private UserPersistence myPersistenceLayer;
+import java.util.ArrayList;
+import java.util.List;
 
-    public UserSearchEngine(UserPersistence setPersistenceLayer) {
+public class ReviewQuery implements ReviewInfo {
+    private ReviewPersistence myPersistenceLayer;
+
+    public ReviewQuery(ReviewPersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 
-    public void addNewUser(UserObject u) {
-        myPersistenceLayer.addNewUser(u);
+    //Search for reviews of a movie
+    //throws ReviewDataException
+    public List<ReviewObject> getReviews(MovieObject movie) {
+        return myPersistenceLayer.getReviewsOfMovie(movie.getTitle());
     }
 
-    public UserObject getUserSimple(String userName) {
-        return (UserObject) getObjectSimple(userName);
+    //Search for reviews in text form of a movie
+    //throws ReviewDataException
+    public List<String> getReviewsText(MovieObject movie) {
+        List<String> stringList = new ArrayList<>();
+        List<ReviewObject> reviewList = getReviews(movie);
+
+        for(int i=0; i<reviewList.size(); i++) {
+            stringList.add(reviewList.get(i).toString());
+        }
+        return stringList;
     }
 
-    // Uses Damerau–Levenshtein_distance 1 permutations of a name to search
-    // https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
-    public UserObject getUser(String userName) {
-        return (UserObject) getObject(userName);
+    //Search for reviews by a user
+    //throws ReviewDataException
+    public List<ReviewObject> getReviews(UserObject user){
+        return myPersistenceLayer.getReviewsOfMovie(user.getUserName());
     }
 
-    // Required to allow SearchEngine methods to search the persistence layer
-    protected SearchableObject fetchPersistent(String searchText) {
-        return myPersistenceLayer.searchUser(searchText).get(0);
+    //Search for reviews in text form by a user
+    //throws ReviewDataException
+    public List<String> getReviewsText(UserObject user) {
+        List<String> stringList = new ArrayList<>();
+        List<ReviewObject> reviewList = getReviews(user);
+
+        for(int i=0; i<reviewList.size(); i++) {
+            stringList.add(reviewList.get(i).toString());
+        }
+        return stringList;
     }
 
-    // Required to tell SearchEngine what to return if the search fails
-    protected SearchableObject defaultObject() {
-        return new UserObject("","");
+    //throws ReviewDataNoMovieException
+    public boolean hasReview(MovieObject movie) {
+        return !myPersistenceLayer.getReviewsOfMovie(movie.getTitle()).isEmpty();
+    }
+
+    //throws ReviewDataNoMovieException
+    public double getAverageRating(MovieObject movie) {
+        return movie.getRating();
+    }
+
+    //throws ReviewDataNoMovieException
+    public int getReviewCount(MovieObject movie) {
+        return movie.getCount();
     }
 }

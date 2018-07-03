@@ -13,13 +13,4 @@ public interface ReviewManager {
 
     //throws ReviewDataException
     void removeReview(String reviewName);
-
-    //throws ReviewDataNoMovieException
-    boolean hasReview(MovieObject movie);
-
-    //throws ReviewDataNoMovieException
-    int getAverageRating(MovieObject movie);
-
-    //throws ReviewDataNoMovieException
-    int getReviewCount(MovieObject movie);
 }

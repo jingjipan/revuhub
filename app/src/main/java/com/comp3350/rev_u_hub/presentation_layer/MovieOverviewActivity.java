@@ -48,7 +48,7 @@ public class MovieOverviewActivity extends AppCompatActivity {
         movieTextComponent.setText(movie.getSynopsis());
 
         //Set Movie
-        List<String> reviews = movie.getReviews();
+        List<String> reviews = Services.getReviewInfo().getReviewsText(movie);
 
         movieTextComponent = (TextView)findViewById(R.id.movieReview1);
         movieTextComponent.setText(reviews.get(0));

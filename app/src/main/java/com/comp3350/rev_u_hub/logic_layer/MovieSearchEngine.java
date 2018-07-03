@@ -9,16 +9,12 @@ import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 public class MovieSearchEngine extends SearchEngine implements MovieAccess {
     private MoviePersistence myPersistenceLayer;
 
-    public MovieSearchEngine() {
-        myPersistenceLayer = new MovieHSQLDB();
-    }
-
     public MovieSearchEngine(MoviePersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 
-    public void addNewMovie(String movieName, MovieObject m) {
-        myPersistenceLayer.addNewMovie(movieName, m);
+    public void addNewMovie(MovieObject m) {
+        myPersistenceLayer.addNewMovie(m);
     }
 
     public MovieObject getMovieSimple(String movieName) {
@@ -33,7 +29,7 @@ public class MovieSearchEngine extends SearchEngine implements MovieAccess {
 
     // Required to allow SearchEngine methods to search the persistence layer
     protected SearchableObject fetchPersistent(String searchText) {
-        return new MovieObject(myPersistenceLayer.searchMovie(searchText));
+        return myPersistenceLayer.searchMovie(searchText).get(0);
     }
 
     // Required to tell SearchEngine what to return if the search fails

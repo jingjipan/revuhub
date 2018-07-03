@@ -11,5 +11,5 @@ public interface UserAccess {
     UserObject getUserSimple(String userName);
 
     //Add a new user into the storage
-    void addNewUser(String userName, UserObject u);
+    void addNewUser(UserObject u);
 }
