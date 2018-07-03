@@ -65,7 +65,8 @@ public class Services {
     }
 
     public static AccountManager getAccountManager() {
-        if ( accountManager == null ) accountManager = new AccountManagement(getUserSearch());
+        if ( accountManager == null ) accountManager = new AccountManagement(getUserSearch(),
+                getUserPersistence());
         return accountManager;
     }
 

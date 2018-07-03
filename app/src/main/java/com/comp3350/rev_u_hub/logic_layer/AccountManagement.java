@@ -1,48 +1,80 @@
 package com.comp3350.rev_u_hub.logic_layer;
 
-import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationFailedException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordMismatchException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationUsernameConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
+import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 
 public class AccountManagement implements AccountManager{
     private UserSearch myUserSearch;
-    private UserObject currentUser;
+    private UserPersistence myPersistenceLayer;
 
-    public AccountManagement(UserSearch userSearch) {
-        myUserSearch = userSearch;
+    public AccountManagement(UserSearch setUserSearch, UserPersistence setPersistenceLayer) {
+        myUserSearch = setUserSearch;
+        myPersistenceLayer = setPersistenceLayer;
     }
 
-    //throws UserCreationException
+    // Creates and stores a user if given valid parameters
     public UserObject createUser(String userName, String password1, String password2)
             throws UserCreationException {
-        UserObject user = getUser(userName,password);
+        UserObject user;
 
-        return null;
+        if (!password1.equals(password2)) throw new UserCreationPasswordMismatchException(
+                "The passwords given do not match.");
+
+        checkUsernameConstraint(userName);
+        checkPasswordConstraint(password1);
+
+        if (!myUserSearch.getUserSimple(userName).isEmpty())
+            throw new UserCreationDuplicateException("The user "+userName+" already exists.");
+
+        user = new UserObject(userName,password1);
+        myPersistenceLayer.addNewUser(user);
+
+        if (myUserSearch.getUserSimple(userName).isEmpty())
+            throw new UserCreationFailedException("The user "+userName+" could not be created.");
+
+        return user;
     }
 
-    //throws UserDataException
+    // Removes a user from storage
     public void removeUser(String userName, String password) throws UserDataException {
         UserObject user = getUser(userName,password);
+
+        myPersistenceLayer.deleteUser(user);
     }
 
-    //throws UserDataException
-    public UserObject changeUsername(String userName, String password) throws UserDataException {
-        UserObject user = getUser(userName,password);
+    // Changes a stored user's username
+    public UserObject changeUsername(String userName, String password) throws UserDataException,
+            UserCreationDuplicateException {
+        UserObject userOld = getUser(userName,password);
+        UserObject userNew;
 
-        return null;
+        myPersistenceLayer.deleteUser(userOld);
+        if (!myUserSearch.getUserSimple(userOld.getUserName()).isEmpty())
+            throw new UserCreationDuplicateException(
+                    "The previous user could not be overwritten.");
+        userNew = new UserObject(userName,password);
+        myPersistenceLayer.addNewUser(userNew);
+        return userNew;
     }
 
-    //throws UserDataException
+    // Changes a stored user's password
     public UserObject changePassword(String userName, String passwordOld, String passwordNew)
             throws UserDataException {
         UserObject user = getUser(userName,passwordOld);
 
-        return null;
+        user.changePassWord(passwordNew);
+        myPersistenceLayer.updatePassWord(user);
+        return user;
     }
 
     private UserObject getUser(String userName, String password) throws UserDataException {
@@ -55,5 +87,17 @@ public class AccountManagement implements AccountManager{
             throw new UserDataNotFoundException("The password is incorrect for the selected user.");
         
         return user;
+    }
+
+    private void checkUsernameConstraint(String userName)
+            throws UserCreationUsernameConstraintException {
+        if (userName.equals("FAIL")) throw new UserCreationUsernameConstraintException(
+                "Valid usernames must have XXX.");
+    }
+
+    private void checkPasswordConstraint(String password)
+            throws UserCreationPasswordConstraintException {
+        if (password.equals("FAIL")) throw new UserCreationPasswordConstraintException(
+                "Valid passwords must have XXX.");
     }
 }
