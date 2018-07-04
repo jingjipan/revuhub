@@ -99,7 +99,7 @@ public class MovieHSQLDB implements MoviePersistence{
 
     public MovieObject updateMovie(MovieObject movie){
         try {
-            final PreparedStatement st = c.prepareStatement("UPDATE movies SET synopsis = ?, cast = ?, pic = ?, count=?, rating=? WHERE movieName = ?");
+            final PreparedStatement st = c.prepareStatement("UPDATE movies SET synopsis = ?, moviecast = ?, pic = ?, count=?, rating=? WHERE movieName = ?");
             st.setString(1, movie.getSynopsis());
             st.setString(2, movie.getCast());
             st.setString(3, movie.getTitle());

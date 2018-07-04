@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation_layer.MainActivity">
+    tools:context=".presentation_layer.HomeActivity">
 
     <!--<android.support.design.widget.BottomNavigationView-->
         <!--android:id="@+id/navigation"-->
@@ -34,6 +34,19 @@
         app:layout_constraintTop_toBottomOf="@+id/searchTitle" />
 
     <TextView
+        android:id="@+id/searchWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SearchWarning"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="447dp"
+        app:layout_constraintBottom_toTopOf="@+id/searchTitle"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/searchTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,19 +60,6 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/movieSearch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/searchWarning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SearchWarning"
-        tools:layout_editor_absoluteX="271dp"
-        tools:layout_editor_absoluteY="447dp"
-        app:layout_constraintBottom_toTopOf="@+id/searchTitle"
-        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
