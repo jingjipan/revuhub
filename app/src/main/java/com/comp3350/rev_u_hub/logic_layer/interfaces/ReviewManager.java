@@ -6,12 +6,14 @@ import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
 
 public interface ReviewManager {
 
-    //throws ReviewCreationException
-    ReviewObject createReview(String setReview, String movieName, String userName, int rating) throws ReviewCreationException;
+    // Creates and stores a review if its parameters are valid
+    ReviewObject createReview(String setReview, String movieName, String userName)
+            throws ReviewCreationException;
+
+    // Modifies a stored review's text
+    ReviewObject editReview(String reviewName, String movieName, String userName)
+            throws ReviewDataException;
 
     //throws ReviewDataException
-    ReviewObject editReview(String reviewName, String movieName, String userName, int rating) throws ReviewDataException;
-
-    //throws ReviewDataException
-    void removeReview(String reviewName) throws ReviewDataException;
+    void removeReview(ReviewObject review) throws ReviewDataException;
 }
