@@ -28,7 +28,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
         final String movieName = rs.getString("movieName");
         final String review = rs.getString("review");
         final String username = rs.getString("userName");
-        return new ReviewObject(movieName,review, username);
+        return new ReviewObject(review,movieName, username);
     }
 
     public List<ReviewObject> getReviewsSequential() {
@@ -80,8 +80,9 @@ public class ReviewHSQLDB implements ReviewPersistence{
         final List<ReviewObject> reviews = new ArrayList<>();
 
         try {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM reviews WHERE reviews.movieName=movies.movieName AND userName = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE userName = ?");
+            st.setString(1, userName);
+            final ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 final ReviewObject review = fromResultSet(rs);
                 reviews.add(review );
@@ -101,7 +102,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
         final List<ReviewObject> reviews = new ArrayList<>();
 
         try {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE reviews.userName=movies.userName AND movieName = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE movieName = ?");
             st.setString(1, movieName);
             final ResultSet rs = st.executeQuery();
 

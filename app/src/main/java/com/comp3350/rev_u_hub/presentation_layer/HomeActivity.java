@@ -77,5 +77,6 @@ public class HomeActivity extends AppCompatActivity {
         movieIntent.putExtra("movieName", movieName);
         this.startActivity(movieIntent);
     }
+
 }
 

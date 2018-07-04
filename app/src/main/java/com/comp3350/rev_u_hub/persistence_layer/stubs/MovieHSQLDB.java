@@ -27,7 +27,7 @@ public class MovieHSQLDB implements MoviePersistence{
     private MovieObject fromResultSet(final ResultSet rs) throws SQLException {
         final String movieName = rs.getString("movieName");
         final String synopsis = rs.getString("synopsis");
-        final String cast = rs.getString("cast");
+        final String cast = rs.getString("moviecast");
         final int count = rs.getInt("count");
         final double rating = rs.getDouble("rating");
         final String pic = rs.getString("pic");
