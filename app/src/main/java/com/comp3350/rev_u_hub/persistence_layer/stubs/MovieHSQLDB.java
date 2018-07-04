@@ -1,6 +1,7 @@
 package com.comp3350.rev_u_hub.persistence_layer.stubs;
 
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,17 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
-public class MovieHSQLDB implements MoviePersistence{
+
+public class MovieHSQLDB implements MoviePersistence {
 
 
+    private final String dbPath;
     private final Connection c;
 
-    public MovieHSQLDB (final String dbPath) {
-        try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
-        } catch (final SQLException e) {
+    public MovieHSQLDB(final String dbPath) {
+        this.dbPath = dbPath;
+        try{
+            c = connection();
+        }catch (final SQLException e) {
             throw new PersistenceException(e);
         }
+    }
+
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     private MovieObject fromResultSet(final ResultSet rs) throws SQLException {
@@ -31,7 +39,7 @@ public class MovieHSQLDB implements MoviePersistence{
         final int count = rs.getInt("count");
         final double rating = rs.getDouble("rating");
         final String pic = rs.getString("pic");
-        return new MovieObject(movieName,synopsis, cast,pic,count,rating);
+        return new MovieObject(movieName, synopsis, cast, pic, count, rating);
     }
 
     public List<MovieObject> getMovieSequential() {
@@ -49,7 +57,6 @@ public class MovieHSQLDB implements MoviePersistence{
 
             return movies;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read movie from DB.");
             throw new PersistenceException(e);
         }
 
@@ -68,17 +75,16 @@ public class MovieHSQLDB implements MoviePersistence{
 
             return newMovie;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to add movie: "+newMovie.getTitle());
             throw new PersistenceException(e);
         }
     }
 
-    public List<MovieObject> searchMovie(String movieName){
+    public List<MovieObject> searchMovie(String movieName) {
 
         final List<MovieObject> movies = new ArrayList<>();
 
         try {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM movies WHERE movieName = ?" );
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM movies WHERE movieName = ?");
             st.setString(1, movieName);
             final ResultSet rs = st.executeQuery();
 
@@ -91,15 +97,14 @@ public class MovieHSQLDB implements MoviePersistence{
 
             return movies;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
     }
 
-    public MovieObject updateMovie(MovieObject movie){
-        try {
-            final PreparedStatement st = c.prepareStatement("UPDATE movies SET synopsis = ?, moviecast = ?, pic = ?, count=?, rating=? WHERE movieName = ?");
+    public MovieObject updateMovie(MovieObject movie) {
+        try{
+            final PreparedStatement st = c.prepareStatement("UPDATE movies SET synopsis = ?, moviecast = ?, pic = ?, count = ?, rating=? WHERE movieName = ?");
             st.setString(1, movie.getSynopsis());
             st.setString(2, movie.getCast());
             st.setString(3, movie.getTitle());
@@ -110,7 +115,6 @@ public class MovieHSQLDB implements MoviePersistence{
 
             return movie;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to update movie: "+movie.getTitle());
             throw new PersistenceException(e);
         }
     }
@@ -118,11 +122,10 @@ public class MovieHSQLDB implements MoviePersistence{
     public void deleteMovie(MovieObject movie) {
         try {
             final PreparedStatement st = c.prepareStatement("DELETE FROM movies WHERE movieName = ?");
-        st.setString(1, movie.getTitle());
-        st.executeUpdate();
-    } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to delete movie: "+movie.getTitle());
-        throw new PersistenceException(e);
-    }
+            st.setString(1, movie.getTitle());
+            st.executeUpdate();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 }
