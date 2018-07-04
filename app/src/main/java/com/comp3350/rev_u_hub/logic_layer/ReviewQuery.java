@@ -69,4 +69,45 @@ public class ReviewQuery implements ReviewSearch {
         }
         return stringList;
     }
+
+    // Search for a review of a movie by a user
+    public ReviewObject getReview(MovieObject movie, UserObject user)
+            throws ReviewDataNotFoundException {
+        ReviewObject review;
+        List<ReviewObject> list =
+                myPersistenceLayer.searchReview(movie.getTitle(), user.getUserName());
+
+        if (list != null && !list.isEmpty()) {
+            review = list.get(0);
+        } else throw new ReviewDataNotFoundException("A review by the selected user for the "
+                + "selected movie does not exist.");
+
+        return review;
+    }
+
+    // Search for a review of a movie by a user
+    public ReviewObject getReview(String movieName, String userName)
+            throws ReviewDataNotFoundException {
+        ReviewObject review;
+        List<ReviewObject> list =
+                myPersistenceLayer.searchReview(movieName, userName);
+
+        if (list != null && !list.isEmpty()) {
+            review = list.get(0);
+        } else throw new ReviewDataNotFoundException("A review by the selected user for the "
+                + "selected movie does not exist.");
+
+        return review;
+    }
+
+    // Returns true if a review of a movie by a user exists
+    public boolean reviewExists(String movieName, String userName) {
+        ReviewObject review;
+        try {
+            review = getReview(movieName, userName);
+        } catch (ReviewDataNotFoundException e) {
+            return false;
+        }
+        return review!=null && !review.isEmpty();
+    }
 }

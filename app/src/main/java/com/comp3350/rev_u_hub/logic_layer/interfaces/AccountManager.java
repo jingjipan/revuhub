@@ -15,8 +15,8 @@ public interface AccountManager {
     void removeUser(String userName, String password) throws UserDataException;
 
     // Changes a stored user's username
-    UserObject changeUsername(String userName, String password) throws UserDataException,
-            UserCreationDuplicateException;
+    UserObject changeUsername(String userNameOld, String userNameNew, String password)
+            throws UserDataException, UserCreationDuplicateException;
 
     // Changes a stored user's password
     UserObject changePassword(String userName, String passwordOld, String passwordNew)

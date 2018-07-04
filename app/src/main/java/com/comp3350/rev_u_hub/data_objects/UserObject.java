@@ -27,4 +27,8 @@ public class UserObject implements SearchableObject {
     public boolean isEmpty() {
         return userName.equals("");
     }
+
+    public boolean equals(UserObject other) {
+        return userName.equals(other.getUserName()) && passWord.equals(other.getPassWord());
+    }
 }

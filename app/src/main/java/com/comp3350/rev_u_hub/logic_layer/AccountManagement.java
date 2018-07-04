@@ -47,22 +47,22 @@ public class AccountManagement implements AccountManager{
 
     // Removes a user from storage
     public void removeUser(String userName, String password) throws UserDataException {
-        UserObject user = getUser(userName,password);
+        UserObject user = getUserObject(userName,password);
 
         myPersistenceLayer.deleteUser(user);
     }
 
     // Changes a stored user's username
-    public UserObject changeUsername(String userName, String password) throws UserDataException,
-            UserCreationDuplicateException {
-        UserObject userOld = getUser(userName,password);
+    public UserObject changeUsername(String userNameOld, String userNameNew, String password)
+            throws UserDataException, UserCreationDuplicateException {
+        UserObject userOld = getUserObject(userNameOld,password);
         UserObject userNew;
 
         myPersistenceLayer.deleteUser(userOld);
-        if (!myUserSearch.getUserSimple(userOld.getUserName()).isEmpty())
+        if (!myUserSearch.getUserSimple(userNameOld).isEmpty())
             throw new UserCreationDuplicateException(
                     "The previous user could not be overwritten.");
-        userNew = new UserObject(userName,password);
+        userNew = new UserObject(userNameNew,password);
         myPersistenceLayer.addNewUser(userNew);
         return userNew;
     }
@@ -70,14 +70,14 @@ public class AccountManagement implements AccountManager{
     // Changes a stored user's password
     public UserObject changePassword(String userName, String passwordOld, String passwordNew)
             throws UserDataException {
-        UserObject user = getUser(userName,passwordOld);
+        UserObject user = getUserObject(userName,passwordOld);
 
         user.changePassWord(passwordNew);
         myPersistenceLayer.updatePassWord(user);
         return user;
     }
 
-    private UserObject getUser(String userName, String password) throws UserDataException {
+    private UserObject getUserObject(String userName, String password) throws UserDataException {
         UserObject user = myUserSearch.getUserSimple(userName);
 
         if (user==null || user.isEmpty())
