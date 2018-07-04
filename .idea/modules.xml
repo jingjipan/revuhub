@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/REVUHUB.iml" filepath="$PROJECT_DIR$/REVUHUB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TeamJ.iml" filepath="$PROJECT_DIR$/TeamJ.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
