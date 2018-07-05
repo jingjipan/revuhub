@@ -27,7 +27,7 @@ public class MovieOverviewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String movieName = intent.getStringExtra("movieName");
-        MovieObject movie = accessMovies.getMovie(movieName);
+        MovieObject movie = accessMovies.getMovieSimple(movieName);
         movieName = movie.getTitle();
 
         //Set Movie Title
