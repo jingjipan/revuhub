@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class SearchMoviesUnitTest {
+public class MovieSearchUnitTest {
     private MoviePersistence persistenceLayer = new MoviePersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
