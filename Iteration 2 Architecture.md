@@ -43,7 +43,13 @@ Reviews can be created and destroyed by users.  A review's text body can be edit
 
 	package com.comp3350.rev_u_hub.persistence_layer;
 
-The persistence layer consists of three database classes that implement three interfaces.
+The persistence layer consists of three database classes that implement three interfaces, also with a script file.
+The script file implements the initialization of database.
+Three tables are created, which are 'MOVIES', 'USERS' table and 'REVIEWS'
+'MOVIES' consists of a 'MOVIENAME' primary key and multiple other keys which stores info of that movie.
+'USERS' consists of a 'USERNAME' primary key and 'PASSWORD' key.
+'REVIEWS' consists of reference foreign keys, 'USERNAME' and 'MOVIENAME'. Also with a 'REVIEW' key which is the storage of review.
+
 These interfaces are also implemented by stub classes for testing.
 Each database is associated with one data object:
 
@@ -53,7 +59,7 @@ Each database is associated with one data object:
 
 The databases, through their interfaces, allow the retrieval of, addition of objects to, editing of, and removal of their contents.
 
-Each database is initialized once by first calling ***EXPLAIN HOW DB IS INITIALIZED*** and then calling a getter method in `Application.Services` which ensures the database objects are created no more than once.
+Each database is initialized once by first calling a copy dababase method in 'presentation_layer.LoginActivity'. The method would read the assets.db.DB.script and then calling a getter method in `Application.Services` which ensures the database objects are created no more than once.
 
 `PersistenceException`s are used by the database objects internally to handle database access failures.
 
