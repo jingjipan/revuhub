@@ -44,11 +44,14 @@ Reviews can be created and destroyed by users.  A review's text body can be edit
 	package com.comp3350.rev_u_hub.persistence_layer;
 
 The persistence layer consists of three database classes that implement three interfaces, also with a script file.
-The script file implements the initialization of database.
+
+The script file performs the initialization of the database.
+
 Three tables are created, which are 'MOVIES', 'USERS' table and 'REVIEWS'
-'MOVIES' consists of a 'MOVIENAME' primary key and multiple other keys which stores info of that movie.
-'USERS' consists of a 'USERNAME' primary key and 'PASSWORD' key.
-'REVIEWS' consists of reference foreign keys, 'USERNAME' and 'MOVIENAME'. Also with a 'REVIEW' key which is the storage of review.
+
+* 'MOVIES' consists of a 'MOVIENAME' primary key and multiple other keys which stores info of that movie.
+* 'USERS' consists of a 'USERNAME' primary key and 'PASSWORD' key.
+* 'REVIEWS' consists of reference foreign keys, 'USERNAME' and 'MOVIENAME'. Also with a 'REVIEW' key which is the storage of review.
 
 These interfaces are also implemented by stub classes for testing.
 Each database is associated with one data object:
@@ -224,3 +227,5 @@ One unit test class exists for each of the public interfaces in the logic layer:
 * `UserLoginUnitTest` tests `UserLogin` using `CurrentUserStorage`
 * `UserSearchUnitTest` tests `UserSearch` using `UserSearchEngine`
 * A description of each test, including the randomized object it is operating on and any exceptions returned, is printed to the console during testing
+
+One unit test class, `MovieInfoUnitTest`, also exists to test the copy constructor in `MovieObject`
