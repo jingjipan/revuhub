@@ -3,19 +3,15 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
-import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.MovieInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
-import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNotFoundException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
@@ -41,8 +37,8 @@ public class ReviewManagerUnitTest {
     private MoviePersistence moviePersistence = new MoviePersistenceStub();
     private UserPersistence userPersistence = new UserAccontPersistenceStub();
     private ReviewSearch reviewSearch = new ReviewQuery(reviewPersistence);
-    private MovieSearch movieSearch = new MovieSearchEngine(moviePersistence);
-    private UserSearch userSearch = new UserSearchEngine(userPersistence);
+    private MovieSearch movieSearch = new MovieInMemorySearch(moviePersistence);
+    private UserSearch userSearch = new UserInMemorySearch(userPersistence);
     private UserLogin userLogin = new CurrentUserStorage(userSearch);
     private ReviewManagement reviewManager = new ReviewManagement(reviewPersistence,
             reviewSearch,

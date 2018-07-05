@@ -1,14 +1,10 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
-import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
@@ -23,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 public class UserLoginUnitTest {
     private UserPersistence persistenceLayer = new UserAccontPersistenceStub();
-    private UserSearch userSearch = new UserSearchEngine(persistenceLayer);
+    private UserSearch userSearch = new UserInMemorySearch(persistenceLayer);
     private UserLogin userLogin = new CurrentUserStorage(userSearch);
 
     @Test

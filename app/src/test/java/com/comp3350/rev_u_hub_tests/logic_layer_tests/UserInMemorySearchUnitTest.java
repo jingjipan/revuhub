@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.UserTestHelper;
@@ -12,13 +12,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class UserSearchUnitTest {
+public class UserInMemorySearchUnitTest {
     private UserPersistence persistenceLayer = new UserAccontPersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
             " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    private UserSearch userSearch = new UserSearchEngine(persistenceLayer);
+    private UserSearch userSearch = new UserInMemorySearch(persistenceLayer);
 
     @Test
     public void testSearches() {
@@ -31,7 +31,7 @@ public class UserSearchUnitTest {
         String testUserName = testUser.getUserName();
         String testUserPassword = testUser.getPassWord();
 
-        System.out.println("\nTesting UserSearchEngine getUser functionality with " +
+        System.out.println("\nTesting UserInMemorySearchEngine getUser functionality with " +
                 description + ".");
 
         persistenceLayer.addNewUser(new UserObject(testUserName,testUserPassword));
@@ -52,7 +52,7 @@ public class UserSearchUnitTest {
         assertTrue(testUser.equals(userSearch.getUser(
                 UserTestHelper.randomSubstitution(testUserName, allChars))));
 
-        System.out.println("Completed testing UserSearch getUser functionality with " +
+        System.out.println("Completed testing UserInMemorySearch getUser functionality with " +
                 description + ".");
     }
 }

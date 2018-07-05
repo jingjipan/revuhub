@@ -3,28 +3,14 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
-import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
-import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
-import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNotFoundException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
-import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
-import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 import com.comp3350.rev_u_hub_tests.ReviewTestHelper;
 import com.comp3350.rev_u_hub_tests.UserTestHelper;
-import com.comp3350.rev_u_hub_tests.persistence.MoviePersistenceStub;
 import com.comp3350.rev_u_hub_tests.persistence.ReviewPersistenceStub;
-import com.comp3350.rev_u_hub_tests.persistence.UserAccontPersistenceStub;
 
 import org.junit.Test;
 

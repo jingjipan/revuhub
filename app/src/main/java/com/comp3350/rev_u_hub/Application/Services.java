@@ -2,11 +2,11 @@ package com.comp3350.rev_u_hub.Application;
 
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
-import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.MovieInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
-import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieRatings;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
@@ -18,9 +18,7 @@ import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
-import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewPersistenceStub;
-import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccountHSQLDB;
 
 import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccontPersistenceStub;
 
@@ -55,12 +53,12 @@ public class Services {
     }
 
     public static MovieSearch getMovieSearch() {
-        if ( movieSearch == null ) movieSearch = new MovieSearchEngine(getMoviePersistence());
+        if ( movieSearch == null ) movieSearch = new MovieInMemorySearch(getMoviePersistence());
         return movieSearch;
     }
 
     public static UserSearch getUserSearch() {
-        if ( userSearch == null ) userSearch = new UserSearchEngine(getUserPersistence());
+        if ( userSearch == null ) userSearch = new UserInMemorySearch(getUserPersistence());
         return userSearch;
     }
 

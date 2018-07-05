@@ -69,7 +69,7 @@ public class MovieOverviewActivity extends ListActivity {
 
         Intent intent = getIntent();
         movieName = intent.getStringExtra("movieName");
-        final MovieObject movie = accessMovies.getMovieSimple(movieName);
+        final MovieObject movie = accessMovies.getMovie(movieName);
         movieName = movie.getTitle();
 
         //Set Movie Title
