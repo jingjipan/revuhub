@@ -8,14 +8,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3350.rev_u_hub.Application.Services;
+import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub.R;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private SearchView searchBar;
     private MovieSearch movieSearch;
+    private UserLogin userLoginOB;
+    private UserObject userObject;
+    private TextView currentUsername;
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,6 +50,17 @@ public class HomeActivity extends AppCompatActivity {
 
         //Set up temporary fake database
         movieSearch = Services.getMovieSearch();
+
+        currentUsername = (TextView)findViewById(R.id.currentUsername);
+
+        try {
+            userLoginOB = Services.getUserLogin();
+            userObject = userLoginOB.getUser();
+            currentUsername.setText("Welcome " + userObject.getUserName() + "!");
+        }
+        catch (UserDataNotFoundException e) {
+            Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
         searchBar = (SearchView)findViewById(R.id.movieSearch);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

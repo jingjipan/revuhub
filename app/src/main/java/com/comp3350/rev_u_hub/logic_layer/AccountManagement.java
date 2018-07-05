@@ -91,13 +91,13 @@ public class AccountManagement implements AccountManager{
 
     private void checkUsernameConstraint(String userName)
             throws UserCreationUsernameConstraintException {
-        if (userName.equals("FAIL")) throw new UserCreationUsernameConstraintException(
-                "Valid usernames must have XXX.");
+        if (userName.equals("")) throw new UserCreationUsernameConstraintException(
+                "Username must not be empty");
     }
 
     private void checkPasswordConstraint(String password)
             throws UserCreationPasswordConstraintException {
-        if (password.equals("FAIL")) throw new UserCreationPasswordConstraintException(
-                "Valid passwords must have XXX.");
+        if (password.equals("")) throw new UserCreationPasswordConstraintException(
+                "Password must not be empty");
     }
 }
