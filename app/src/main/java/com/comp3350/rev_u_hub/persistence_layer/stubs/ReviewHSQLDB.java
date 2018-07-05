@@ -51,7 +51,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
     }
 
-    public List<ReviewObject> searchReview(String userName, String movieName){
+    public List<ReviewObject> searchReview(String movieName, String userName){
 
         final List<ReviewObject> reviews = new ArrayList<>();
 

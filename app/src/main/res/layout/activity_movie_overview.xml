@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation_layer.MovieOverviewActivity"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <LinearLayout
