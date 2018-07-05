@@ -34,7 +34,7 @@ public abstract class MovieTestHelper extends UnitTestHelper {
 
     public static MovieObject[] getMovieTestArray() {
         return new MovieObject[]{
-                MovieTestHelper.randomMovie(true),
+                MovieTestHelper.randomMovie(false),
                 MovieTestHelper.randomMovie(true),
                 new MovieObject(),
                 MovieTestHelper.randomMovie(true,0),

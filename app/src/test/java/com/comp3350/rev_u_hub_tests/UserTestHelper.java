@@ -31,7 +31,7 @@ public abstract class UserTestHelper extends UnitTestHelper {
 
     public static UserObject[] getUserTestArray() {
         return new UserObject[]{
-                UserTestHelper.randomUser(true),
+                UserTestHelper.randomUser(false),
                 UserTestHelper.randomUser(true),
                 new UserObject(),
                 UserTestHelper.randomUser(true,0),
