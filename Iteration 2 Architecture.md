@@ -172,7 +172,7 @@ The MovieOverviewActivity sets it's content to activity_movie_overview.xml. This
 
 The Main.java class simply sets and gets the database path name. This was similar in the sample project.
 
-###Services
+### Services
 
 The Services.java class serves as centeralized hub that initializes and provides access to: 
 * MoviePersistence
