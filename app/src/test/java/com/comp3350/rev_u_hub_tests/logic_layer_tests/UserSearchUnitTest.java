@@ -31,28 +31,28 @@ public class UserSearchUnitTest {
         String testUserName = testUser.getUserName();
         String testUserPassword = testUser.getPassWord();
 
-        System.out.println("\nTesting UserSearchEngine getUser functionality with " +
+        System.out.println("\nTesting UserInMemorySearchEngine getUser functionality with " +
                 description + ".");
 
-        persistenceLayer.addNewUser(new UserObject(testUser).getUserName());
+        persistenceLayer.addNewUser(new UserObject(testUserName,testUserPassword));
 
         System.out.println("    User Name: \"" + testUser + "\"");
 
         assertNotNull(testUser);
         assertNotNull(testUserName);
 
-        assertTrue(testUser.equals(userSearch.getUserSimple(testUser)));
+        assertTrue(testUser.equals(userSearch.getUserSimple(testUserName)));
 
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomDeletion(testUser))));
+                UserTestHelper.randomDeletion(testUserName))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomTransposition(testUser))));
+                UserTestHelper.randomTransposition(testUserName))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomInsertion(testUser, allChars))));
+                UserTestHelper.randomInsertion(testUserName, allChars))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomSubstitution(testUser, allChars))));
+                UserTestHelper.randomSubstitution(testUserName, allChars))));
 
-        System.out.println("Completed testing UserSearch getUser functionality with " +
+        System.out.println("Completed testing UserSearchEngine getUser functionality with " +
                 description + ".");
     }
 }

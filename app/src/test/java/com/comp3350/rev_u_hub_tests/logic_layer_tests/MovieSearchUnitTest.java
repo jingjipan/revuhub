@@ -3,8 +3,8 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
-import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
+import com.comp3350.rev_u_hub_tests.MovieTestHelper;
 import com.comp3350.rev_u_hub_tests.persistence.MoviePersistenceStub;
 
 import org.junit.Test;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class SearchMoviesUnitTest {
+public class MovieSearchUnitTest {
     private MoviePersistence persistenceLayer = new MoviePersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
@@ -31,7 +31,7 @@ public class SearchMoviesUnitTest {
     private void testSearch(MovieObject testMovie, String description) {
         String testTitle = testMovie.getTitle();
 
-        System.out.println("\nTesting MovieSearchEngine getMovie functionality with " +
+        System.out.println("\nTesting MovieInMemorySearchEngine getMovie functionality with " +
                 description + ".");
 
         persistenceLayer.addNewMovie(new MovieObject(testMovie).getMovie());
@@ -52,7 +52,8 @@ public class SearchMoviesUnitTest {
         assertTrue(testMovie.equals(movieSearch.getMovie(
                 MovieTestHelper.randomSubstitution(testTitle, allChars))));
 
-        System.out.println("Completed testing MovieSearchEngine getMovie functionality with " +
+        System.out.println(
+                "Completed testing MovieInMemorySearchEngine getMovie functionality with " +
                 description + ".");
     }
 }

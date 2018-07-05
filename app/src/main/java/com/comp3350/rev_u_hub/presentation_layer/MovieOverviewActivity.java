@@ -5,11 +5,13 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -48,9 +50,10 @@ public class MovieOverviewActivity extends ListActivity {
     private MovieSearch accessMovies;
     private ReviewManager reviewManager;
     private String movieName;
+    List<String> reviews;
 
     private ListView lv;
-    ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
 
     private String reviewText = "";
     private Button submitButton;
@@ -67,7 +70,7 @@ public class MovieOverviewActivity extends ListActivity {
 
         Intent intent = getIntent();
         movieName = intent.getStringExtra("movieName");
-        final MovieObject movie = accessMovies.getMovieSimple(movieName);
+        final MovieObject movie = accessMovies.getMovie(movieName);
         movieName = movie.getTitle();
 
         //Set Movie Title
@@ -87,18 +90,35 @@ public class MovieOverviewActivity extends ListActivity {
         movieTextComponent.setText(movie.getSynopsis());
 
         //Set Movie
-        List<String> reviews = null;
-        try {
-            reviews = Services.getReviewSearch().getReviewsText(movie);
-            adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, reviews);
+        reviews = null;
+        setListViewContent(movie);
 
-            lv = getListView();
-            lv.setAdapter(adapter);
+        lv = getListView();
+        lv.setAdapter(adapter);
 
 
-        } catch (ReviewDataException e) {
-            e.printStackTrace();
-        }
+        // enable nested scrolling for the listview
+        lv.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
 
         submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener(){
@@ -115,12 +135,16 @@ public class MovieOverviewActivity extends ListActivity {
                         reviewManager = Services.getReviewManager();
                         try {
                             reviewManager.createReview(reviewText, movieName, currUser.getUserName());
-                            adapter.notifyDataSetChanged();
+                            updateAdapter(movie);
+
                             review.setText(""); // clear the review field
                             Toast.makeText(MovieOverviewActivity.this,"Review Submitted", Toast.LENGTH_SHORT).show();
                         } catch(ReviewCreationException e) {
                             System.out.println(e.getMessage());
-                            Toast.makeText(MovieOverviewActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                            if(e instanceof ReviewCreationDuplicateException) {
+                                Toast.makeText(MovieOverviewActivity.this, "You have already submitted a review", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     }
 
@@ -130,7 +154,6 @@ public class MovieOverviewActivity extends ListActivity {
 
             }
         });
-
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -167,10 +190,25 @@ public class MovieOverviewActivity extends ListActivity {
 //        });
     }
 
-    public boolean alreadyReviewed(UserObject currUser) {
-
-        return false;
+    private void setListViewContent(MovieObject movie) {
+        try {
+            reviews = Services.getReviewSearch().getReviewsText(movie);
+            adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, reviews);
+        } catch (ReviewDataException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void updateAdapter(MovieObject movie) {
+        adapter.clear();
+        try{
+            adapter.addAll(Services.getReviewSearch().getReviewsText(movie));
+            adapter.notifyDataSetChanged();
+        } catch(ReviewDataException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 //    public boolean getNewReview() {
 //
