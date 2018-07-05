@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
 
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.R;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
+import android.view.ViewGroup.MarginLayoutParams;
 
 import java.util.List;
 
@@ -52,15 +55,31 @@ public class MovieOverviewActivity extends AppCompatActivity {
         List<String> reviews = null;
         try {
             reviews = Services.getReviewSearch().getReviewsText(movie);
+
+            // add reviews to layout
+            for(String review : reviews) {
+                addReview(review);
+            }
+
         } catch (ReviewDataException e) {
             e.printStackTrace();
         }
+    }
 
-        movieTextComponent = (TextView)findViewById(R.id.movieReview1);
-        movieTextComponent.setText(reviews.get(0));
-        movieTextComponent = (TextView)findViewById(R.id.movieReview2);
-        movieTextComponent.setText(reviews.get(1));
-        movieTextComponent = (TextView)findViewById(R.id.movieReview3);
-        movieTextComponent.setText(reviews.get(2));
+    private void addReview(String reviewText) {
+        // Get the linear lauout for the reviews
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.movieReviews);
+
+        TextView review = new TextView(this);
+        review.setText(reviewText);
+
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        params.setMargins(10,10,10,10);
+
+        review.setLayoutParams(params);
+        review.setTextSize(20);
+
+        linearLayout.addView(review);
     }
 }
