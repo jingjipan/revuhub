@@ -8,12 +8,12 @@ import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieInMemorySearch extends SearchEngine implements MovieSearch {
+public class MovieSearchEngine extends SearchEngine implements MovieSearch {
     private MoviePersistence myPersistenceLayer;
     private List<MovieObject> lastRetrieval;
     private List<String> lastRetrievalStrings;
 
-    public MovieInMemorySearch(MoviePersistence setPersistenceLayer) {
+    public MovieSearchEngine(MoviePersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 

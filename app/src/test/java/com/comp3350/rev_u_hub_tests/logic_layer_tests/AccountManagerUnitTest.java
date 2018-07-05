@@ -2,7 +2,7 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
-import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
+import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AccountManagerUnitTest {
     private UserPersistence persistenceLayer = new UserAccontPersistenceStub();
-    private UserSearch userSearch = new UserInMemorySearch(persistenceLayer);
+    private UserSearch userSearch = new UserSearchEngine(persistenceLayer);
     private AccountManager accountManager = new AccountManagement(userSearch,persistenceLayer);
     private static final String newPassWord = "NEW_PASS";
     private static final String newUserName = "NEW_NAME";

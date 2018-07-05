@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
-import com.comp3350.rev_u_hub.logic_layer.MovieInMemorySearch;
+import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
 import com.comp3350.rev_u_hub_tests.MovieTestHelper;
@@ -12,13 +12,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class MovieInMemorySearchUnitTest {
+public class MovieSearchUnitTest {
     private MoviePersistence persistenceLayer = new MoviePersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
             " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    private MovieSearch movieSearch = new MovieInMemorySearch(persistenceLayer);
+    private MovieSearch movieSearch = new MovieSearchEngine(persistenceLayer);
 
     @Test
     public void testSearches(){

@@ -1,7 +1,7 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.UserObject;
-import com.comp3350.rev_u_hub.logic_layer.UserInMemorySearch;
+import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.UserTestHelper;
@@ -12,13 +12,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class UserInMemorySearchUnitTest {
+public class UserSearchUnitTest {
     private UserPersistence persistenceLayer = new UserAccontPersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
             " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-    private UserSearch userSearch = new UserInMemorySearch(persistenceLayer);
+    private UserSearch userSearch = new UserSearchEngine(persistenceLayer);
 
     @Test
     public void testSearches() {
@@ -52,7 +52,7 @@ public class UserInMemorySearchUnitTest {
         assertTrue(testUser.equals(userSearch.getUser(
                 UserTestHelper.randomSubstitution(testUserName, allChars))));
 
-        System.out.println("Completed testing UserInMemorySearch getUser functionality with " +
+        System.out.println("Completed testing UserSearchEngine getUser functionality with " +
                 description + ".");
     }
 }

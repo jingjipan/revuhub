@@ -8,12 +8,12 @@ import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserInMemorySearch extends SearchEngine implements UserSearch {
+public class UserSearchEngine extends SearchEngine implements UserSearch {
     private UserPersistence myPersistenceLayer;
     private List<UserObject> lastRetrieval;
     private List<String> lastRetrievalStrings;
 
-    public UserInMemorySearch(UserPersistence setPersistenceLayer) {
+    public UserSearchEngine(UserPersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
     }
 
