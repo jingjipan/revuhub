@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class UserSearchUnitTest {
+public class SearchUsersUnitTest {
     private UserPersistence persistenceLayer = new UserAccontPersistenceStub();
     private static final String allChars = "0123456789" +
             "abcdefghijklmnopqrstuvwxyz" +
@@ -34,23 +34,23 @@ public class UserSearchUnitTest {
         System.out.println("\nTesting UserSearchEngine getUser functionality with " +
                 description + ".");
 
-        persistenceLayer.addNewUser(new UserObject(testUser).getUserName());
+        persistenceLayer.addNewUser(new UserObject(testUserName, testUserPassword));
 
         System.out.println("    User Name: \"" + testUser + "\"");
 
         assertNotNull(testUser);
         assertNotNull(testUserName);
 
-        assertTrue(testUser.equals(userSearch.getUserSimple(testUser)));
+        assertTrue(testUser.equals(userSearch.getUserSimple(testUserName)));
 
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomDeletion(testUser))));
+                UserTestHelper.randomDeletion(testUserName))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomTransposition(testUser))));
+                UserTestHelper.randomTransposition(testUserName))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomInsertion(testUser, allChars))));
+                UserTestHelper.randomInsertion(testUserName, allChars))));
         assertTrue(testUser.equals(userSearch.getUser(
-                UserTestHelper.randomSubstitution(testUser, allChars))));
+                UserTestHelper.randomSubstitution(testUserName, allChars))));
 
         System.out.println("Completed testing UserSearch getUser functionality with " +
                 description + ".");
