@@ -187,3 +187,34 @@ The Services.java class serves as centeralized hub that initializes and provides
 * MovieRatings
 
 ## Test Classes
+
+	package com.comp3350.rev_u_hub_tests
+
+All unit tests can be run by running the `AllTests` class.
+
+The unit tests do not use Services to retrieve their dependencies.
+
+Instead, they create their own persistence stubs found in:
+
+	package com.comp3350.rev_u_hub_tests.persistence;
+
+* These stubs emulate the behaviour of the `HSQLDB` classes in the persistence layer.
+
+The unit tests retrieve their test data sets from descendants of the `UnitTestHelper` class:
+
+* `MovieUnitTestHelper`
+* `UserUnitTestHelper`
+* `ReviewUnitTestHelper`
+* These classes allow creation of randomized movie, user, and review objects respectively
+
+One unit test class exists for each of the public interfaces in the logic layer:
+
+* Each of these test classes tests all methods in the interface using its implementing class
+* `AccountManagerUnitTest` tests `AccountManager` using `AccountManagement`
+* `MovieRatingsUnitTest` tests `MovieRatings` using `RatingManagement`
+* `MovieSearchUnitTest` tests `MovieSearch` using `MovieSearchEngine`
+* `ReviewManagerUnitTest` tests `ReviewManager` using `ReviewManagement`
+* `ReviewSearchUnitTest` tests `ReviewSearch` using `ReviewQuery`
+* `UserLoginUnitTest` tests `UserLogin` using `CurrentUserStorage`
+* `UserSearchUnitTest` tests `UserSearch` using `UserSearchEngine`
+* A description of each test, including the randomized object it is operating on and any exceptions returned, is printed to the console during testing
