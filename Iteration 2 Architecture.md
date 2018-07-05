@@ -102,7 +102,7 @@ The `CurrentUserStorage` class makes use of `UserSearch` to allow user login.  T
 
 The `ReviewQuery` class uses `ReviewPersistence`'s functionality for performing review database queries to retrieve reviews.  Reviews by a user or for a movie can be retrieved in list or text form.  Specific reviews can also be retrieved using both a user and movie.
 
-The `MovieSearchEngine` and `UserSearchEngine` classes both extend `SearchEngine` to retrieve movie and user object respectively.  By default, the `SearchEngine` class uses a loose search that allows typos within one [Damerau–Levenshtein distance](https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance) of a username or movie title.  The `SearchEngine` class also allows simple (strict) searches using a username or movie title.
+The `MovieSearchEngine` and `UserSearchEngine` classes both extend `SearchEngine` to retrieve movie and user object respectively.  By default, the `SearchEngine` class uses a loose search that allows typos within one [Damerauâ€“Levenshtein distance](https://en.wikipedia.org/wiki/Damerauâ€“Levenshtein_distance) of a username or movie title.  The `SearchEngine` class also allows simple (strict) searches using a username or movie title.
 
 ### Exceptions
 
@@ -141,7 +141,29 @@ The logic layer's exception hierarchy is as follows:
 		* `ReviewDataWrongUserException`		*User is not logged in*
 
 
-## Presentation Layer
+## PresentationLayer
+
+    package com.comp3350.rev_u_hub.presentation_layer
+
+The presentation layer consists of multiple activity classes that serve as the different "pages" on the application. Each activity class has a cooresponding .xml layout file to setup up the front end. The activites serve as the minor logic portion that is required in order for android to properly serve the pages.
+
+The activites use Application/Services.java class in order to access all the required interfaces and methods that are used to manipulate the application data.
+
+### LoginActivity
+
+The LoginActivity serves as the launcher for the application. It's content view is set to activity_login.xml. This page has a simple login form with a button that will launch the HomeActivity if the user exists. To test current user login: Username 'admin', Password '123456'. There is also a button that will launch a new activity for creating a new user in the application. 
+
+### CreateUserActivity
+
+The CreateUserActivity sets it's content to activity_create_user.xml. This is a simple create account page that checks to see if a username exists already, and if doesn't and the password fields match, a new user is created and is "logged in". This will lauch the HomeActivity. To test already existing user: Username: 'admin'. To test creating a new user, use any username besides 'admin', 'test1', and 'test2'. 
+
+### HomeActivity
+
+The HomeActivity sets it's content to activity_main.xml. This is a simple search page, for searching for an existing movie. The searching is strict for the movies and no longer fuzzy (will fix in the next iteration). This activity was formally known as MainActivity.
+
+### MovieOverviewActivity
+
+The MovieOverviewActivity sets it's content to activity_movie_overview.xml. This page shows all the content for a searched movie, and all of the reviews left for that movie. It also allows you to add a review to a movie if the current user hasn't left a review on that movie before. To test this, create a new user and leave a review on any movie.
 
 
 ## Application
