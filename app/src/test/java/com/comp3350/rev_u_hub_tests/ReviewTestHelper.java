@@ -31,7 +31,7 @@ public abstract class ReviewTestHelper extends UnitTestHelper {
 
     public static ReviewObject[] getReviewTestArray(String movie, String user) {
         return new ReviewObject[]{
-                ReviewTestHelper.randomReview(movie,user,true),
+                ReviewTestHelper.randomReview(movie,user,false),
                 ReviewTestHelper.randomReview(movie,user,true),
                 new ReviewObject(),
                 ReviewTestHelper.randomReview(movie,user,0),

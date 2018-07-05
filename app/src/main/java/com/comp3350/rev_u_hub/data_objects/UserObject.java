@@ -31,4 +31,8 @@ public class UserObject implements SearchableObject {
     public boolean equals(UserObject other) {
         return userName.equals(other.getUserName()) && passWord.equals(other.getPassWord());
     }
+
+    public String toString() {
+        return getUserName();
+    }
 }
