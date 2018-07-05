@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -48,9 +49,10 @@ public class MovieOverviewActivity extends ListActivity {
     private MovieSearch accessMovies;
     private ReviewManager reviewManager;
     private String movieName;
+    List<String> reviews;
 
     private ListView lv;
-    ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> adapter;
 
     private String reviewText = "";
     private Button submitButton;
@@ -87,18 +89,12 @@ public class MovieOverviewActivity extends ListActivity {
         movieTextComponent.setText(movie.getSynopsis());
 
         //Set Movie
-        List<String> reviews = null;
-        try {
-            reviews = Services.getReviewSearch().getReviewsText(movie);
-            adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, reviews);
+        reviews = null;
+        setListViewContent(movie);
 
-            lv = getListView();
-            lv.setAdapter(adapter);
+        lv = getListView();
+        lv.setAdapter(adapter);
 
-
-        } catch (ReviewDataException e) {
-            e.printStackTrace();
-        }
 
         submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener(){
@@ -115,7 +111,8 @@ public class MovieOverviewActivity extends ListActivity {
                         reviewManager = Services.getReviewManager();
                         try {
                             reviewManager.createReview(reviewText, movieName, currUser.getUserName());
-                            adapter.notifyDataSetChanged();
+                            updateAdapter(movie);
+
                             review.setText(""); // clear the review field
                             Toast.makeText(MovieOverviewActivity.this,"Review Submitted", Toast.LENGTH_SHORT).show();
                         } catch(ReviewCreationException e) {
@@ -167,10 +164,25 @@ public class MovieOverviewActivity extends ListActivity {
 //        });
     }
 
-    public boolean alreadyReviewed(UserObject currUser) {
-
-        return false;
+    private void setListViewContent(MovieObject movie) {
+        try {
+            reviews = Services.getReviewSearch().getReviewsText(movie);
+            adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, reviews);
+        } catch (ReviewDataException e) {
+            e.printStackTrace();
+        }
     }
+
+    private void updateAdapter(MovieObject movie) {
+        adapter.clear();
+        try{
+            adapter.addAll(Services.getReviewSearch().getReviewsText(movie));
+            adapter.notifyDataSetChanged();
+        } catch(ReviewDataException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 //    public boolean getNewReview() {
 //
