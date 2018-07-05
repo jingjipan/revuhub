@@ -2034,7 +2034,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>
@@ -3752,7 +3752,7 @@ public final class R {
     public static final int mini=0x7f08006f;
     public static final int movieCast=0x7f080070;
     public static final int movieImage=0x7f080071;
-    public static final int movieReviews=0x7f080072;
+    public static final int movieReview=0x7f080072;
     public static final int movieSearch=0x7f080073;
     public static final int movieSynopsis=0x7f080074;
     public static final int movieTitle=0x7f080075;
@@ -3822,37 +3822,38 @@ public final class R {
     public static final int start=0x7f0800b5;
     public static final int status_bar_latest_event_content=0x7f0800b6;
     public static final int submenuarrow=0x7f0800b7;
-    public static final int submit_area=0x7f0800b8;
-    public static final int tabMode=0x7f0800b9;
-    public static final int tag_transition_group=0x7f0800ba;
-    public static final int text=0x7f0800bb;
-    public static final int text2=0x7f0800bc;
-    public static final int textSpacerNoButtons=0x7f0800bd;
-    public static final int textSpacerNoTitle=0x7f0800be;
-    public static final int text_input_password_toggle=0x7f0800bf;
-    public static final int textinput_counter=0x7f0800c0;
-    public static final int textinput_error=0x7f0800c1;
-    public static final int time=0x7f0800c2;
-    public static final int title=0x7f0800c3;
-    public static final int titleDividerNoCustom=0x7f0800c4;
-    public static final int title_template=0x7f0800c5;
-    public static final int top=0x7f0800c6;
-    public static final int topPanel=0x7f0800c7;
-    public static final int touch_outside=0x7f0800c8;
-    public static final int transition_current_scene=0x7f0800c9;
-    public static final int transition_layout_save=0x7f0800ca;
-    public static final int transition_position=0x7f0800cb;
-    public static final int transition_scene_layoutid_cache=0x7f0800cc;
-    public static final int transition_transform=0x7f0800cd;
-    public static final int uniform=0x7f0800ce;
-    public static final int up=0x7f0800cf;
-    public static final int useLogo=0x7f0800d0;
-    public static final int usernameHeader=0x7f0800d1;
-    public static final int view_offset_helper=0x7f0800d2;
-    public static final int visible=0x7f0800d3;
-    public static final int withText=0x7f0800d4;
-    public static final int wrap=0x7f0800d5;
-    public static final int wrap_content=0x7f0800d6;
+    public static final int submitButton=0x7f0800b8;
+    public static final int submit_area=0x7f0800b9;
+    public static final int tabMode=0x7f0800ba;
+    public static final int tag_transition_group=0x7f0800bb;
+    public static final int text=0x7f0800bc;
+    public static final int text2=0x7f0800bd;
+    public static final int textSpacerNoButtons=0x7f0800be;
+    public static final int textSpacerNoTitle=0x7f0800bf;
+    public static final int text_input_password_toggle=0x7f0800c0;
+    public static final int textinput_counter=0x7f0800c1;
+    public static final int textinput_error=0x7f0800c2;
+    public static final int time=0x7f0800c3;
+    public static final int title=0x7f0800c4;
+    public static final int titleDividerNoCustom=0x7f0800c5;
+    public static final int title_template=0x7f0800c6;
+    public static final int top=0x7f0800c7;
+    public static final int topPanel=0x7f0800c8;
+    public static final int touch_outside=0x7f0800c9;
+    public static final int transition_current_scene=0x7f0800ca;
+    public static final int transition_layout_save=0x7f0800cb;
+    public static final int transition_position=0x7f0800cc;
+    public static final int transition_scene_layoutid_cache=0x7f0800cd;
+    public static final int transition_transform=0x7f0800ce;
+    public static final int uniform=0x7f0800cf;
+    public static final int up=0x7f0800d0;
+    public static final int useLogo=0x7f0800d1;
+    public static final int usernameHeader=0x7f0800d2;
+    public static final int view_offset_helper=0x7f0800d3;
+    public static final int visible=0x7f0800d4;
+    public static final int withText=0x7f0800d5;
+    public static final int wrap=0x7f0800d6;
+    public static final int wrap_content=0x7f0800d7;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f090000;
@@ -3943,59 +3944,60 @@ public final class R {
     public static final int ReviewText=0x7f0d0000;
     public static final int SearchText=0x7f0d0001;
     public static final int SearchWarning=0x7f0d0002;
-    public static final int abc_action_bar_home_description=0x7f0d0003;
-    public static final int abc_action_bar_up_description=0x7f0d0004;
-    public static final int abc_action_menu_overflow_description=0x7f0d0005;
-    public static final int abc_action_mode_done=0x7f0d0006;
-    public static final int abc_activity_chooser_view_see_all=0x7f0d0007;
-    public static final int abc_activitychooserview_choose_application=0x7f0d0008;
-    public static final int abc_capital_off=0x7f0d0009;
-    public static final int abc_capital_on=0x7f0d000a;
-    public static final int abc_font_family_body_1_material=0x7f0d000b;
-    public static final int abc_font_family_body_2_material=0x7f0d000c;
-    public static final int abc_font_family_button_material=0x7f0d000d;
-    public static final int abc_font_family_caption_material=0x7f0d000e;
-    public static final int abc_font_family_display_1_material=0x7f0d000f;
-    public static final int abc_font_family_display_2_material=0x7f0d0010;
-    public static final int abc_font_family_display_3_material=0x7f0d0011;
-    public static final int abc_font_family_display_4_material=0x7f0d0012;
-    public static final int abc_font_family_headline_material=0x7f0d0013;
-    public static final int abc_font_family_menu_material=0x7f0d0014;
-    public static final int abc_font_family_subhead_material=0x7f0d0015;
-    public static final int abc_font_family_title_material=0x7f0d0016;
-    public static final int abc_search_hint=0x7f0d0017;
-    public static final int abc_searchview_description_clear=0x7f0d0018;
-    public static final int abc_searchview_description_query=0x7f0d0019;
-    public static final int abc_searchview_description_search=0x7f0d001a;
-    public static final int abc_searchview_description_submit=0x7f0d001b;
-    public static final int abc_searchview_description_voice=0x7f0d001c;
-    public static final int abc_shareactionprovider_share_with=0x7f0d001d;
-    public static final int abc_shareactionprovider_share_with_application=0x7f0d001e;
-    public static final int abc_toolbar_collapse_description=0x7f0d001f;
-    public static final int app_name=0x7f0d0020;
-    public static final int appbar_scrolling_view_behavior=0x7f0d0021;
-    public static final int bottom_sheet_behavior=0x7f0d0022;
-    public static final int character_counter_pattern=0x7f0d0023;
-    public static final int confirmPassword=0x7f0d0024;
-    public static final int createAccount=0x7f0d0025;
-    public static final int createNavHeaderString=0x7f0d0026;
-    public static final int movieImageDescription=0x7f0d0027;
-    public static final int passwordText=0x7f0d0028;
-    public static final int password_toggle_content_description=0x7f0d0029;
-    public static final int path_password_eye=0x7f0d002a;
-    public static final int path_password_eye_mask_strike_through=0x7f0d002b;
-    public static final int path_password_eye_mask_visible=0x7f0d002c;
-    public static final int path_password_strike_through=0x7f0d002d;
-    public static final int search_menu_title=0x7f0d002e;
-    public static final int status_bar_notification_info_overflow=0x7f0d002f;
-    public static final int title_activity_create_user=0x7f0d0030;
-    public static final int title_activity_login=0x7f0d0031;
-    public static final int title_activity_movie_overview=0x7f0d0032;
-    public static final int title_activity_search=0x7f0d0033;
-    public static final int title_dashboard=0x7f0d0034;
-    public static final int title_home=0x7f0d0035;
-    public static final int title_notifications=0x7f0d0036;
-    public static final int usernameText=0x7f0d0037;
+    public static final int Submit=0x7f0d0003;
+    public static final int abc_action_bar_home_description=0x7f0d0004;
+    public static final int abc_action_bar_up_description=0x7f0d0005;
+    public static final int abc_action_menu_overflow_description=0x7f0d0006;
+    public static final int abc_action_mode_done=0x7f0d0007;
+    public static final int abc_activity_chooser_view_see_all=0x7f0d0008;
+    public static final int abc_activitychooserview_choose_application=0x7f0d0009;
+    public static final int abc_capital_off=0x7f0d000a;
+    public static final int abc_capital_on=0x7f0d000b;
+    public static final int abc_font_family_body_1_material=0x7f0d000c;
+    public static final int abc_font_family_body_2_material=0x7f0d000d;
+    public static final int abc_font_family_button_material=0x7f0d000e;
+    public static final int abc_font_family_caption_material=0x7f0d000f;
+    public static final int abc_font_family_display_1_material=0x7f0d0010;
+    public static final int abc_font_family_display_2_material=0x7f0d0011;
+    public static final int abc_font_family_display_3_material=0x7f0d0012;
+    public static final int abc_font_family_display_4_material=0x7f0d0013;
+    public static final int abc_font_family_headline_material=0x7f0d0014;
+    public static final int abc_font_family_menu_material=0x7f0d0015;
+    public static final int abc_font_family_subhead_material=0x7f0d0016;
+    public static final int abc_font_family_title_material=0x7f0d0017;
+    public static final int abc_search_hint=0x7f0d0018;
+    public static final int abc_searchview_description_clear=0x7f0d0019;
+    public static final int abc_searchview_description_query=0x7f0d001a;
+    public static final int abc_searchview_description_search=0x7f0d001b;
+    public static final int abc_searchview_description_submit=0x7f0d001c;
+    public static final int abc_searchview_description_voice=0x7f0d001d;
+    public static final int abc_shareactionprovider_share_with=0x7f0d001e;
+    public static final int abc_shareactionprovider_share_with_application=0x7f0d001f;
+    public static final int abc_toolbar_collapse_description=0x7f0d0020;
+    public static final int app_name=0x7f0d0021;
+    public static final int appbar_scrolling_view_behavior=0x7f0d0022;
+    public static final int bottom_sheet_behavior=0x7f0d0023;
+    public static final int character_counter_pattern=0x7f0d0024;
+    public static final int confirmPassword=0x7f0d0025;
+    public static final int createAccount=0x7f0d0026;
+    public static final int createNavHeaderString=0x7f0d0027;
+    public static final int movieImageDescription=0x7f0d0028;
+    public static final int passwordText=0x7f0d0029;
+    public static final int password_toggle_content_description=0x7f0d002a;
+    public static final int path_password_eye=0x7f0d002b;
+    public static final int path_password_eye_mask_strike_through=0x7f0d002c;
+    public static final int path_password_eye_mask_visible=0x7f0d002d;
+    public static final int path_password_strike_through=0x7f0d002e;
+    public static final int search_menu_title=0x7f0d002f;
+    public static final int status_bar_notification_info_overflow=0x7f0d0030;
+    public static final int title_activity_create_user=0x7f0d0031;
+    public static final int title_activity_login=0x7f0d0032;
+    public static final int title_activity_movie_overview=0x7f0d0033;
+    public static final int title_activity_search=0x7f0d0034;
+    public static final int title_dashboard=0x7f0d0035;
+    public static final int title_home=0x7f0d0036;
+    public static final int title_notifications=0x7f0d0037;
+    public static final int usernameText=0x7f0d0038;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0e0000;
@@ -9096,7 +9098,7 @@ public final class R {
      * <tr><td>barrier</td><td>2</td><td></td></tr>
      * <tr><td>chains</td><td>4</td><td></td></tr>
      * <tr><td>dimensions</td><td>8</td><td></td></tr>
-     * <tr><td>direct</td><td>1</td><td>for now only direct & barriers</td></tr>
+     * <tr><td>direct</td><td>1</td><td></td></tr>
      * <tr><td>none</td><td>0</td><td></td></tr>
      * <tr><td>standard</td><td>3</td><td></td></tr>
      * </table>

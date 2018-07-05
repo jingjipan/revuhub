@@ -90,16 +90,16 @@ public final class R {
         public static final int save_image_matrix = 0x7f08008f;
         public static final int save_non_transition_alpha = 0x7f080090;
         public static final int save_scale_type = 0x7f080091;
-        public static final int tag_transition_group = 0x7f0800ba;
-        public static final int text = 0x7f0800bb;
-        public static final int text2 = 0x7f0800bc;
-        public static final int time = 0x7f0800c2;
-        public static final int title = 0x7f0800c3;
-        public static final int transition_current_scene = 0x7f0800c9;
-        public static final int transition_layout_save = 0x7f0800ca;
-        public static final int transition_position = 0x7f0800cb;
-        public static final int transition_scene_layoutid_cache = 0x7f0800cc;
-        public static final int transition_transform = 0x7f0800cd;
+        public static final int tag_transition_group = 0x7f0800bb;
+        public static final int text = 0x7f0800bc;
+        public static final int text2 = 0x7f0800bd;
+        public static final int time = 0x7f0800c3;
+        public static final int title = 0x7f0800c4;
+        public static final int transition_current_scene = 0x7f0800ca;
+        public static final int transition_layout_save = 0x7f0800cb;
+        public static final int transition_position = 0x7f0800cc;
+        public static final int transition_scene_layoutid_cache = 0x7f0800cd;
+        public static final int transition_transform = 0x7f0800ce;
     }
     public static final class integer {
         public static final int status_bar_notification_info_maxnum = 0x7f090009;
@@ -113,7 +113,7 @@ public final class R {
         public static final int notification_template_part_time = 0x7f0a003b;
     }
     public static final class string {
-        public static final int status_bar_notification_info_overflow = 0x7f0d002f;
+        public static final int status_bar_notification_info_overflow = 0x7f0d0030;
     }
     public static final class style {
         public static final int TextAppearance_Compat_Notification = 0x7f0e00ed;

@@ -19,6 +19,7 @@ import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewHSQLDB;
+import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewPersistenceStub;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccountHSQLDB;
 
 import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccontPersistenceStub;
@@ -44,7 +45,7 @@ public class Services {
     }
 
     private static synchronized ReviewPersistence getReviewPersistence() {
-        if (reviewPersistence == null) reviewPersistence = new ReviewHSQLDB(Main.getDBPathName());
+        if (reviewPersistence == null) reviewPersistence = new ReviewPersistenceStub();
         return reviewPersistence;
     }
 
