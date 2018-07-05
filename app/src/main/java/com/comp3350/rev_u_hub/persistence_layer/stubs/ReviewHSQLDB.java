@@ -15,15 +15,8 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
     private final String dbPath;
 
-    private final Connection c;
-
     public ReviewHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        try{
-            c = connection();
-        }catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
     }
 
     private Connection connection() throws SQLException {
@@ -41,7 +34,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public List<ReviewObject> getReviewsSequential() {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM reviews");
             while (rs.next()) {
@@ -62,7 +55,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE movieName = ? AND userName = ?");
             st.setString(1, movieName);
             st.setString(2, userName);
@@ -84,7 +77,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public List<ReviewObject> getReviewsOfUser(String userName) {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE userName = ?");
             st.setString(1, userName);
             final ResultSet rs = st.executeQuery();
@@ -105,7 +98,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public List<ReviewObject> getReviewsOfMovie(String movieName) {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE movieName = ?");
             st.setString(1, movieName);
             final ResultSet rs = st.executeQuery();
@@ -125,7 +118,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     }
 
     public ReviewObject addNewReview(ReviewObject newReview) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO reviews VALUES(?, ?, ?)");
             st.setString(1, newReview.getUserName());
             st.setString(2, newReview.getMovieName());
@@ -141,7 +134,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     }
 
     public ReviewObject updateReview(ReviewObject review){
-        try {
+        try(final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("UPDATE reviews SET review = ? WHERE movieName = ? AND userName = ?");
             st.setString(1,  review.getReview());
             st.setString(2,  review.getMovieName());
@@ -155,7 +148,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     }
 
     public void deleteReview(ReviewObject review) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM reviews WHERE movieName = ? AND userName = ?");
             st.setString(1,  review.getMovieName());
             st.setString(2,  review.getUserName());
@@ -167,7 +160,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
     }
 
     public void deleteAllReview(String userName) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM reviews WHERE userName = ?");
             st.setString(1,  userName);
 

@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String movieName) {
-                if(!movieSearch.getMovie(movieName).isEmpty()) {
+                if(!movieSearch.getMovieSimple(movieName).isEmpty()) {
                     showMovieOverview(movieName);
                 } else {
                     Toast.makeText(HomeActivity.this, "Movie not found", Toast.LENGTH_SHORT).show();

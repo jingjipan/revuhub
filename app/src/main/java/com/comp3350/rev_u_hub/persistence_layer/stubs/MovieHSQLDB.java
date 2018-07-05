@@ -17,15 +17,9 @@ public class MovieHSQLDB implements MoviePersistence {
 
 
     private final String dbPath;
-    private final Connection c;
 
     public MovieHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        try{
-            c = connection();
-        }catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
     }
 
     private Connection connection() throws SQLException {
@@ -45,7 +39,7 @@ public class MovieHSQLDB implements MoviePersistence {
     public List<MovieObject> getMovieSequential() {
         final List<MovieObject> movies = new ArrayList<>();
 
-        try {
+        try (final Connection c = connection()){
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM movies");
             while (rs.next()) {
@@ -63,7 +57,7 @@ public class MovieHSQLDB implements MoviePersistence {
     }
 
     public MovieObject addNewMovie(MovieObject newMovie) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO movies VALUES(?, ?, ?, ?, ?, ?)");
             st.setString(1, newMovie.getTitle());
             st.setString(2, newMovie.getSynopsis());
@@ -83,7 +77,7 @@ public class MovieHSQLDB implements MoviePersistence {
 
         final List<MovieObject> movies = new ArrayList<>();
 
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM movies WHERE movieName = ?");
             st.setString(1, movieName);
             final ResultSet rs = st.executeQuery();
@@ -103,7 +97,7 @@ public class MovieHSQLDB implements MoviePersistence {
     }
 
     public MovieObject updateMovie(MovieObject movie) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("UPDATE movies SET synopsis = ?, moviecast = ?, pic = ?, count = ?, rating=? WHERE movieName = ?");
             st.setString(1, movie.getSynopsis());
             st.setString(2, movie.getCast());
@@ -120,7 +114,7 @@ public class MovieHSQLDB implements MoviePersistence {
     }
 
     public void deleteMovie(MovieObject movie) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM movies WHERE movieName = ?");
             st.setString(1, movie.getTitle());
             st.executeUpdate();

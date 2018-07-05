@@ -16,15 +16,9 @@ public class UserAccountHSQLDB implements UserPersistence{
 
 
     private final String dbPath;
-    private final Connection c;
 
     public UserAccountHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        try{
-            c = connection();
-        }catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
     }
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
@@ -39,7 +33,7 @@ public class UserAccountHSQLDB implements UserPersistence{
     public List<UserObject> getUserSequential() {
         final List<UserObject> users = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM users");
             while (rs.next()) {
@@ -60,7 +54,7 @@ public class UserAccountHSQLDB implements UserPersistence{
 
         final List<UserObject> users = new ArrayList<>();
 
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM users WHERE userName = ?" );
             st.setString(1, userName);
             final ResultSet rs = st.executeQuery();
@@ -80,7 +74,7 @@ public class UserAccountHSQLDB implements UserPersistence{
     }
 
     public UserObject addNewUser(UserObject newUser) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES(?, ?)");
             st.setString(1, newUser.getUserName());
             st.setString(2, newUser.getPassWord());
@@ -94,7 +88,7 @@ public class UserAccountHSQLDB implements UserPersistence{
     }
 
     public UserObject updatePassWord(UserObject currentUser) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("UPDATE users SET passWord = ? WHERE userName = ?");
             st.setString(1, currentUser.getPassWord());
             st.setString(2, currentUser.getUserName());
@@ -108,7 +102,7 @@ public class UserAccountHSQLDB implements UserPersistence{
     }
 
     public void deleteUser(UserObject currentUser) {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM users WHERE userName = ?");
             st.setString(1, currentUser.getUserName());
             st.executeUpdate();
