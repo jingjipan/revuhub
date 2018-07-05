@@ -159,7 +159,7 @@ The CreateUserActivity sets it's content to activity_create_user.xml. This is a 
 
 ### HomeActivity
 
-The HomeActivity sets it's content to activity_main.xml. This is a simple search page, for searching for an existing movie. The searching is strict for the movies and no longer fuzzy (will fix in the next iteration). This activity was formally known as MainActivity.
+The HomeActivity sets it's content to activity_main.xml. This is a simple search page, for searching for an existing movie. This activity was formally known as MainActivity.
 
 ### MovieOverviewActivity
 
@@ -168,5 +168,22 @@ The MovieOverviewActivity sets it's content to activity_movie_overview.xml. This
 
 ## Application
 
+### Main
+
+The Main.java class simply sets and gets the database path name. This was similar in the sample project.
+
+###Services
+
+The Services.java class serves as centeralized hub that initializes and provides access to: 
+* MoviePersistence
+* ReviewPersistence
+* UserPersistence
+* MovieSearch
+* UserSearch 
+* ReviewSearch
+* AccountManager
+* UserLogin
+* ReviewManager
+* MovieRatings
 
 ## Test Classes
