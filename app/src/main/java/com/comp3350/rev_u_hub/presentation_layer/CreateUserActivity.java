@@ -39,9 +39,6 @@ public class CreateUserActivity extends AppCompatActivity {
                 EditText newUsername = (EditText)findViewById(R.id.createUsernameField);
                 EditText newPassword = (EditText)findViewById(R.id.createPasswordField);
                 EditText confirmPassword = (EditText)findViewById(R.id.confirmPasswordField);
-                Toast.makeText(CreateUserActivity.this, newUsername.getText().toString() + " " + newPassword.getText().toString() + " "
-                        + confirmPassword.getText().toString() , Toast.LENGTH_SHORT).show();
-
                 try {
                     accountManager = Services.getAccountManager();
                     accountManager.createUser(newUsername.getText().toString(), newPassword.getText().toString(), confirmPassword.getText().toString());

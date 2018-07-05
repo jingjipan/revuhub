@@ -82,7 +82,6 @@
         tools:layout_editor_absoluteY="403dp"
         android:textSize="18sp"
         android:layout_marginTop="500dp"
-        android:layout_marginLeft="175dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -91,7 +90,6 @@
         android:id="@+id/createNavHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="175dp"
         android:layout_marginTop="450dp"
         android:text="@string/createNavHeaderString"
         android:textSize="20sp"

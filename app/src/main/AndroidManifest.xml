@@ -14,7 +14,7 @@
             android:label="@string/app_name" />
         <activity
             android:name=".presentation_layer.MovieOverviewActivity"
-            android:label="string/app_name" />
+            android:label="@string/app_name" />
         <activity
             android:name=".presentation_layer.LoginActivity"
             android:label="@string/app_name">
