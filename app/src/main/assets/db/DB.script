@@ -1,6 +1,6 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 CREATE MEMORY TABLE PUBLIC.USERS(USERNAME VARCHAR(20) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(20))
-CREATE MEMORY TABLE PUBLIC.MOVIES(MOVIENAME VARCHAR(20) NOT NULL PRIMARY KEY,SYNOPSIS VARCHAR(1000), CAST VARCHAR(1000), PIC VARCHAR(100), COUNT INTEGER, RATING DOUBLE )
+CREATE MEMORY TABLE PUBLIC.MOVIES(MOVIENAME VARCHAR(20) NOT NULL PRIMARY KEY,SYNOPSIS VARCHAR(1000), MOVIECAST VARCHAR(1000), PIC VARCHAR(100), COUNT INTEGER, RATING DECIMAL )
 CREATE MEMORY TABLE PUBLIC.REVIEWS(USERNAME VARCHAR(20) NOT NULL,MOVIENAME VARCHAR(20) NOT NULL,REVIEW VARCHAR(2000),CONSTRAINT CONSTRAINT1 PRIMARY KEY(USERNAME,MOVIENAME),CONSTRAINT CONSTRAINT2 FOREIGN KEY(USERNAME) REFERENCES USERS(USERNAME),CONSTRAINT CONSTRAINT3 FOREIGN KEY(MOVIENAME) REFERENCES MOVIES(MOVIENAME))
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -8,19 +8,20 @@ CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 SET DATABASE DEFAULT INITIAL SCHEMA PUBLIC
 GRANT DBA TO SA
 SET WRITE_DELAY 20
+SET FILES SCALE 32
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES('admin','123456')
 INSERT INTO USERS VALUES('test1','123456')
 INSERT INTO USERS VALUES('test2','123456')
-INSERT INTO MOVIES VALUES('Thor','i','am','thor',1,4.3)
-INSERT INTO MOVIES VALUES('Deadpool','i','am','deadpool',1,4.3)
+INSERT INTO MOVIES VALUES('Thor','The powerful, but arrogant god Thor, is cast out of Asgard to live amongst humans in Midgard (Earth), where he soon becomes one of their finest defenders.','Chris Hemsworth, Natalie Portman, Tom Hiddleston, Anthony Hopkins','thor',1,4.3)
+INSERT INTO MOVIES VALUES('Deadpool','A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.','Ryan Reynolds, Karan Soni, Ed Skrein, Michael Benyaer','deadpool',1,4.3)
 INSERT INTO MOVIES VALUES('The Avengers','i','am','invincible',1,4.3)
 INSERT INTO REVIEWS VALUES('admin','Thor','good movie')
-INSERT INTO REVIEWS VALUES('admin','Deadpool','good movie')
+INSERT INTO REVIEWS VALUES('admin','Deadpool','I don''t normally go for films with this much blood & gore & foul language, but Deadpool manages to be a superhero parody while still being a superhero film (and even a love story!) Excellent.')
 INSERT INTO REVIEWS VALUES('admin','The Avengers','good movie')
-INSERT INTO REVIEWS VALUES('test1','Thor','bad movie')
-INSERT INTO REVIEWS VALUES('test1','Deadpool','bad movie')
-INSERT INTO REVIEWS VALUES('test1','The Avengers','bad movie')
+INSERT INTO REVIEWS VALUES('test1','Thor','Okay for what it was. I don't really like this type of movie.')
+INSERT INTO REVIEWS VALUES('test1','Deadpool','Okay for what it was. I don''t really like this type of movie.')
+INSERT INTO REVIEWS VALUES('test1','The Avengers','Okay for what it was. I don't really like this type of movie.')
 INSERT INTO REVIEWS VALUES('test2','Thor','suck movie')
-INSERT INTO REVIEWS VALUES('test2','Deadpool','suck movie')
+INSERT INTO REVIEWS VALUES('test2','Deadpool','It was terrible. Unfortunately I can never take my kids to watch this comic book film because of the level of sex and profanity. Terrible, terrible movie.')
 INSERT INTO REVIEWS VALUES('test2','The Avengers','suck movie')

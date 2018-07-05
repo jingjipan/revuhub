@@ -33,7 +33,7 @@ public class MovieObject implements Serializable, SearchableObject {
             title = "";
             synopsis = "";
             cast = "";
-            rating = 3;
+            rating = 0;
             count = 0;
         }
     }
@@ -84,9 +84,7 @@ public class MovieObject implements Serializable, SearchableObject {
     public boolean equals(MovieObject other) {
         return this.getTitle().equals(other.getTitle()) &&
                 this.getSynopsis().equals(other.getSynopsis()) &&
-                this.getCast().equals(other.getCast()) &&
-                this.getRating()==other.getRating() &&
-                this.getCount()==other.getCount();
+                this.getCast().equals(other.getCast());
     }
 
     public MovieObject getMovie() {

@@ -52,7 +52,7 @@ public class RatingManagement implements MovieRatings {
     }
 
     private MovieObject getMovieObject(String title) throws MovieDataNotFoundException {
-        MovieObject movie = myMovieSearch.getMovie(title);
+        MovieObject movie = myMovieSearch.getMovieSimple(title);
 
         if (movie==null || movie.isEmpty())
             throw new MovieDataNotFoundException("The selected movie does not exist.");

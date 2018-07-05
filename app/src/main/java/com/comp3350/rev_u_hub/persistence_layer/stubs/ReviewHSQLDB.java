@@ -13,28 +13,28 @@ import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 public class ReviewHSQLDB implements ReviewPersistence{
 
 
-    private final Connection c;
+    private final String dbPath;
 
     public ReviewHSQLDB(final String dbPath) {
-        try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
-        } catch (final SQLException e) {
-            System.out.println("ERROR: Fail to get DB connection.");
-            throw new PersistenceException(e);
-        }
+        this.dbPath = dbPath;
     }
+
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    }
+
 
     private ReviewObject fromResultSet(final ResultSet rs) throws SQLException {
         final String movieName = rs.getString("movieName");
         final String review = rs.getString("review");
         final String username = rs.getString("userName");
-        return new ReviewObject(movieName,review, username);
+        return new ReviewObject(review,movieName, username);
     }
 
     public List<ReviewObject> getReviewsSequential() {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try {
+        try(final Connection c = connection()){
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM reviews");
             while (rs.next()) {
@@ -46,7 +46,6 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return reviews;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
@@ -56,7 +55,7 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE movieName = ? AND userName = ?");
             st.setString(1, movieName);
             st.setString(2, userName);
@@ -71,7 +70,6 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return reviews;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
@@ -79,9 +77,10 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public List<ReviewObject> getReviewsOfUser(String userName) {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM reviews WHERE reviews.movieName=movies.movieName AND userName = ?");
+        try(final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE userName = ?");
+            st.setString(1, userName);
+            final ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 final ReviewObject review = fromResultSet(rs);
                 reviews.add(review );
@@ -91,7 +90,6 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return reviews;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
@@ -100,8 +98,8 @@ public class ReviewHSQLDB implements ReviewPersistence{
     public List<ReviewObject> getReviewsOfMovie(String movieName) {
         final List<ReviewObject> reviews = new ArrayList<>();
 
-        try {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE reviews.userName=movies.userName AND movieName = ?");
+        try(final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM reviews WHERE movieName = ?");
             st.setString(1, movieName);
             final ResultSet rs = st.executeQuery();
 
@@ -114,14 +112,13 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return reviews;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
     }
 
     public ReviewObject addNewReview(ReviewObject newReview) {
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO reviews VALUES(?, ?, ?)");
             st.setString(1, newReview.getUserName());
             st.setString(2, newReview.getMovieName());
@@ -132,13 +129,12 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return newReview;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to add review: "+newReview.getReview());
             throw new PersistenceException(e);
         }
     }
 
     public ReviewObject updateReview(ReviewObject review){
-        try {
+        try(final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("UPDATE reviews SET review = ? WHERE movieName = ? AND userName = ?");
             st.setString(1,  review.getReview());
             st.setString(2,  review.getMovieName());
@@ -147,32 +143,29 @@ public class ReviewHSQLDB implements ReviewPersistence{
 
             return  review;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to update review of movie: "+ review.getMovieName());
             throw new PersistenceException(e);
         }
     }
 
     public void deleteReview(ReviewObject review) {
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM reviews WHERE movieName = ? AND userName = ?");
             st.setString(1,  review.getMovieName());
             st.setString(2,  review.getUserName());
 
             st.executeUpdate();
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to delete review: "+review.getReview());
             throw new PersistenceException(e);
         }
     }
 
     public void deleteAllReview(String userName) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM reviews WHERE userName = ?");
             st.setString(1,  userName);
 
             st.executeUpdate();
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to delete all reviews of movie: "+userName);
             throw new PersistenceException(e);
         }
     }

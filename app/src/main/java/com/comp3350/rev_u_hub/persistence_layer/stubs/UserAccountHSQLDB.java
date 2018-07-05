@@ -15,14 +15,13 @@ import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 public class UserAccountHSQLDB implements UserPersistence{
 
 
-    private final Connection c;
+    private final String dbPath;
 
     public UserAccountHSQLDB(final String dbPath) {
-        try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
+        this.dbPath = dbPath;
+    }
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
     private UserObject fromResultSet(final ResultSet rs) throws SQLException {
@@ -34,7 +33,7 @@ public class UserAccountHSQLDB implements UserPersistence{
     public List<UserObject> getUserSequential() {
         final List<UserObject> users = new ArrayList<>();
 
-        try {
+        try(final Connection c = connection()){
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM users");
             while (rs.next()) {
@@ -46,7 +45,6 @@ public class UserAccountHSQLDB implements UserPersistence{
 
             return users;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Fail to get DB connection.");
             throw new PersistenceException(e);
         }
 
@@ -56,7 +54,7 @@ public class UserAccountHSQLDB implements UserPersistence{
 
         final List<UserObject> users = new ArrayList<>();
 
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM users WHERE userName = ?" );
             st.setString(1, userName);
             final ResultSet rs = st.executeQuery();
@@ -70,14 +68,13 @@ public class UserAccountHSQLDB implements UserPersistence{
 
             return users;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to read reviews from DB.");
             throw new PersistenceException(e);
         }
 
     }
 
     public UserObject addNewUser(UserObject newUser) {
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO users VALUES(?, ?)");
             st.setString(1, newUser.getUserName());
             st.setString(2, newUser.getPassWord());
@@ -86,13 +83,12 @@ public class UserAccountHSQLDB implements UserPersistence{
 
             return newUser;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to add user "+newUser.getUserName()+" into DB.");
             throw new PersistenceException(e);
         }
     }
 
     public UserObject updatePassWord(UserObject currentUser) {
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("UPDATE users SET passWord = ? WHERE userName = ?");
             st.setString(1, currentUser.getPassWord());
             st.setString(2, currentUser.getUserName());
@@ -101,18 +97,16 @@ public class UserAccountHSQLDB implements UserPersistence{
 
             return currentUser;
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to update password of user "+currentUser.getUserName());
             throw new PersistenceException(e);
         }
     }
 
     public void deleteUser(UserObject currentUser) {
-        try {
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM users WHERE userName = ?");
             st.setString(1, currentUser.getUserName());
             st.executeUpdate();
         } catch (final SQLException e) {
-            System.out.println("ERROR: Not able to delete user "+currentUser.getUserName()+" from DB.");
             throw new PersistenceException(e);
         }
     }

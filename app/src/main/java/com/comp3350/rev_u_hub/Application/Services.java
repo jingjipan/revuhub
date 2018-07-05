@@ -4,6 +4,7 @@ import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
+import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
@@ -20,6 +21,8 @@ import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccountHSQLDB;
 
+import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccontPersistenceStub;
+
 public class Services {
 
     private static MoviePersistence moviePersistence = null;
@@ -33,6 +36,7 @@ public class Services {
     private static UserLogin userLogin = null;
     private static MovieRatings movieRatings = null;
     private static AccountManager accountManager = null;
+    private static ReviewManager reviewManager = null;
 
     private static synchronized MoviePersistence getMoviePersistence() {
         if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
@@ -45,7 +49,7 @@ public class Services {
     }
 
     private static synchronized UserPersistence getUserPersistence() {
-        if (userPersistence == null) userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
+        if (userPersistence == null) userPersistence = new UserAccontPersistenceStub();
         return userPersistence;
     }
 
@@ -54,7 +58,7 @@ public class Services {
         return movieSearch;
     }
 
-    private static UserSearch getUserSearch() {
+    public static UserSearch getUserSearch() {
         if ( userSearch == null ) userSearch = new UserSearchEngine(getUserPersistence());
         return userSearch;
     }
@@ -65,7 +69,8 @@ public class Services {
     }
 
     public static AccountManager getAccountManager() {
-        if ( accountManager == null ) accountManager = new AccountManagement(getUserSearch());
+        if ( accountManager == null ) accountManager = new AccountManagement(getUserSearch(),
+                getUserPersistence());
         return accountManager;
     }
 
@@ -74,7 +79,10 @@ public class Services {
         return userLogin;
     }
 
-    public static ReviewManager getReviewManager() {return null;} //temporary until implemented
+    public static ReviewManager getReviewManager() {
+        if ( reviewManager == null ) reviewManager = new ReviewManagement(getReviewPersistence());
+        return reviewManager;
+    }
 
     public static MovieRatings getMovieRatings() {
         if ( movieRatings == null ) movieRatings =
