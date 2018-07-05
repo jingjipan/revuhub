@@ -5,11 +5,11 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation_layer.LoginActivity">
+    tools:context=".presentation_layer.CreateUserActivity">
 
 
     <TextView
-        android:id="@+id/usernameHeader"
+        android:id="@+id/createUsernameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -22,20 +22,20 @@
         android:textSize="30sp" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/createUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="300dp"
-        android:text="Login"
+        android:layout_marginTop="430dp"
+        android:text="@string/createAccount"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/loginUsernameField"
+        android:id="@+id/createUsernameField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -48,20 +48,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-    android:id="@+id/passwordHeader"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="180dp"
-    android:text="@string/passwordText"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.501"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:textSize="30sp" />
+        android:id="@+id/createPasswordHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:text="@string/passwordText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/loginPasswordField"
+        android:id="@+id/createPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="230dp"
@@ -73,28 +73,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/createNavButton"
+    <TextView
+        android:id="@+id/confirmPasswordHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/createAccount"
-        tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="403dp"
-        android:textSize="18sp"
-        android:layout_marginTop="500dp"
-        android:layout_marginLeft="175dp"
+        android:text="@string/confirmPassword"
+        android:layout_marginTop="310dp"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="325dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/createNavHeader"
+    <EditText
+        android:id="@+id/confirmPasswordField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="450dp"
-        android:text="@string/createNavHeaderString"
-        android:textSize="20sp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="397dp"
+        android:layout_marginTop="360dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

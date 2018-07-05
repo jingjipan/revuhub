@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,33 +19,59 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import com.comp3350.rev_u_hub.Application.Main;
+import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.R;
+import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button loginButton;
+    private Button createNavButton;
+    private UserLogin userLoginOB;
+    private UserObject currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        copyDatabaseToDevice();
 
+        copyDatabaseToDevice();
 
         loginButton = (Button)findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                EditText currentUsername = (EditText)findViewById(R.id.loginUsernameField);
+                EditText currentPassword = (EditText)findViewById(R.id.loginPasswordField);
 
                 try {
-                    Intent homeIntent = new Intent(view.getContext(), HomeActivity.class);
-                    startActivity(homeIntent);
+                    userLoginOB = Services.getUserLogin();
+                    currentUser = userLoginOB.userLogin(currentUsername.getText().toString(), currentPassword.getText().toString());
+                    try {
+                        Intent homeIntent = new Intent(view.getContext(), HomeActivity.class);
+                        startActivity(homeIntent);
+                    }
+                    catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-                catch (Exception e) {
-                    System.out.println(e.getMessage());
+                catch(UserDataException e) {
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        createNavButton = (Button)findViewById(R.id.createNavButton);
+        createNavButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent createUserIntent = new Intent(view.getContext(), CreateUserActivity.class);
+                startActivity(createUserIntent);
+            }
+        });
+
     }
 
 

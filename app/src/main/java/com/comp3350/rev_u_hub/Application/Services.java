@@ -21,6 +21,8 @@ import com.comp3350.rev_u_hub.persistence_layer.stubs.MovieHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.ReviewHSQLDB;
 import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccountHSQLDB;
 
+import com.comp3350.rev_u_hub.persistence_layer.stubs.UserAccontPersistenceStub;
+
 public class Services {
 
     private static MoviePersistence moviePersistence = null;
@@ -47,7 +49,7 @@ public class Services {
     }
 
     private static synchronized UserPersistence getUserPersistence() {
-        if (userPersistence == null) userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
+        if (userPersistence == null) userPersistence = new UserAccontPersistenceStub();
         return userPersistence;
     }
 

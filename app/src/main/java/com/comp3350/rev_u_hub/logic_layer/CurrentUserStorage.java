@@ -21,7 +21,7 @@ public class CurrentUserStorage implements UserLogin {
         UserObject user = myUserSearch.getUserSimple(username);
 
         if (user.isEmpty()) {
-            user = myUserSearch.getUser(username);
+            user = myUserSearch.getUserSimple(username);
             if (user.isEmpty())
                 throw new UserDataNotFoundException("No user with that username was found.");
             else throw new UserDataNotFoundException("No user with that username was found." +
