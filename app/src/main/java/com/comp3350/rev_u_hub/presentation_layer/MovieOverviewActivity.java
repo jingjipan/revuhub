@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -96,6 +97,29 @@ public class MovieOverviewActivity extends ListActivity {
         lv.setAdapter(adapter);
 
 
+        // enable nested scrolling for the listview
+        lv.setOnTouchListener(new ListView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                // Handle ListView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });
+
         submitButton = (Button)findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -117,7 +141,10 @@ public class MovieOverviewActivity extends ListActivity {
                             Toast.makeText(MovieOverviewActivity.this,"Review Submitted", Toast.LENGTH_SHORT).show();
                         } catch(ReviewCreationException e) {
                             System.out.println(e.getMessage());
-                            Toast.makeText(MovieOverviewActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                            if(e instanceof ReviewCreationDuplicateException) {
+                                Toast.makeText(MovieOverviewActivity.this, "You have already submitted a review", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     }
 
@@ -127,7 +154,6 @@ public class MovieOverviewActivity extends ListActivity {
 
             }
         });
-
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
