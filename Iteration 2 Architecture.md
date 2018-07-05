@@ -141,7 +141,7 @@ The logic layer's exception hierarchy is as follows:
 		* `ReviewDataWrongUserException`		*User is not logged in*
 
 
-## PresentationLayer
+## Presentation Layer
 
     package com.comp3350.rev_u_hub.presentation_layer
 
