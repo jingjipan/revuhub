@@ -12,6 +12,7 @@ public class MovieSearchEngine extends SearchEngine implements MovieSearch {
     private MoviePersistence myPersistenceLayer;
     private List<MovieObject> lastRetrieval;
     private List<String> lastRetrievalStrings;
+    private String[] stripWords = {"the ","a "};
 
     public MovieSearchEngine(MoviePersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
@@ -25,14 +26,22 @@ public class MovieSearchEngine extends SearchEngine implements MovieSearch {
     // Uses Damerau–Levenshtein_distance 1 permutations of a title to search
     // https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
     public MovieObject getMovie(String movieName) {
+        MovieObject movie;
+
         retrieveFromPersistence();
-        return (MovieObject) getObject(movieName);
+        movie = (MovieObject) getObject(movieName);
+
+        if (movie.isEmpty()) {  // If the basic search fails, try an looser search
+            retrieveFromPersistenceStripped();
+            movie = (MovieObject) getObject(stripTitle(movieName));
+        }
+        return movie;
     }
 
     // Required to allow SearchEngine methods to search the persistence layer
     protected SearchableObject fetchPersistent(String searchText) {
         MovieObject movie = (MovieObject) defaultObject();
-        for(int i=0; i<lastRetrievalStrings.size(); i++) {
+        for(int i=0; movie.isEmpty() && i<lastRetrievalStrings.size(); i++) {
             if (lastRetrievalStrings.get(i).equals(searchText))
                 movie = lastRetrieval.get(i);
         }
@@ -50,5 +59,26 @@ public class MovieSearchEngine extends SearchEngine implements MovieSearch {
         for(int i=0; i<lastRetrieval.size(); i++) {
             lastRetrievalStrings.add(lastRetrieval.get(i).getTitle());
         }
+    }
+
+    private void retrieveFromPersistenceStripped() {
+        lastRetrievalStrings =  new ArrayList<>();
+        lastRetrieval = myPersistenceLayer.getMovieSequential();
+        for(int i=0; i<lastRetrieval.size(); i++) {
+            lastRetrievalStrings.add(stripTitle(lastRetrieval.get(i).getTitle()));
+        }
+    }
+
+    // Removes certain words, spaces, apostrophes, and capitalization from a movie title
+    private String stripTitle(String rawString) {
+        String output = rawString.toLowerCase();
+
+        for (String stripWord : stripWords) {
+            output = output.replaceAll(stripWord, "");
+        }
+        output = output.replaceAll(" ","");
+        output = output.replaceAll("'","");
+
+        return output;
     }
 }

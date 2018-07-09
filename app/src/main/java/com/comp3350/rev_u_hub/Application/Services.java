@@ -2,12 +2,14 @@ package com.comp3350.rev_u_hub.Application;
 
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.CurrentUserStorage;
+import com.comp3350.rev_u_hub.logic_layer.MovieListViewer;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieLists;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieRatings;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewManager;
@@ -35,6 +37,8 @@ public class Services {
     private static MovieRatings movieRatings = null;
     private static AccountManager accountManager = null;
     private static ReviewManager reviewManager = null;
+
+    private static MovieLists movieLists = null;
 
     private static synchronized MoviePersistence getMoviePersistence() {
         if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
@@ -86,5 +90,11 @@ public class Services {
         if ( movieRatings == null ) movieRatings =
                 new RatingManagement(getMovieSearch(), getMoviePersistence());
         return movieRatings;
+    }
+
+    public static MovieLists getMovieLists() {
+        if ( movieLists == null ) movieLists =
+                new MovieListViewer(getMoviePersistence());
+        return movieLists;
     }
 }

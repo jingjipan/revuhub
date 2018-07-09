@@ -1,8 +1,10 @@
 package com.comp3350.rev_u_hub.data_objects;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
-public class MovieObject implements Serializable, SearchableObject {
+public class MovieObject implements Serializable, SearchableObject, Comparable {
     private String title, synopsis, cast;
     private int count;
     private double rating;
@@ -89,5 +91,19 @@ public class MovieObject implements Serializable, SearchableObject {
 
     public MovieObject getMovie() {
         return this;
+    }
+
+    public int compareTo(@NonNull Object o) {
+        int output;
+        double difference;
+
+        if (o instanceof MovieObject) {
+            difference = getRating() - ((MovieObject) o).getRating();
+            output = difference > 0 ? 1 : difference < 0 ? -1 : 0;
+        } else {
+            output = 0;
+        }
+
+        return output;
     }
 }
