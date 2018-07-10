@@ -1,6 +1,8 @@
 package com.comp3350.rev_u_hub.data_objects;
 
-public class ReviewObject implements SearchableObject {
+import android.support.annotation.NonNull;
+
+public class ReviewObject implements SearchableObject, Comparable {
 
     private String review;
     private String movieName;
@@ -44,5 +46,19 @@ public class ReviewObject implements SearchableObject {
 
     public String toString() {
         return getReview();
+    }
+
+    public int compareTo(@NonNull Object o) {
+        int output;
+        double difference;
+
+        if (o instanceof ReviewObject) {
+            difference = review.length() - ((ReviewObject) o).getReview().length();
+            output = difference > 0 ? 1 : difference < 0 ? -1 : 0;
+        } else {
+            output = 0;
+        }
+
+        return output;
     }
 }

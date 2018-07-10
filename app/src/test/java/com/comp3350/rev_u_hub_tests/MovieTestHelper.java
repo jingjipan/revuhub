@@ -65,7 +65,7 @@ public abstract class MovieTestHelper extends UnitTestHelper {
                     randomString(length),
                     randomString(length),
                     randomInteger(1, 100),
-                    randomInteger(1, 200)/20.0
+                    randomInteger(1, 100)/20.0
             );
         } else {
             randMovie = new MovieObject(
@@ -74,7 +74,7 @@ public abstract class MovieTestHelper extends UnitTestHelper {
                     randomWord(length),
                     randomWord(length),
                     randomInteger(1, 100),
-                    randomInteger(1, 200)/20.0
+                    randomInteger(1, 100)/20.0
             );
         }
         return randMovie.validateMovie(randMovie) ? randMovie : new MovieObject();

@@ -99,7 +99,7 @@ public class MovieObject implements Serializable, SearchableObject, Comparable {
 
         if (o instanceof MovieObject) {
             difference = getRating() - ((MovieObject) o).getRating();
-            output = difference > 0 ? 1 : difference < 0 ? -1 : 0;
+            output = difference > 0 ? -1 : difference < 0 ? 1 : 0;
         } else {
             output = 0;
         }

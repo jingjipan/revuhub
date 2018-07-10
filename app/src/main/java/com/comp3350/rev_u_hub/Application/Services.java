@@ -7,6 +7,7 @@ import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewManagement;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
+import com.comp3350.rev_u_hub.logic_layer.UserMovieStats;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieLists;
@@ -14,6 +15,7 @@ import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieRatings;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.UserMovieProfile;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
@@ -39,6 +41,7 @@ public class Services {
     private static ReviewManager reviewManager = null;
 
     private static MovieLists movieLists = null;
+    private static UserMovieProfile userMovieProfile = null;
 
     private static synchronized MoviePersistence getMoviePersistence() {
         if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
@@ -96,5 +99,12 @@ public class Services {
         if ( movieLists == null ) movieLists =
                 new MovieListViewer(getMoviePersistence());
         return movieLists;
+    }
+
+    public static UserMovieProfile getUserMovieProfile() {
+        if ( userMovieProfile == null ) userMovieProfile =
+                new UserMovieStats(getMovieSearch(), getUserSearch(),
+                        getReviewSearch(), getMovieRatings());
+        return userMovieProfile;
     }
 }
