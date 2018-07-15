@@ -17,4 +17,7 @@
     <string name="createNavHeaderString">Don\'t have an account?</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="Submit">Submit</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="topRatedMovies">Top Rated Movies</string>
+    <string name="myProfile">My Profile</string>
 </resources>
