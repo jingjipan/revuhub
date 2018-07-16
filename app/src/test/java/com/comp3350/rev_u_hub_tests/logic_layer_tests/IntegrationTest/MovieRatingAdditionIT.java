@@ -37,7 +37,7 @@ public class MovieRatingAdditionIT {
 
     @Test
     public void testMovieRatingAddtion() {
-        System.out.println("Start testing Movie Rating addition");
+        System.out.println("Start testing an addition of a movie rating.");
         try{
             movieRatings.hasRating("Thor");
         }catch(MovieDataNotFoundException e){
@@ -62,11 +62,11 @@ public class MovieRatingAdditionIT {
         assertTrue("movie rating should be 3.0",rating==3.0);
         assertTrue("rating count should be 2",count==2);
 
-        System.out.println("Finished test Movie Rating addition");
+        System.out.println("Finished testing an addition of a movie rating.");
     }
     @Test
     public void testMovieRatingInvalidAddtion() {
-        System.out.println("Start testing Movie Rating Invalid addition");
+        System.out.println("Start testing an invalid addition of a movie rating.");
         boolean cond = false;
         try{
             movieRatings.hasRating("Thor");
@@ -83,7 +83,7 @@ public class MovieRatingAdditionIT {
         }
         assertTrue("Reviews must be an integer from 1 to 5", cond);
 
-        System.out.println("Finished test Movie Rating Invalid addition");
+        System.out.println("Finished testing an invalid addition of a movie rating.");
     }
 
 

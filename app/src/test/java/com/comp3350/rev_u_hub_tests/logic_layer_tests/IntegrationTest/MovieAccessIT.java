@@ -33,10 +33,9 @@ public class MovieAccessIT {
     }
 
     @Test
-    public void testMovieLists() {
-        System.out.println("Start testing AccessMovie");
+    public void testAccessMovieLists() {
+        System.out.println("Start testing access a list of movies.");
         List<MovieObject> movieLists = new ArrayList<MovieObject>();
-        //movieLists = movieListViewer.getMovieList(3);
 
         try{
             movieLists = movieListViewer.getMovieList(3);
@@ -46,7 +45,7 @@ public class MovieAccessIT {
         assertNotNull("movie list should not be null",movieLists);
         assertTrue("Thor".equals(movieLists.get(0).getTitle()));
 
-        System.out.println("Finished test AccessMovie");
+        System.out.println("Finished testing access a list of movies.");
     }
 
     @After

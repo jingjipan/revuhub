@@ -32,15 +32,26 @@ public class AccountAccessIT {
     }
 
     @Test
-    public void testUserObject() {
-        System.out.println("Start testing Access Account");
+    public void testValidUser() {
+        System.out.println("Start testing access of a valid user.");
         UserObject userObject;
         userObject = userSearchEngine.getUserSimple("admin");
         assertNotNull("admin user should in the database",userObject);
         assertTrue("admin".equals(userObject.getUserName()));
         assertTrue("123456".equals(userObject.getPassWord()));
 
-        System.out.println("Finished test Access Account");
+        System.out.println("Finished testing access of a valid user.");
+    }
+
+    @Test
+    public void testInvalidUser() {
+        System.out.println("Start testing access of an invalid user.");
+        UserObject userObject;
+        userObject = userSearchEngine.getUserSimple("test123");
+        assertTrue("".equals(userObject.getUserName()));
+        assertTrue("".equals(userObject.getPassWord()));
+
+        System.out.println("Finished testing access of an invalid user.");
     }
 
     @After
