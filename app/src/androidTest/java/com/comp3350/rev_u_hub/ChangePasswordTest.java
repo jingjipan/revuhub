@@ -54,10 +54,10 @@ public class ChangePasswordTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.clickOnEditText(0);
         String oldPassword = "123456";
         solo.enterText(0, oldPassword);
-        solo.clickOnEditText(0);
+        solo.clickOnEditText(1);
         String newPassword = "newPass";
-        solo.enterText(0, newPassword);
-        solo.clickOnView(solo.getView("loginButton"));
+        solo.enterText(1, newPassword);
+        solo.clickOnView(solo.getView("passwordBtn"));
 
         solo.goBack();
         solo.waitForActivity("HomeActivity");
@@ -65,9 +65,11 @@ public class ChangePasswordTest extends ActivityInstrumentationTestCase2<LoginAc
         solo.waitForActivity("LoginActivity");
 
         solo.clickOnEditText(0);
+        solo.clearEditText(0);
         solo.enterText(0, username);
 
         solo.clickOnEditText(1);
+        solo.clearEditText(1);
         password = "newPass";
         solo.enterText(1, password);
         solo.clickOnView(solo.getView("loginButton"));

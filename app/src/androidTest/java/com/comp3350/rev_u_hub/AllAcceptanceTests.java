@@ -7,7 +7,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({LoginTest.class,
         CreateUserTest.class,
         SearchMovieTest.class,
-        UserProfileTest.class,})
+        UserProfileTest.class,
+        ChangePasswordTest.class,
+        AddReviewTest.class,})
 public class AllAcceptanceTests {
 }
 

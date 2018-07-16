@@ -10,7 +10,7 @@ import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.presentation_layer.HomeActivity;
 import com.comp3350.rev_u_hub.presentation_layer.LoginActivity;
 import com.robotium.solo.Solo;
-
+import java.lang.Thread;
 import junit.framework.Assert;
 
 
@@ -62,6 +62,13 @@ public class AddReviewTest extends ActivityInstrumentationTestCase2<LoginActivit
         solo.enterText(0, newReview);
 
         solo.clickOnView(solo.getView("submitButton"));
+        try {
+            Thread.sleep(6000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
 
         assertTrue(solo.searchText(newReview));
 
@@ -72,5 +79,7 @@ public class AddReviewTest extends ActivityInstrumentationTestCase2<LoginActivit
         catch (UserDataException e){
             System.out.println(e);
         }
+
+
     }
 }
