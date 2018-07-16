@@ -94,7 +94,6 @@ public class UserAccountHSQLDB implements UserPersistence{
             st.setString(2, currentUser.getUserName());
 
             st.executeUpdate();
-
             return currentUser;
         } catch (final SQLException e) {
             throw new PersistenceException(e);

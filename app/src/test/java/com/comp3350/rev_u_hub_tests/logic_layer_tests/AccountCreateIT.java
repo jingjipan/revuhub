@@ -1,7 +1,11 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
+
 import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
@@ -19,10 +23,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
-public class AccessAccountIT {
-    private UserSearchEngine userSearchEngine;
+public class AccountCreateIT {
+    private AccountManager accountManager;
     private File tempDB;
     private UserPersistence myPersistenceLayer;
+    private UserSearch myUserSearch;
 
 
 
@@ -31,18 +36,24 @@ public class AccessAccountIT {
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
         this.myPersistenceLayer = Services.getUserPersistence();
-        this.userSearchEngine = new UserSearchEngine(myPersistenceLayer);
+        this.myUserSearch=new UserSearchEngine(myPersistenceLayer);
+        this.accountManager= new AccountManagement(myUserSearch,myPersistenceLayer);
     }
 
     @Test
-    public void testUserObject() {
-        UserObject userObject;
-        userObject = userSearchEngine.getUserSimple("admin");
-        assertNotNull("admin user should in the database",userObject);
-        assertTrue("admin".equals(userObject.getUserName()));
+    public void testCreateUserObject() {
+        UserObject userObject=null;
+        try {
+            userObject = accountManager.createUser("Tom", "123456", "123456");
+        }catch (UserCreationException e) {
+            e.printStackTrace();
+            assertNotNull("user should not null", userObject);
+        }
+        assertNotNull("User should be stored in database",userObject=myUserSearch.getUserSimple("Tom"));
+        assertTrue("Tom".equals(userObject.getUserName()));
         assertTrue("123456".equals(userObject.getPassWord()));
 
-        System.out.println("Finished test AccessAccount");
+        System.out.println("Finished test Create Account");
     }
 
     @After
@@ -50,5 +61,4 @@ public class AccessAccountIT {
         // reset DB
         this.tempDB.delete();
     }
-
 }

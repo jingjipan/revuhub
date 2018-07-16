@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class AccessReviewIT {
+public class ReviewAccessIT {
     private ReviewPersistence reviewPersistence;
     private File tempDB;
     private MovieObject newMovie;

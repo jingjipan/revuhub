@@ -5,10 +5,9 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 
 public class MovieObject implements Serializable, SearchableObject, Comparable {
-    private String title, synopsis, cast;
+    private String title, synopsis, cast, pic;
     private int count;
     private double rating;
-    private String pic;
     public MovieObject() {
         title = "";
         synopsis = "";

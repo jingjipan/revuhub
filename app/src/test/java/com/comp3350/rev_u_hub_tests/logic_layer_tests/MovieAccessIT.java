@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 
-public class AccessMovieIT {
+public class MovieAccessIT {
     private MovieListViewer movieListViewer;
     private File tempDB;
     private MoviePersistence myPersistenceLayer;
