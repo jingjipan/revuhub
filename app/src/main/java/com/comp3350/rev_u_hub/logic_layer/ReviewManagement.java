@@ -123,7 +123,7 @@ public class ReviewManagement implements ReviewManager {
                 review.getUserName()));
     }
 
-    private MovieObject getMovieObject(String title) throws ReviewDataNoMovieException {
+    public MovieObject getMovieObject(String title) throws ReviewDataNoMovieException {
         MovieObject movie = movieSearch.getMovieSimple(title);
 
         if (movie==null || movie.isEmpty())
@@ -131,7 +131,7 @@ public class ReviewManagement implements ReviewManager {
         return movie;
     }
 
-    private UserObject getUserObject(String userName) throws ReviewDataException {
+    public UserObject getUserObject(String userName) throws ReviewDataException {
         UserObject user = userSearch.getUserSimple(userName);
 
         if (user==null || user.isEmpty())

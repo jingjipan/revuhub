@@ -38,6 +38,7 @@ public class SearchMovieTest {
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
 
+
     @Test
     public void searchMovie() {
         //testing login

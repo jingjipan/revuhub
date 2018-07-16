@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support.test:rules-1.0.2">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-1.0.2.aar/5f4c9ef1950fa0f78a453dbc9cde4cd0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-1.0.2.aar/5f4c9ef1950fa0f78a453dbc9cde4cd0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-1.0.2.aar/0ca7ea9c80b22e88da733f82ffd8c49e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/rules-1.0.2.aar/0ca7ea9c80b22e88da733f82ffd8c49e/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
