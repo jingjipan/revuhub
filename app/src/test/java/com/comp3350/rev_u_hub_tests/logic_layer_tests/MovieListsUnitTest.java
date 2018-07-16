@@ -2,6 +2,7 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests;
 
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.logic_layer.MovieListViewer;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieLists;
 import com.comp3350.rev_u_hub.persistence_layer.MoviePersistence;
@@ -17,10 +18,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-public class TEMPORARYMovieListsUnitTest {
-    private MoviePersistence moviePersistence = new MoviePersistenceStub();
-    private MovieLists movieLists = new MovieListViewer(moviePersistence);
+public class MovieListsUnitTest {
+    private MoviePersistence moviePersistence = spy(new MoviePersistenceStub());
+    private MovieLists movieLists = spy(new MovieListViewer(moviePersistence));
 
     @Test
     public void testMovieLists() {
@@ -64,6 +69,14 @@ public class TEMPORARYMovieListsUnitTest {
             System.out.println("    Testing item "+i+", rating "+list2.get(i).getRating()+
                     ": "+list2.get(i));
             assertEquals(list1.get(i).getRating(),list2.get(i).getRating(),0.1);
+        }
+
+        try {
+            verify(moviePersistence, times(1)).getMovieSequential();
+            verify(movieLists, times(1)).getMovieList(anyInt());
+        } catch (MovieDataException e) {
+            printException(e);
+            assertTrue("Invalid state due to caught exception.",false);
         }
 
         System.out.println("Completed testing MovieLists getMovieList() method.");

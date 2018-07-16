@@ -36,17 +36,22 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-public class TEMPORARYUserMovieProfileUnitTest {
+public class UserMovieProfileUnitTest {
     private MoviePersistence moviePersistence = new MoviePersistenceStub();
     private UserPersistence userPersistence = new UserAccontPersistenceStub();
     private ReviewPersistence reviewPersistence = new ReviewPersistenceStub();
     private MovieSearch movieSearch = new MovieSearchEngine(moviePersistence);
     private UserSearch userSearch = new UserSearchEngine(userPersistence);
-    private ReviewSearch reviewSearch = new ReviewQuery(reviewPersistence);
-    private MovieRatings movieRatings = new RatingManagement(movieSearch, moviePersistence);
-    private UserMovieProfile userMovieProfile = new UserMovieStats(movieSearch,
-            userSearch, reviewSearch, movieRatings);
+    private ReviewSearch reviewSearch = spy(new ReviewQuery(reviewPersistence));
+    private MovieRatings movieRatings = spy(new RatingManagement(movieSearch, moviePersistence));
+    private UserMovieProfile userMovieProfile = spy(new UserMovieStats(movieSearch,
+            userSearch, reviewSearch, movieRatings));
 
     @Test
     public void testUserMovieProfile() {
@@ -68,6 +73,7 @@ public class TEMPORARYUserMovieProfileUnitTest {
 
         testUserMovieProfileMethods(reviewList, movie, user);
     }
+
     private void testUserMovieProfileMethods(List<ReviewObject> testReviews, MovieObject movie,
                                       UserObject user) {
 
@@ -143,6 +149,22 @@ public class TEMPORARYUserMovieProfileUnitTest {
             printException(e);
             assertTrue("Invalid state due to caught exception.",false);
         } catch (MovieDataException e) {
+            printException(e);
+            assertTrue("Invalid state due to caught exception.",false);
+        }
+
+
+        try {
+            verify(reviewSearch, times(4)).getReviews(user);
+            verify(movieRatings, times(14)).getAverageRating(anyString());
+            verify(userMovieProfile,
+                    times(1)).getLongestReview(user.getUserName());
+            verify(userMovieProfile,
+                    times(1)).getReviewedList(1, user.getUserName());
+            verify(userMovieProfile,
+                    times(2)).getReviewRatingAverage(user.getUserName());
+
+        } catch (ReviewDataException | MovieDataException | UserDataNotFoundException e) {
             printException(e);
             assertTrue("Invalid state due to caught exception.",false);
         }

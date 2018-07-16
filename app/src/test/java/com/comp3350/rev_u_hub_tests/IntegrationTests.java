@@ -9,6 +9,9 @@ import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.MovieAcces
 import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.MovieRatingAccessIT;
 import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.MovieRatingAdditionIT;
 import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.ReviewAccessIT;
+import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.ReviewCreateIT;
+import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.ReviewModifyIT;
+import com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest.ReviewRemoveIT;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -22,9 +25,10 @@ import org.junit.runners.Suite;
         MovieAccessIT.class,
         MovieRatingAccessIT.class,
         MovieRatingAdditionIT.class,
-        ReviewAccessIT.class
+        ReviewAccessIT.class,
+        ReviewCreateIT.class,
+        ReviewModifyIT.class,
+        ReviewRemoveIT.class
 })
-
 public class IntegrationTests {
-
 }

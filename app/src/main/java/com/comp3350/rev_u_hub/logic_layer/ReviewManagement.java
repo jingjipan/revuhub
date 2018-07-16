@@ -4,6 +4,7 @@ import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationFailedException;
@@ -25,15 +26,15 @@ public class ReviewManagement implements ReviewManager {
 
     private ReviewPersistence myPersistenceLayer;
     private ReviewSearch reviewSearch;
-    private MovieSearch movieSearch;
-    private UserSearch userSearch;
+    private MovieSearchValidator movieSearchValidator;
+    private UserSearchValidator userSearchValidator;
     private UserLogin userLogin;
 
     public ReviewManagement(ReviewPersistence setPersistenceLayer) {
         myPersistenceLayer = setPersistenceLayer;
         reviewSearch = Services.getReviewSearch();
-        movieSearch = Services.getMovieSearch();
-        userSearch = Services.getUserSearch();
+        movieSearchValidator = new MovieSearchValidator(Services.getMovieSearch());
+        userSearchValidator = new UserSearchValidator(Services.getUserSearch());
         userLogin = Services.getUserLogin();
     }
 
@@ -44,8 +45,8 @@ public class ReviewManagement implements ReviewManager {
                             UserLogin setUserLogin) {
         myPersistenceLayer = setPersistenceLayer;
         reviewSearch = setReviewSearch;
-        movieSearch = setMovieSearch;
-        userSearch = setUserSearch;
+        movieSearchValidator = new MovieSearchValidator(setMovieSearch);
+        userSearchValidator = new UserSearchValidator(setUserSearch);
         userLogin = setUserLogin;
     }
 
@@ -124,18 +125,26 @@ public class ReviewManagement implements ReviewManager {
     }
 
     private MovieObject getMovieObject(String title) throws ReviewDataNoMovieException {
-        MovieObject movie = movieSearch.getMovieSimple(title);
+        MovieObject movie;
 
-        if (movie==null || movie.isEmpty())
+        try {
+            movie = movieSearchValidator.getMovieSimple(title);
+        } catch (MovieDataNotFoundException e) {
             throw new ReviewDataNoMovieException("The selected movie does not exist.");
+        }
+
         return movie;
     }
 
     private UserObject getUserObject(String userName) throws ReviewDataException {
-        UserObject user = userSearch.getUserSimple(userName);
+        UserObject user;
 
-        if (user==null || user.isEmpty())
+        try {
+            user = userSearchValidator.getUserSimple(userName);
+        } catch (UserDataNotFoundException e) {
             throw new ReviewDataNoUserException("The selected user does not exist.");
+        }
+
         return user;
     }
 }
