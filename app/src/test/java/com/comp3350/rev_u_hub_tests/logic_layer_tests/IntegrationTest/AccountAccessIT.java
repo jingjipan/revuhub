@@ -24,9 +24,6 @@ public class AccountAccessIT {
     private File tempDB;
     private UserPersistence myPersistenceLayer;
 
-
-
-
     @Before
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
@@ -49,6 +46,7 @@ public class AccountAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 
 }

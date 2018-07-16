@@ -46,13 +46,7 @@ public class AccountRemoveIT {
     public void testRemoveUserObject() {
         UserObject userObject=null;
         try {
-            userObject = accountManager.createUser("Tom", "123456", "123456");
-        }catch (UserCreationException e) {
-            e.printStackTrace();
-            assertNotNull("user should not null", userObject);
-        }
-        try {
-            accountManager.removeUser("Tom","123456");
+            accountManager.removeUser("admin","123456");
         }catch (UserDataException e) {
             e.printStackTrace();
         }
@@ -66,5 +60,6 @@ public class AccountRemoveIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }

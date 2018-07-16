@@ -60,5 +60,6 @@ public class AccountCreateIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }
