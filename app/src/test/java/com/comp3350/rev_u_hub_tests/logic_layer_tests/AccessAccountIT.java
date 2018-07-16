@@ -23,7 +23,6 @@ public class AccessAccountIT {
     private UserSearchEngine userSearchEngine;
     private File tempDB;
     private UserPersistence myPersistenceLayer;
-    private UserSearch myUserSearch;
 
 
 
