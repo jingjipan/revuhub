@@ -21,3 +21,5 @@ As a team, we communication each other much more than previous iteration, we tal
 
 
 ### Also include a chart (as an image) showing the 2 data points of project velocity from the last two iterations. 
+
+![Project velocity](/path/to/Projct velocity.jpg)
