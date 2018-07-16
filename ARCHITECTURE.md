@@ -81,14 +81,14 @@ The logic layer classes access the persistence layer interfaces while providing 
 	ReviewManagement implements ReviewManager
 	RatingManagement implements MovieRatings
 
-The `AccountManagement` class makes use of `UserSearch` and `UserPersistence` to allow creation, removal, and modification of stored user objects.
+The `AccountManagement` class makes use of `UserSearchValidator` and `UserPersistence` to allow creation, removal, and modification of stored user objects.
 
 * User creation is validated with constraints and the requirement of two entries of a password which must match.
 * Users can be removed or modified if their password is correctly supplied to `AccountManagement`.
 
 The `ReviewManagement` class makes use of all the search classes (accessed through `Application.Services`) and `ReviewPersistence` to allow creation, removal, and modification of stored review objects.
 
-The `RatingManagement` class makes use of `MovieSearch` and `MoviePersistence` to allow addition of ratings and retrieval of count and rating data.
+The `RatingManagement` class makes use of `MovieSearchValidator` and `MoviePersistence` to allow addition of ratings and retrieval of count and rating data.
 
 * Ratings can be added to a movie but not removed
 * *Note that ratings are stored in a movie and are unrelated to reviews*
@@ -97,11 +97,20 @@ The `RatingManagement` class makes use of `MovieSearch` and `MoviePersistence` t
 
 	CurrentUserStorage implements UserLogin
 
-The `CurrentUserStorage` class makes use of `UserSearch` to allow user login.  The `CurrentUserStorage` class can also be used to retrieve the current logged-in user or whether any user is logged in at all.
+The `CurrentUserStorage` class makes use of `UserSearchValidator` to allow user login.  The `CurrentUserStorage` class can also be used to retrieve the current logged-in user or whether any user is logged in at all.
 
 * `CurrentUserStorage` contains at most one `UserObject`
 * Through exception messages, `CurrentUserStorage` can suggest fixes to failed logins
 * Once logged in, a user may not log out of the system
+
+### Display Listing Classes
+
+    UserMovieStats implements UserMovieProfile
+    MovieListViewer implements MovieLists
+
+The `MovieListViewer` class retrieves lists of movies from the persistence layer, sorted by average rating.
+
+The `UserMovieStats` class retrieves similar lists for a user, filtering for movies they have reviewed.  It also displays additional data, such as longest review and average rating of a user's reviewed movies.
 
 ### Search Classes
 
@@ -111,7 +120,20 @@ The `CurrentUserStorage` class makes use of `UserSearch` to allow user login.  T
 
 The `ReviewQuery` class uses `ReviewPersistence`'s functionality for performing review database queries to retrieve reviews.  Reviews by a user or for a movie can be retrieved in list or text form.  Specific reviews can also be retrieved using both a user and movie.
 
-The `MovieSearchEngine` and `UserSearchEngine` classes both extend `SearchEngine` to retrieve movie and user object respectively.  By default, the `SearchEngine` class uses a loose search that allows typos within one [Damerau–Levenshtein distance](https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance) of a username or movie title.  The `SearchEngine` class also allows simple (strict) searches using a username or movie title.
+The `MovieSearchEngine` and `UserSearchEngine` classes both extend `SearchEngine` to retrieve movie and user object respectively.  By default, the `SearchEngine` class uses a loose search that allows typos within one [Damerau–Levenshtein distance](https://en.wikipedia.org/wiki/Damerau–Levenshtein_distance) of a username or movie title.  The `SearchEngine` class also allows simple (strict) searches using a username or movie title.  In addition to this looseness, the search ignores case, spaces, apostrophes, and certain substrings like `"the "`.
+
+### Validation Classes
+
+    MovieSearchValidator
+    UserSearchValidator
+
+The validation classes are wrappers used internally by the logic layer.  For most of logic's functionality, certain exceptions are tested for and thrown in a uniform manner.  These classes encapsulate that behaviour.  We considered adding these behaviours directly to the search classes, but the successful retrieval of empty objects were necessary for certain tests and methods.
+
+`MovieSearchValidator` wraps a `MovieSearch` object and validates its outputs, throwing exceptions where needed.
+
+`UserSearchValidator` wraps a `UserSearch` object and validates its outputs, throwing exceptions where needed.
+
+Through the validator classes, we are able to easily test our exception hierarchy.
 
 ### Exceptions
 
@@ -200,6 +222,8 @@ The Services.java class serves as centeralized hub that initializes and provides
 
 ## Test Classes
 
+### Unit Tests
+
 	package com.comp3350.rev_u_hub_tests
 
 All unit tests can be run by running the `AllTests` class.
@@ -219,6 +243,8 @@ The unit tests retrieve their test data sets from descendants of the `UnitTestHe
 * `ReviewUnitTestHelper`
 * These classes allow creation of randomized movie, user, and review objects respectively
 
+Two unit tests, `UserSearchValidatorUnitTest` and `MovieSearchValidatorUnitTest`, test our exception hierarchy through the validator classes.
+
 One unit test class exists for each of the public interfaces in the logic layer:
 
 * Each of these test classes tests all methods in the interface using its implementing class
@@ -229,13 +255,26 @@ One unit test class exists for each of the public interfaces in the logic layer:
 * `ReviewSearchUnitTest` tests `ReviewSearch` using `ReviewQuery`
 * `UserLoginUnitTest` tests `UserLogin` using `CurrentUserStorage`
 * `UserSearchUnitTest` tests `UserSearch` using `UserSearchEngine`
+* `MovieListsUnitTest` tests `MovieLists` using `MovieListViewer`
+* `UserMovieProfileUnitTest` tests `UserMovieProfile` using `UserMovieStats`
 * A description of each test, including the randomized object it is operating on and any exceptions returned, is printed to the console during testing
+* Our unit tests use stubs; the newest of our tests use `Mockito` to implement mock test doubles
+
+Additionally, the `AdvancedMovieSearchUnitTest` class tests exceptionally complex typo-detection within the `MovieSearchEngine` class.
 
 One unit test class, `MovieInfoUnitTest`, also exists to test the copy constructor in `MovieObject`
 
     package com.comp3350.rev_u_hub_androidTest
 
-Acceptance Tests
+### Integration Tests
+
+    package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
+
+The integration tests test the ability of the logic classes to create, delete, and modify data in the persistence layer.
+
+The `IntegrationTests` class runs all of the integration tests.
+
+### Acceptance Tests
 
 All acceptance tests can be run by running the `AllAcceptanceTests` class.
 
