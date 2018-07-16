@@ -245,4 +245,4 @@ One acceptance test class exists for each user story (except for the user storie
 * `LoginTest tests if a user can login using an existing user i.e. user=admin password=123456 (it also tests the failure case of an incorrect password)
 * `CreateUserTest tests if a new user can be created and then if it persists when navigating to th login page and trying to log in with the new information
 * `SearchMovieTest tests to see if an existing user can search an existing movie i.e. user=admin password=123456 movie=Deadpool
-* `
+* ` 
