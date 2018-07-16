@@ -1,6 +1,6 @@
 # Architecture.md
 
-**Rev-U-Hub Iteration 2**
+**Rev-U-Hub Iteration 3**
 
 ## Data Objects
 
@@ -276,9 +276,10 @@ The `IntegrationTests` class runs all of the integration tests.
 
 ### Acceptance Tests
 
-All acceptance tests can be run by running the `AllAcceptanceTests` class.
+All acceptance tests can be run by running the `AllAcceptanceTests` class. Run using a Nexus 7 device in developer mode.
 
 One acceptance test class exists for each user story (except for the user stories that can be tested by one test)
+
 
 * Each of these test classes test a user story or multiple user stories (in the case of testing viewing all the different movie information, this can be done in one test)
 * `LoginTest tests if a user can login using an existing user i.e. user=admin password=123456 (it also tests the failure case of an incorrect password)
