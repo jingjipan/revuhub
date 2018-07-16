@@ -43,17 +43,18 @@ public class Services {
     private static MovieLists movieLists = null;
     private static UserMovieProfile userMovieProfile = null;
 
-    private static synchronized MoviePersistence getMoviePersistence() {
+    //change from private for Integration Test
+    public static synchronized MoviePersistence getMoviePersistence() {
         if (moviePersistence == null) moviePersistence = new MovieHSQLDB(Main.getDBPathName());
         return moviePersistence;
     }
-
-    private static synchronized ReviewPersistence getReviewPersistence() {
+    //change from private for Integration Test
+    public static synchronized ReviewPersistence getReviewPersistence() {
         if (reviewPersistence == null) reviewPersistence = new ReviewHSQLDB(Main.getDBPathName());
         return reviewPersistence;
     }
-
-    private static synchronized UserPersistence getUserPersistence() {
+    //change from private for Integration Test
+    public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) userPersistence = new UserAccountHSQLDB(Main.getDBPathName());
         return userPersistence;
     }
