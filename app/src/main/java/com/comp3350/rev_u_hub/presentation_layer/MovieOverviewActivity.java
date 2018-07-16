@@ -172,39 +172,6 @@ public class MovieOverviewActivity extends ListActivity {
             }
         });
 
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                UserLogin userLogin = Services.getUserLogin();
-//
-//                try{
-//                    UserObject currUser = userLogin.getUser();
-//
-//                    if(!alreadyReviewed(currUser)) {
-//                        // if a new review is made
-//                        newReviewCreated = getNewReview();
-//                        if(newReviewCreated) {
-//
-//                        }
-//
-//
-//                        reviewManager = Services.getReviewManager();
-//                        try {
-//                            reviewManager.createReview(reviewText, movieName, currUser.getUserName());
-//                        } catch(ReviewCreationException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    } else {
-//                        // User has already reviewed it, show toast
-//                        Toast.makeText(MovieOverviewActivity.this, "You have already reviewed this movie", Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch(UserDataNotFoundException e) {
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//        });
     }
 
     private void setListViewContent(MovieObject movie) {

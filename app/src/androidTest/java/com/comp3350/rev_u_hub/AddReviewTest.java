@@ -4,6 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.SearchView;
 
+import com.comp3350.rev_u_hub.Application.Services;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
+import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.presentation_layer.HomeActivity;
 import com.comp3350.rev_u_hub.presentation_layer.LoginActivity;
 import com.robotium.solo.Solo;
@@ -11,12 +14,12 @@ import com.robotium.solo.Solo;
 import junit.framework.Assert;
 
 
-public class SearchMovieTest extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class AddReviewTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private Solo solo;
     private SearchView mSearchView;
 
-    public SearchMovieTest() {
+    public AddReviewTest() {
         super(LoginActivity.class);
     }
 
@@ -32,14 +35,21 @@ public class SearchMovieTest extends ActivityInstrumentationTestCase2<LoginActiv
 
     public void testCreateRoutine() {
         solo.waitForActivity("LoginActivity");
+        solo.clickOnView(solo.getView("createNavButton"));
+        solo.waitForActivity("CreateUserActivity");
+
         solo.clickOnEditText(0);
-        String username = "admin";
+        String username = "new";
         solo.enterText(0, username);
 
         solo.clickOnEditText(1);
-        String password = "123456";
+        String password = "pass";
         solo.enterText(1, password);
-        solo.clickOnView(solo.getView("loginButton"));
+
+        solo.clickOnEditText(2);
+        String newPassword = "pass";
+        solo.enterText(2, newPassword);
+        solo.clickOnView(solo.getView("createUserButton"));
 
         solo.waitForActivity("HomeActivity");
         String movieName = "Deadpool";
@@ -47,15 +57,20 @@ public class SearchMovieTest extends ActivityInstrumentationTestCase2<LoginActiv
         ((SearchView) search).setQuery(movieName, true);
 
         solo.waitForActivity("MovieOverviewActivity");
+        solo.clickOnEditText(0);
+        String newReview = "newReview";
+        solo.enterText(0, newReview);
 
-        // Check for moviename
-        assertTrue(solo.searchText(movieName));
+        solo.clickOnView(solo.getView("submitButton"));
 
-        // Check for synopsis
-        String synopsis = "A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.";
-        assertTrue(solo.searchText(synopsis));
+        assertTrue(solo.searchText(newReview));
 
-        String cast = "Ryan Reynolds, Karan Soni, Ed Skrein, Michael Benyaer";
-        assertTrue(solo.searchText(cast));
+        AccountManager manger = Services.getAccountManager();
+        try {
+            manger.removeUser("new", "pass");
+        }
+        catch (UserDataException e){
+            System.out.println(e);
+        }
     }
 }
