@@ -32,7 +32,13 @@ import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationFailedException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewCreationNoUserException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNoMovieException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNoUserException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNotFoundException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataWrongUserException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
@@ -141,53 +147,30 @@ public class MovieOverviewActivity extends ListActivity {
                             Toast.makeText(MovieOverviewActivity.this,"Review Submitted", Toast.LENGTH_SHORT).show();
                         } catch(ReviewCreationException e) {
                             System.out.println(e.getMessage());
+                            String userMessage;
                             if(e instanceof ReviewCreationDuplicateException) {
-                                Toast.makeText(MovieOverviewActivity.this, "You have already submitted a review", Toast.LENGTH_SHORT).show();
-
+                                userMessage = "You have already submitted a review.";
                             }
+                            else if(e instanceof ReviewCreationFailedException) {
+                                userMessage = "The review could not be created.";
+                            }
+                            else if(e instanceof ReviewCreationNoUserException) {
+                                userMessage = "The selected user is not logged in.";
+                            }
+                            else {
+                                userMessage = "Something went wrong on our end.";
+                            }
+                            Toast.makeText(MovieOverviewActivity.this, userMessage, Toast.LENGTH_SHORT).show();
                         }
                     }
 
                 } catch(UserDataNotFoundException e) {
                     System.out.println(e.getMessage());
+                    Toast.makeText(MovieOverviewActivity.this, "No user with that username was found.", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                UserLogin userLogin = Services.getUserLogin();
-//
-//                try{
-//                    UserObject currUser = userLogin.getUser();
-//
-//                    if(!alreadyReviewed(currUser)) {
-//                        // if a new review is made
-//                        newReviewCreated = getNewReview();
-//                        if(newReviewCreated) {
-//
-//                        }
-//
-//
-//                        reviewManager = Services.getReviewManager();
-//                        try {
-//                            reviewManager.createReview(reviewText, movieName, currUser.getUserName());
-//                        } catch(ReviewCreationException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    } else {
-//                        // User has already reviewed it, show toast
-//                        Toast.makeText(MovieOverviewActivity.this, "You have already reviewed this movie", Toast.LENGTH_SHORT).show();
-//                    }
-//                } catch(UserDataNotFoundException e) {
-//                    System.out.println(e.getMessage());
-//                }
-//            }
-//        });
     }
 
     private void setListViewContent(MovieObject movie) {
@@ -205,41 +188,25 @@ public class MovieOverviewActivity extends ListActivity {
             adapter.addAll(Services.getReviewSearch().getReviewsText(movie));
             adapter.notifyDataSetChanged();
         } catch(ReviewDataException e) {
+            String userMessage;
+            if(e instanceof ReviewDataNotFoundException) {
+                userMessage = "No reviews exist for the selected movie.";
+            }
+            else if(e instanceof ReviewDataNoMovieException) {
+                userMessage = "The selected movie does not exist.";
+            }
+            else if(e instanceof ReviewDataNoUserException) {
+                userMessage = "The selected user does not exist.";
+            }
+            else if(e instanceof ReviewDataWrongUserException) {
+                userMessage = "The selected user is not logged in.";
+            }
+            else {
+                userMessage = "Something went wrong on our end.";
+            }
+            Toast.makeText(MovieOverviewActivity.this, userMessage, Toast.LENGTH_SHORT).show();
             System.out.println(e.getMessage());
         }
     }
-
-
-//    public boolean getNewReview() {
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MovieOverviewActivity.this);
-//        builder.setTitle("New Review");
-//
-//        // Set up the input
-//        final EditText input = new EditText(MovieOverviewActivity.this);
-//        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-//        input.setInputType(InputType.TYPE_CLASS_TEXT);
-//        builder.setView(input);
-//
-//        newReviewCreated = false;
-//        // Set up the buttons
-//        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                newReviewCreated = true;
-//                reviewText = input.getText().toString();
-//            }
-//        });
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                newReviewCreated = true;
-//                dialog.cancel();
-//            }
-//        });
-//
-//        builder.show();
-//        return newReviewCreated;
-//    }
 
 }

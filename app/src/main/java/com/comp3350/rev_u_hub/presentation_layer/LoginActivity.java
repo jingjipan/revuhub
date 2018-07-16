@@ -23,6 +23,8 @@ import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.R;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataWrongPasswordException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 
 public class LoginActivity extends AppCompatActivity {
@@ -58,7 +60,18 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 catch(UserDataException e) {
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    String userMessage;
+                    if(e instanceof UserDataNotFoundException){
+                        userMessage = "No user with that username was found.";
+                    }
+                    else if(e instanceof UserDataWrongPasswordException) {
+                        userMessage = "Username or Password was incorrect.";
+                    }
+                    else {
+                        userMessage = "Something went wrong on our end.";
+                    }
+                    Toast.makeText(LoginActivity.this, userMessage, Toast.LENGTH_SHORT).show();
+                    System.out.println(e.getMessage());
                 }
             }
         });

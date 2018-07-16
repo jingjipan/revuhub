@@ -3,6 +3,8 @@ package com.comp3350.rev_u_hub.presentation_layer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
     private UserLogin userLoginOB;
     private UserObject userObject;
     private TextView currentUsername;
+    private Button userProfileButton;
+    private String currentUserString;
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,7 +60,8 @@ public class HomeActivity extends AppCompatActivity {
         try {
             userLoginOB = Services.getUserLogin();
             userObject = userLoginOB.getUser();
-            currentUsername.setText("Welcome " + userObject.getUserName() + "!");
+            currentUserString = userObject.getUserName();
+            currentUsername.setText("Welcome " + currentUserString + "!");
         }
         catch (UserDataNotFoundException e) {
             Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -82,6 +87,16 @@ public class HomeActivity extends AppCompatActivity {
 
 //        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 //        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        userProfileButton = (Button)findViewById(R.id.goToProfile);
+        userProfileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent = new Intent(view.getContext(), ProfileActivity.class);
+                profileIntent.putExtra("userName", currentUserString);
+                startActivity(profileIntent);
+            }
+        });
     }
 
     @Override
