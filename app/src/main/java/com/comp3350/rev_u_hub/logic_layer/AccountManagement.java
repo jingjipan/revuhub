@@ -69,9 +69,10 @@ public class AccountManagement implements AccountManager{
 
     // Changes a stored user's password
     public UserObject changePassword(String userName, String passwordOld, String passwordNew)
-            throws UserDataException {
+            throws UserDataException, UserCreationPasswordConstraintException {
         UserObject user = getUserObject(userName,passwordOld);
 
+        checkPasswordConstraint(passwordNew);
         user.changePassWord(passwordNew);
         myPersistenceLayer.updatePassWord(user);
         return user;

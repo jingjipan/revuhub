@@ -3,6 +3,7 @@ package com.comp3350.rev_u_hub.logic_layer.interfaces;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 
 public interface AccountManager {
@@ -20,5 +21,5 @@ public interface AccountManager {
 
     // Changes a stored user's password
     UserObject changePassword(String userName, String passwordOld, String passwordNew)
-            throws UserDataException;
+            throws UserDataException, UserCreationPasswordConstraintException;
 }

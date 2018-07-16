@@ -7,6 +7,7 @@
     <string name="movieImageDescription">This is so the IDE does not yell at me</string>
     <string name="ReviewText">Reviews</string>
     <string name="SearchText">Search for a movie!</string>
+    <string name="UserSearchText">Search for a user!</string>
     <string name="SearchWarning">(You can only search: \"Deadpool\", \"Thor\", \"The Avengers\", \"50 First Dates\", \"Mall Cop\", \"Bee Movie\", and \"Garfield\")</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -17,6 +18,7 @@
     <string name="createNavHeaderString">Don\'t have an account?</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="Submit">Submit</string>
+    <string name="ChangePassword">Change Password</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="topRatedMovies">Top Rated Movies</string>
     <string name="myProfile">My Profile</string>
