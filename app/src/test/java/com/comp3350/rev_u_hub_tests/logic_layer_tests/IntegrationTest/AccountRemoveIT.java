@@ -3,7 +3,6 @@ package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
@@ -11,7 +10,6 @@ import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
 import com.comp3350.rev_u_hub.Application.Services;
-import com.comp3350.rev_u_hub.data_objects.UserObject;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,18 +20,12 @@ import java.io.IOException;
 
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
-
-
 
 public class AccountRemoveIT {
     private AccountManager accountManager;
     private File tempDB;
     private UserPersistence myPersistenceLayer;
     private UserSearch myUserSearch;
-
-
-
 
     @Before
     public void setUp() throws IOException {
@@ -44,22 +36,21 @@ public class AccountRemoveIT {
     }
 
     @Test
-    public void testRemoveUserObject() {
-        System.out.println("Start testing Remove Account");
-        UserObject userObject=null;
+    public void testRemoveValidUser() {
+        System.out.println("Start testing removal of a valid user account.");
         try {
             accountManager.removeUser("admin","123456");
         }catch (UserDataException e) {
             e.printStackTrace();
         }
-        assertTrue("User name should not be stored in database",myUserSearch.getUserSimple("Tom").getUserName().equals(""));
-        assertTrue("User password should not be stored in database",myUserSearch.getUserSimple("Tom").getPassWord().equals(""));
+        assertTrue("User name should not be stored in database",myUserSearch.getUserSimple("admin").getUserName().equals(""));
+        assertTrue("User password should not be stored in database",myUserSearch.getUserSimple("admin").getPassWord().equals(""));
 
-        System.out.println("Finished test Remove Account");
+        System.out.println("Finished testing removal of a valid user account.");
     }
     @Test
     public void testRemoveInvalidUserObject() {
-        System.out.println("Start testing Remove invalid Account");
+        System.out.println("Start testing removal of an invalid user account.");
         boolean cond = false;
         try {
             accountManager.removeUser("adm","123456");
@@ -70,7 +61,7 @@ public class AccountRemoveIT {
             e.printStackTrace();
         }
         assertTrue("The selected user does not exit",cond);
-       System.out.println("Finished test Remove invalid Account");
+       System.out.println("Finished testing removal of an invalid user account.");
     }
 
     @After

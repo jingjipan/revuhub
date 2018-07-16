@@ -15,6 +15,7 @@ import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
 import com.comp3350.rev_u_hub.Application.Services;
 
+import org.hsqldb.rights.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,49 +39,55 @@ public class AccountModifyIT {
     public void setUp() throws IOException {
         this.tempDB = TestUtils.copyDB();
         this.myPersistenceLayer = Services.getUserPersistence();
-        this.myUserSearch=new UserSearchEngine(myPersistenceLayer);
-        this.accountManager= new AccountManagement(myUserSearch,myPersistenceLayer);
+        this.myUserSearch = new UserSearchEngine(myPersistenceLayer);
+        this.accountManager = new AccountManagement(myUserSearch, myPersistenceLayer);
     }
 
     @Test
-    public void testModifyUserObject() {
-        System.out.println("Start testing Account Modify");
-        UserObject userObject=null;
+    public void testModifyValidUserName() {
+        System.out.println("Start testing valid modification of a valid user name.");
+        UserObject userObject = null;
         try {
             accountManager.changeUsername("admin", "test123", "123456");
-        }catch (UserDataException e) {
+        } catch (UserDataException e) {
             e.printStackTrace();
-        }catch(UserCreationDuplicateException e){
+        } catch (UserCreationDuplicateException e) {
             e.printStackTrace();
         }
         userObject = myUserSearch.getUserSimple("admin");
-        assertTrue("user should not exist in database",userObject.getUserName().equals("")&&userObject.getPassWord().equals("")) ;
-        assertNotNull("User should be stored in database",userObject=myUserSearch.getUserSimple("test123"));
+        assertTrue("user should not exist in database", userObject.getUserName().equals("") && userObject.getPassWord().equals(""));
+        userObject = myUserSearch.getUserSimple("test123");
         assertTrue("test123".equals(userObject.getUserName()));
         assertTrue("123456".equals(userObject.getPassWord()));
+        System.out.println("Finished testing valid modification of a valid user name.");
+    }
 
+    @Test
+    public void testModifyValidPassword() {
+        System.out.println("Start testing valid modification of a valid user password.");
+        UserObject userObject = null;
         try {
-            accountManager.changePassword("test123", "123456", "654321");
-        }catch (UserDataException e) {
+            accountManager.changePassword("admin", "123456", "654321");
+        } catch (UserDataException e) {
             e.printStackTrace();
         } catch (UserCreationPasswordConstraintException e) {
             e.printStackTrace();
         }
-        assertTrue("test123".equals((userObject=myUserSearch.getUserSimple("test123")).getUserName()));
+        userObject = myUserSearch.getUserSimple("admin");
+        assertTrue("admin".equals(userObject.getUserName()));
         assertTrue("654321".equals(userObject.getPassWord()));
-        System.out.println("Finished test Account Modify");
+        System.out.println("Finished testing valid modification of a valid user password.");
     }
 
     @Test
-    public void testModifyInvalidUserObject() {
-        System.out.println("Start testing invalid Account Modify");
+    public void testModifyInvalidUser() {
+        System.out.println("Start testing modification of invalid user account.");
         boolean cond=false;
         try {
             accountManager.changeUsername("amd", "test1", "123456");
-        }catch(UserDataNotFoundException e){
+        } catch(UserDataNotFoundException e){
            cond = true;
-        }
-        catch (UserDataException e) {
+        } catch (UserDataException e) {
             e.printStackTrace();
         } catch (UserCreationDuplicateException e) {
             e.printStackTrace();
@@ -96,8 +103,9 @@ public class AccountModifyIT {
             e.printStackTrace();
         }
         assertTrue("The password is incorrect for the selected user.",cond);
-        System.out.println("Finished test invalid Account Modify");
+        System.out.println("Finished testing modification of invalid user account.");
     }
+
     @After
     public void tearDown() {
         // reset DB

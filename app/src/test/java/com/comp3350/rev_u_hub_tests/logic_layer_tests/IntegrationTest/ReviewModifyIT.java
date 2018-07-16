@@ -62,33 +62,6 @@ public class ReviewModifyIT {
         System.out.println("Finished testing modification of a valid review.");
     }
 
-    @Test
-    public void testModifyInvalidReview() {
-        System.out.println("Start testing modification of an invalid review.");
-        myReview = null;
-        boolean message = false;
-        try{
-            userLogin.userLogin("admin","123456");
-        }catch(UserDataException e){
-            e.printStackTrace();
-        }
-        try{
-            myReviewManager.editReview("","Thor","admin");
-        }catch(ReviewDataException e){
-            message=true;
-        }
-        try {
-            myReview=myReviewQuery.getReview("Thor","admin");
-        }catch (ReviewDataException e){
-            e.printStackTrace();
-        }
-        assertNotNull("The review shall be in the database.",myReview);
-        assertTrue("Testing invalid review, this message shall appear.",message);
-        assertTrue("The review shall not be edited.",myReview.getReview().equals(""));
-
-        System.out.println("Finished testing modification of an invalid review.");
-    }
-
     @After
     public void tearDown() {
         // reset DB

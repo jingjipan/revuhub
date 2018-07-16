@@ -36,9 +36,9 @@ public class MovieRatingAccessIT {
 
     @Test
     public void testMovieRatingAccess() {
+        System.out.println("Start testing access the rating of a movie.");
         double rating=0;
         int count=0;
-        System.out.println("Start testing Movie Rating access");
         try{
             movieRatings.hasRating("Thor");
         }catch(MovieDataNotFoundException e){
@@ -55,7 +55,7 @@ public class MovieRatingAccessIT {
         assertTrue("movie rating should be 5.0",rating==5.0);
         assertTrue("rating count should be 1",count==1);
 
-        System.out.println("Finished test Movie Rating access");
+        System.out.println("Finished testing access the rating of a movie.");
     }
 
     @After
