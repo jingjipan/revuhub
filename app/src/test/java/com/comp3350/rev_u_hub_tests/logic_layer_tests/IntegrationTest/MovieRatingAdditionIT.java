@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub_tests.logic_layer_tests;
+package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
@@ -19,7 +19,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
-public class MovieRatingAccessIT {
+public class MovieRatingAdditionIT {
     private static final int newRating = 5;
     private MoviePersistence myPersistenceLayer;
     private File tempDB;
@@ -36,9 +36,6 @@ public class MovieRatingAccessIT {
 
     @Test
     public void testMovieRatingAccess() {
-        double rating=0;
-        int count=0;
-
         try{
             movieRatings.hasRating("Thor");
         }catch(MovieDataNotFoundException e){
@@ -46,14 +43,22 @@ public class MovieRatingAccessIT {
         }
 
         try{
+            movieRatings.addRating("Thor",1);
+        }catch(MovieDataException e){
+            e.printStackTrace();
+        }
+
+        double rating=0;
+        int count=0;
+        try{
             rating = movieRatings.getAverageRating("Thor");
             count= movieRatings.getRatingCount("Thor");
         }catch(MovieDataException e){
             e.printStackTrace();
         }
 
-        assertTrue("movie rating should be 5.0",rating==5.0);
-        assertTrue("rating count should be 1",count==1);
+        assertTrue("movie rating should be 3.0",rating==3.0);
+        assertTrue("rating count should be 2",count==2);
 
         System.out.println("Finished test Movie Rating access");
     }

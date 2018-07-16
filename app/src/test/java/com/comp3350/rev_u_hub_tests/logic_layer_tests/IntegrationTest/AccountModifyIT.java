@@ -1,8 +1,10 @@
-package com.comp3350.rev_u_hub_tests.logic_layer_tests;
+package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
 
+import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
@@ -10,7 +12,6 @@ import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
 import com.comp3350.rev_u_hub.Application.Services;
-import com.comp3350.rev_u_hub.data_objects.UserObject;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,19 +21,16 @@ import java.io.File;
 import java.io.IOException;
 
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 
-
-public class AccountRemoveIT {
+public class AccountModifyIT {
     private AccountManager accountManager;
     private File tempDB;
     private UserPersistence myPersistenceLayer;
     private UserSearch myUserSearch;
-
-
-
 
     @Before
     public void setUp() throws IOException {
@@ -43,23 +41,29 @@ public class AccountRemoveIT {
     }
 
     @Test
-    public void testRemoveUserObject() {
+    public void testModifyUserObject() {
         UserObject userObject=null;
         try {
-            userObject = accountManager.createUser("Tom", "123456", "123456");
-        }catch (UserCreationException e) {
+            accountManager.changeUsername("test3", "test123", "123456");
+        }catch (UserDataException e) {
             e.printStackTrace();
-            assertNotNull("user should not null", userObject);
+        }catch(UserCreationDuplicateException e){
+            e.printStackTrace();
         }
+        userObject = myUserSearch.getUserSimple("test3");
+        assertTrue("user should not exist in database",userObject.getUserName().equals("")&&userObject.getPassWord().equals("")) ;
+        assertNotNull("User should be stored in database",userObject=myUserSearch.getUserSimple("test123"));
+        assertTrue("test123".equals(userObject.getUserName()));
+        assertTrue("123456".equals(userObject.getPassWord()));
+
         try {
-            accountManager.removeUser("Tom","123456");
+            accountManager.changePassword("test123", "123456", "654321");
         }catch (UserDataException e) {
             e.printStackTrace();
         }
-        assertTrue("User name should not be stored in database",myUserSearch.getUserSimple("Tom").getUserName().equals(""));
-        assertTrue("User password should not be stored in database",myUserSearch.getUserSimple("Tom").getPassWord().equals(""));
-
-        System.out.println("Finished test Remove Account");
+        assertTrue("test123".equals((userObject=myUserSearch.getUserSimple("test123")).getUserName()));
+        assertTrue("654321".equals(userObject.getPassWord()));
+        System.out.println("Finished test Account Modify");
     }
 
     @After

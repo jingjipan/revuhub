@@ -67,6 +67,4 @@ public class MoviePersistenceStub implements MoviePersistence{
             movies.remove(index);
         }
     }
-
-
 }

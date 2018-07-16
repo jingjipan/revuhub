@@ -1,4 +1,4 @@
-package com.comp3350.rev_u_hub_tests.logic_layer_tests;
+package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.MovieObject;
