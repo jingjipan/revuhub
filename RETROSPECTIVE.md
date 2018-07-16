@@ -21,5 +21,7 @@ As a team, we communication each other much more than previous iteration, we tal
 
 
 ### Also include a chart (as an image) showing the 2 data points of project velocity from the last two iterations. 
+For Iteration 1, we estimate time by hours is 171 and we complete it in 154 hours.
+For Iteration 2, we estimate time by hours is 208 and we complete it in 272 hours.
 
 ![Project velocity](/path/to/Projct velocity.jpg)
