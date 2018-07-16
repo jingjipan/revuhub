@@ -25,7 +25,6 @@ import static org.junit.Assert.assertTrue;
 public class ReviewAccessIT {
     private ReviewPersistence reviewPersistence;
     private File tempDB;
-    private MovieObject newMovie;
     private ReviewQuery reviewQuery;
 
     @Before
@@ -54,5 +53,6 @@ public class ReviewAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }

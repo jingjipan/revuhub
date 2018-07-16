@@ -52,6 +52,7 @@ public class MovieAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 
 

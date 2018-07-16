@@ -1,18 +1,16 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
-
+import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
 import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
-import com.comp3350.rev_u_hub.Application.Services;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,13 +19,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-
-public class AccountModifyIT {
+public class ReviewCreateIT {
     private AccountManager accountManager;
     private File tempDB;
     private UserPersistence myPersistenceLayer;

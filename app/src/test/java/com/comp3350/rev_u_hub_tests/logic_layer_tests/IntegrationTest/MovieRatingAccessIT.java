@@ -62,5 +62,6 @@ public class MovieRatingAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }

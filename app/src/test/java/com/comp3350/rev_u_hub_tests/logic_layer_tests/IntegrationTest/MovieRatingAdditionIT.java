@@ -67,5 +67,6 @@ public class MovieRatingAdditionIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }
