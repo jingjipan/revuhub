@@ -22,6 +22,7 @@ Our improvements will be a success if we limit the number of interfaces to no mo
 
 ### Also include a chart (as an image) showing the 2 data points of project velocity from the last two iterations. 
 For Iteration 1, we estimated our work to take 171 hours and we completed it in 154 hours.
+
 For Iteration 2, we estimated our work to take 208 horus and we completed it in 272 hours.
 
 ![Project velocity](Project velocity.jpg)
