@@ -123,7 +123,7 @@ public class Services {
         accountManager = null;
         reviewManager = null;
 
-        MovieLists movieLists = null;
-        UserMovieProfile userMovieProfile = null;
+        movieLists = null;
+        userMovieProfile = null;
     }
 }

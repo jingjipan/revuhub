@@ -21,7 +21,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class ReviewCreateIT {
+public class ReviewModifyIT {
     private File tempDB;
     private ReviewPersistence myPersistenceLayer;
     private ReviewManagement myReviewManager;
@@ -38,43 +38,43 @@ public class ReviewCreateIT {
     }
 
     @Test
-    public void testCreateValidReview() {
-        System.out.println("Start testing creation of a new valid review.");
-        myReview = null;
-        try{
-            userLogin.userLogin("test3","123456");
-        }catch(UserDataException e){
-            e.printStackTrace();
-        }
-        try{
-            myReviewManager.createReview("123","Thor","test3");
-            myReview=myReviewQuery.getReview("Thor","test3");
-        }catch(ReviewCreationException e){
-            e.printStackTrace();
-        }catch(ReviewDataException e){
-            e.printStackTrace();
-        }
-        assertNotNull("The review shall be in the database.",myReview);
-        assertTrue("The new message should be in the database.",myReviewQuery.reviewExists("Thor","test3"));
-        assertTrue("The newly added review should be '123'.",myReview.getReview().equals("123"));
-
-        System.out.println("Finished testing creation of a new valid review.");
-    }
-
-    @Test
-    public void testCreateExistingReview() {
-        boolean message=false;
-        System.out.println("Start testing creation of a existing review.");
+    public void testModifyValidReview() {
+        System.out.println("Start testing modification of a valid review.");
         myReview = null;
         try{
             userLogin.userLogin("admin","123456");
         }catch(UserDataException e){
             e.printStackTrace();
         }
-
         try{
-            myReviewManager.createReview("123","Thor","admin");
-        }catch(ReviewCreationException e){
+            myReviewManager.editReview("123","Thor","admin");
+        }catch(ReviewDataException e){
+            e.printStackTrace();
+        }
+        try {
+            myReview=myReviewQuery.getReview("Thor","admin");
+        }catch (ReviewDataException e){
+            e.printStackTrace();
+        }
+        assertNotNull("The review shall be in the database.",myReview);
+        assertTrue("The review shall be edited.",myReview.getReview().equals("123"));
+
+        System.out.println("Finished testing modification of a valid review.");
+    }
+
+    @Test
+    public void testModifyInvalidReview() {
+        System.out.println("Start testing modification of an invalid review.");
+        myReview = null;
+        boolean message = false;
+        try{
+            userLogin.userLogin("admin","123456");
+        }catch(UserDataException e){
+            e.printStackTrace();
+        }
+        try{
+            myReviewManager.editReview("","Thor","admin");
+        }catch(ReviewDataException e){
             message=true;
         }
         try {
@@ -83,11 +83,10 @@ public class ReviewCreateIT {
             e.printStackTrace();
         }
         assertNotNull("The review shall be in the database.",myReview);
-        assertTrue("Create duplicate review successfully.",message);
-        assertTrue("The review shall still exist.",myReviewQuery.reviewExists("Thor","admin"));
-        assertTrue("Review shall not be changed.",!myReview.getReview().equals("123"));
+        assertTrue("Testing invalid review, this message shall appear.",message);
+        assertTrue("The review shall not be edited.",myReview.getReview().equals(""));
 
-        System.out.println("Finished testing creation of a existing review.");
+        System.out.println("Finished testing modification of an invalid review.");
     }
 
     @After
