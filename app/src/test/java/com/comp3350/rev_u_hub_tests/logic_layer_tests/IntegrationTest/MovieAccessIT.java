@@ -34,6 +34,7 @@ public class MovieAccessIT {
 
     @Test
     public void testMovieLists() {
+        System.out.println("Start testing AccessMovie");
         List<MovieObject> movieLists = new ArrayList<MovieObject>();
         //movieLists = movieListViewer.getMovieList(3);
 
@@ -52,6 +53,7 @@ public class MovieAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 
 

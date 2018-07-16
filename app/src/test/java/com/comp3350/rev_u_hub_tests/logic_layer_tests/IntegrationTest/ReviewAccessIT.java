@@ -1,12 +1,9 @@
 package com.comp3350.rev_u_hub_tests.logic_layer_tests.IntegrationTest;
 
 import com.comp3350.rev_u_hub.Application.Services;
-import com.comp3350.rev_u_hub.data_objects.MovieObject;
 import com.comp3350.rev_u_hub.data_objects.ReviewObject;
 import com.comp3350.rev_u_hub.logic_layer.ReviewQuery;
-import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.ReviewDataNotFoundException;
-import com.comp3350.rev_u_hub.logic_layer.interfaces.ReviewSearch;
 import com.comp3350.rev_u_hub.persistence_layer.ReviewPersistence;
 import com.comp3350.rev_u_hub_tests.utils.TestUtils;
 
@@ -25,7 +22,6 @@ import static org.junit.Assert.assertTrue;
 public class ReviewAccessIT {
     private ReviewPersistence reviewPersistence;
     private File tempDB;
-    private MovieObject newMovie;
     private ReviewQuery reviewQuery;
 
     @Before
@@ -37,7 +33,8 @@ public class ReviewAccessIT {
     }
 
     @Test
-    public void testReviewObject() {
+    public void testAccessValidReview() {
+        System.out.println("Start testing access valid review");
         ReviewObject reviewObject = null;
         try{
             reviewObject = reviewQuery.getReview("Thor","admin");
@@ -47,12 +44,26 @@ public class ReviewAccessIT {
         assertNotNull("review should be in lists",reviewObject);
         assertTrue("admin".equals(reviewObject.getUserName()));
 
-        System.out.println("Finished test AccessReview");
+        System.out.println("Finished testing access valid review");
+    }
+
+    @Test
+    public void testAccessInvalidReview() {
+        System.out.println("Start testing access invalid review");
+        boolean message = false;
+        try{
+            reviewQuery.getReview("Thor","test3");
+        }catch(ReviewDataNotFoundException e){
+           message=true;
+        }
+        assertTrue("The review should not in the database.",message);
+        System.out.println("Finished testing access invalid review");
     }
 
     @After
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }

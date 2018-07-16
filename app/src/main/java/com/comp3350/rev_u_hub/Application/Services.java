@@ -108,4 +108,22 @@ public class Services {
                         getReviewSearch(), getMovieRatings());
         return userMovieProfile;
     }
+
+    public static void clean(){
+        moviePersistence = null;
+        reviewPersistence = null;
+        userPersistence = null;
+
+        movieSearch = null;
+        userSearch = null;
+        reviewSearch = null;
+
+        userLogin = null;
+        movieRatings = null;
+        accountManager = null;
+        reviewManager = null;
+
+        movieLists = null;
+        userMovieProfile = null;
+    }
 }

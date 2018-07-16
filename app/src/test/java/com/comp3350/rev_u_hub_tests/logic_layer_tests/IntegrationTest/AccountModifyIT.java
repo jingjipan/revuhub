@@ -8,6 +8,7 @@ import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateExcept
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
 import com.comp3350.rev_u_hub.persistence_layer.UserPersistence;
@@ -43,15 +44,16 @@ public class AccountModifyIT {
 
     @Test
     public void testModifyUserObject() {
+        System.out.println("Start testing Account Modify");
         UserObject userObject=null;
         try {
-            accountManager.changeUsername("test3", "test123", "123456");
+            accountManager.changeUsername("admin", "test123", "123456");
         }catch (UserDataException e) {
             e.printStackTrace();
         }catch(UserCreationDuplicateException e){
             e.printStackTrace();
         }
-        userObject = myUserSearch.getUserSimple("test3");
+        userObject = myUserSearch.getUserSimple("admin");
         assertTrue("user should not exist in database",userObject.getUserName().equals("")&&userObject.getPassWord().equals("")) ;
         assertNotNull("User should be stored in database",userObject=myUserSearch.getUserSimple("test123"));
         assertTrue("test123".equals(userObject.getUserName()));
@@ -69,9 +71,37 @@ public class AccountModifyIT {
         System.out.println("Finished test Account Modify");
     }
 
+    @Test
+    public void testModifyInvalidUserObject() {
+        System.out.println("Start testing invalid Account Modify");
+        boolean cond=false;
+        try {
+            accountManager.changeUsername("amd", "test1", "123456");
+        }catch(UserDataNotFoundException e){
+           cond = true;
+        }
+        catch (UserDataException e) {
+            e.printStackTrace();
+        } catch (UserCreationDuplicateException e) {
+            e.printStackTrace();
+        }
+        assertTrue("The name is invalid.",cond);
+        try {
+            accountManager.changePassword("admin", "123", "65");
+        }catch(UserDataNotFoundException e){
+            cond = true;
+        }catch (UserDataException e) {
+            e.printStackTrace();
+        } catch (UserCreationPasswordConstraintException e) {
+            e.printStackTrace();
+        }
+        assertTrue("The password is incorrect for the selected user.",cond);
+        System.out.println("Finished test invalid Account Modify");
+    }
     @After
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }

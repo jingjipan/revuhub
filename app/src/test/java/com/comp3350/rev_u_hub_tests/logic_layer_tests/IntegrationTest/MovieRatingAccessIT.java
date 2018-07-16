@@ -38,7 +38,7 @@ public class MovieRatingAccessIT {
     public void testMovieRatingAccess() {
         double rating=0;
         int count=0;
-
+        System.out.println("Start testing Movie Rating access");
         try{
             movieRatings.hasRating("Thor");
         }catch(MovieDataNotFoundException e){
@@ -62,5 +62,6 @@ public class MovieRatingAccessIT {
     public void tearDown() {
         // reset DB
         this.tempDB.delete();
+        Services.clean();
     }
 }
