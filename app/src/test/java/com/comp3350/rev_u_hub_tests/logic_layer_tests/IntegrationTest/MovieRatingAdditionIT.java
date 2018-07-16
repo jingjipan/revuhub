@@ -4,6 +4,7 @@ import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.logic_layer.MovieSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.RatingManagement;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataInvalidRatingException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieRatings;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
@@ -35,7 +36,8 @@ public class MovieRatingAdditionIT {
     }
 
     @Test
-    public void testMovieRatingAccess() {
+    public void testMovieRatingAddtion() {
+        System.out.println("Start testing Movie Rating addition");
         try{
             movieRatings.hasRating("Thor");
         }catch(MovieDataNotFoundException e){
@@ -60,8 +62,30 @@ public class MovieRatingAdditionIT {
         assertTrue("movie rating should be 3.0",rating==3.0);
         assertTrue("rating count should be 2",count==2);
 
-        System.out.println("Finished test Movie Rating access");
+        System.out.println("Finished test Movie Rating addition");
     }
+    @Test
+    public void testMovieRatingInvalidAddtion() {
+        System.out.println("Start testing Movie Rating Invalid addition");
+        boolean cond = false;
+        try{
+            movieRatings.hasRating("Thor");
+        }catch(MovieDataNotFoundException e){
+            e.printStackTrace();
+        }
+
+        try{
+            movieRatings.addRating("Thor",6);
+        }catch (MovieDataInvalidRatingException e){
+            cond = true;
+        }catch(MovieDataException e){
+            e.printStackTrace();
+        }
+        assertTrue("Reviews must be an integer from 1 to 5", cond);
+
+        System.out.println("Finished test Movie Rating Invalid addition");
+    }
+
 
     @After
     public void tearDown() {

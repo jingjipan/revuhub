@@ -24,7 +24,5 @@ import org.junit.runners.Suite;
         MovieRatingAdditionIT.class,
         ReviewAccessIT.class
 })
-
 public class IntegrationTests {
-
 }

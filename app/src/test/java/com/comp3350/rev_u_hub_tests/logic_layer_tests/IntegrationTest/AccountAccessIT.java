@@ -33,13 +33,14 @@ public class AccountAccessIT {
 
     @Test
     public void testUserObject() {
+        System.out.println("Start testing Access Account");
         UserObject userObject;
         userObject = userSearchEngine.getUserSimple("admin");
         assertNotNull("admin user should in the database",userObject);
         assertTrue("admin".equals(userObject.getUserName()));
         assertTrue("123456".equals(userObject.getPassWord()));
 
-        System.out.println("Finished test AccessAccount");
+        System.out.println("Finished test Access Account");
     }
 
     @After
