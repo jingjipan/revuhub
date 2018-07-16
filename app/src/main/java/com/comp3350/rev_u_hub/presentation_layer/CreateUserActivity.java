@@ -14,8 +14,15 @@ import android.widget.Toast;
 import com.comp3350.rev_u_hub.Application.Services;
 import com.comp3350.rev_u_hub.R;
 import com.comp3350.rev_u_hub.data_objects.UserObject;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationFailedException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordMismatchException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationUsernameConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataNotFoundException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataWrongPasswordException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
@@ -54,11 +61,42 @@ public class CreateUserActivity extends AppCompatActivity {
                         }
                     }
                     catch(UserDataException e) {
-                        Toast.makeText(CreateUserActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        String userMessage;
+                        if(e instanceof UserDataNotFoundException){
+                            userMessage = "No user with that username was found.";
+                        }
+                        else if(e instanceof UserDataWrongPasswordException) {
+                            userMessage = "Username or Password was incorrect.";
+                        }
+                        else {
+                            userMessage = "Something went wrong on our end.";
+                        }
+                        Toast.makeText(CreateUserActivity.this, userMessage, Toast.LENGTH_SHORT).show();
+                        System.out.println(e.getMessage());
                     }
                 }
                 catch (UserCreationException e) {
-                    Toast.makeText(CreateUserActivity.this, e.getMessage() , Toast.LENGTH_SHORT).show();
+                    String userMessage;
+                    if(e instanceof UserCreationFailedException) {
+                        userMessage = "Creation Failed.";
+                    }
+                    else if(e instanceof UserCreationDuplicateException) {
+                        userMessage = "User already exists.";
+                    }
+                    else if(e instanceof UserCreationUsernameConstraintException) {
+                        userMessage = "Username must not be empty.";
+                    }
+                    else if(e instanceof UserCreationPasswordConstraintException) {
+                        userMessage = "Password must not be empty.";
+                    }
+                    else if(e instanceof UserCreationPasswordMismatchException) {
+                        userMessage = "The passwords given do not match.";
+                    }
+                    else {
+                        userMessage = "Something went wrong on our end.";
+                    }
+                    Toast.makeText(CreateUserActivity.this, userMessage, Toast.LENGTH_SHORT).show();
+                    System.out.println(e.getMessage());
                 }
             }
         });

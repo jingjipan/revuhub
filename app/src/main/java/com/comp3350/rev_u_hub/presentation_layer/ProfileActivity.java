@@ -66,7 +66,7 @@ public class ProfileActivity extends ListActivity {
         }
         catch (MovieDataNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(ProfileActivity.this,"No movies were found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this,"No movies were found.", Toast.LENGTH_SHORT).show();
         }
 
         lv = getListView();
