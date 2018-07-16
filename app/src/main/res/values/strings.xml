@@ -20,6 +20,6 @@
     <string name="Submit">Submit</string>
     <string name="ChangePassword">Change Password</string>
     <string name="title_activity_profile">ProfileActivity</string>
-    <string name="topRatedMovies">Top Rated Movies</string>
+    <string name="topRatedMovies">Overall Top Rated Movies</string>
     <string name="myProfile">My Profile</string>
 </resources>
