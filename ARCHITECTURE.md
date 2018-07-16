@@ -168,12 +168,15 @@ The CreateUserActivity sets it's content to activity_create_user.xml. This is a 
 
 ### HomeActivity
 
-The HomeActivity sets it's content to activity_main.xml. This is a simple search page, for searching for an existing movie. This activity was formally known as MainActivity.
+The HomeActivity sets it's content to activity_main.xml. This is a simple search page, for searching for an existing movie. This activity was formally known as MainActivity. It also has a search for an existing user on the application which will take you to their profile and a "My Profile" button which will navigate the current user to their profile.
 
 ### MovieOverviewActivity
 
 The MovieOverviewActivity sets it's content to activity_movie_overview.xml. This page shows all the content for a searched movie, and all of the reviews left for that movie. It also allows you to add a review to a movie if the current user hasn't left a review on that movie before. To test this, create a new user and leave a review on any movie.
 
+### ProfileActivity
+
+The Profile Activity sets it's content to activity_profile.xml. This page shows the top 3 rated movies on the application (which serves as a suggestion list) and if the current user that is logged in is equal to the user profile page, then it allows that user to edit their password.
 
 ## Application
 
@@ -229,3 +232,17 @@ One unit test class exists for each of the public interfaces in the logic layer:
 * A description of each test, including the randomized object it is operating on and any exceptions returned, is printed to the console during testing
 
 One unit test class, `MovieInfoUnitTest`, also exists to test the copy constructor in `MovieObject`
+
+    package com.comp3350.rev_u_hub_androidTest
+
+Acceptance Tests
+
+All acceptance tests can be run by running the `AllAcceptanceTests` class.
+
+One acceptance test class exists for each user story (except for the user stories that can be tested by one test)
+
+* Each of these test classes test a user story or multiple user stories (in the case of testing viewing all the different movie information, this can be done in one test)
+* `LoginTest tests if a user can login using an existing user i.e. user=admin password=123456 (it also tests the failure case of an incorrect password)
+* `CreateUserTest tests if a new user can be created and then if it persists when navigating to th login page and trying to log in with the new information
+* `SearchMovieTest tests to see if an existing user can search an existing movie i.e. user=admin password=123456 movie=Deadpool
+* `
