@@ -11,12 +11,12 @@ import com.robotium.solo.Solo;
 import junit.framework.Assert;
 
 
-public class SearchMovieTest extends ActivityInstrumentationTestCase2<LoginActivity> {
+public class UserProfileTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
     private Solo solo;
     private SearchView mSearchView;
 
-    public SearchMovieTest() {
+    public UserProfileTest() {
         super(LoginActivity.class);
     }
 
@@ -42,20 +42,13 @@ public class SearchMovieTest extends ActivityInstrumentationTestCase2<LoginActiv
         solo.clickOnView(solo.getView("loginButton"));
 
         solo.waitForActivity("HomeActivity");
-        String movieName = "Deadpool";
-        View search = solo.getView(R.id.movieSearch);
-        ((SearchView) search).setQuery(movieName, true);
+        String usernameSearch = "admin";
+        View search = solo.getView(R.id.userSearch);
+        ((SearchView) search).setQuery(usernameSearch, true);
 
-        solo.waitForActivity("MovieOverviewActivity");
+        solo.waitForActivity("ProfileActivity");
 
-        // Check for moviename
-        assertTrue(solo.searchText(movieName));
-
-        // Check for synopsis
-        String synopsis = "A fast-talking mercenary with a morbid sense of humor is subjected to a rogue experiment that leaves him with accelerated healing powers and a quest for revenge.";
-        assertTrue(solo.searchText(synopsis));
-
-        String cast = "Ryan Reynolds, Karan Soni, Ed Skrein, Michael Benyaer";
-        assertTrue(solo.searchText(cast));
+        // Check for username
+        assertTrue(solo.searchText(usernameSearch));
     }
 }

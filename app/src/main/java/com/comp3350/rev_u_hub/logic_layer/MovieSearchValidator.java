@@ -5,7 +5,7 @@ import com.comp3350.rev_u_hub.logic_layer.exceptions.MovieDataNotFoundException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.MovieSearch;
 
 public class MovieSearchValidator {
-    MovieSearch myMovieSearch;
+    private MovieSearch myMovieSearch;
 
     public MovieSearchValidator(MovieSearch setSearch) {
         myMovieSearch = setSearch;

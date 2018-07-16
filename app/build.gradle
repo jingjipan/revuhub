@@ -24,6 +24,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-vector-drawable:27.1.1'
+    implementation 'com.jayway.android.robotium:robotium-solo:5.3.1'
     testImplementation 'junit:junit:4.12'
     testImplementation group: 'com.google.guava', name: 'guava', version: '25.1-jre'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
