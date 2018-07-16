@@ -3,7 +3,7 @@ The purpose of the project is to simulate a movie review application similar to 
 
 You run the project by hitting run in android studio which will install the application to the specified location. 
 
-* ## Other useful documents 
+## Other useful documents 
 * ARCHITECTURE.md
 * Architecture image.txt
 * RETROSPECTIVE.md
