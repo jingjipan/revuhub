@@ -6,6 +6,7 @@ import com.comp3350.rev_u_hub.logic_layer.AccountManagement;
 import com.comp3350.rev_u_hub.logic_layer.UserSearchEngine;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationDuplicateException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationException;
+import com.comp3350.rev_u_hub.logic_layer.exceptions.UserCreationPasswordConstraintException;
 import com.comp3350.rev_u_hub.logic_layer.exceptions.UserDataException;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.AccountManager;
 import com.comp3350.rev_u_hub.logic_layer.interfaces.UserSearch;
@@ -59,6 +60,8 @@ public class AccountModifyIT {
         try {
             accountManager.changePassword("test123", "123456", "654321");
         }catch (UserDataException e) {
+            e.printStackTrace();
+        } catch (UserCreationPasswordConstraintException e) {
             e.printStackTrace();
         }
         assertTrue("test123".equals((userObject=myUserSearch.getUserSimple("test123")).getUserName()));

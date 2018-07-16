@@ -9,28 +9,20 @@ import com.comp3350.rev_u_hub.logic_layer.interfaces.UserLogin;
 
 public class CurrentUserStorage implements UserLogin {
 
-    private UserSearch myUserSearch;
+    private UserSearchValidator myUserSearchValidator;
     private UserObject currentUser;
 
     public CurrentUserStorage(UserSearch userSearch) {
-        myUserSearch = userSearch;
+        myUserSearchValidator = new UserSearchValidator(userSearch);
     }
 
     // If credentials are correct, sets the current user
     public UserObject userLogin(String username, String password) throws UserDataException {
-        UserObject user = myUserSearch.getUserSimple(username);
+        UserObject user = myUserSearchValidator.getUser(username);
 
-        if (user.isEmpty()) {
-            user = myUserSearch.getUser(username);
-            if (user.isEmpty())
-                throw new UserDataNotFoundException("No user with that username was found.");
-            else throw new UserDataNotFoundException("No user with that username was found." +
-                    "  Did you mean "+user.getUserName()+"?");
-        } else {
-          if (!user.getPassWord().equals(password))
+        if (!user.getPassWord().equals(password))
               throw new UserDataWrongPasswordException(
                       "The password entered is incorrect for this user.");
-        }
 
         currentUser = user;
         return currentUser;

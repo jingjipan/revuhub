@@ -20,8 +20,8 @@ import java.util.List;
 
 public class UserMovieStats implements UserMovieProfile{
 
-    private MovieSearch movieSearch;
-    private UserSearch userSearch;
+    private MovieSearchValidator movieSearchValidator;
+    private UserSearchValidator userSearchValidator;
     private ReviewSearch reviewSearch;
     private MovieRatings movieRatings;
 
@@ -29,8 +29,8 @@ public class UserMovieStats implements UserMovieProfile{
                           UserSearch setUserSearch,
                           ReviewSearch setReviewSearch,
                           MovieRatings setMovieRatings) {
-        movieSearch = setMovieSearch;
-        userSearch = setUserSearch;
+        movieSearchValidator = new MovieSearchValidator(setMovieSearch);
+        userSearchValidator = new UserSearchValidator(setUserSearch);
         reviewSearch = setReviewSearch;
         movieRatings = setMovieRatings;
     }
@@ -44,16 +44,17 @@ public class UserMovieStats implements UserMovieProfile{
         UserObject user;
         MovieObject movie;
 
-        user = userSearch.getUserSimple(username);
-        if (user.isEmpty()) throw new UserDataNotFoundException("The user "+username+
-            " does not exist.");
+        user = userSearchValidator.getUserSimple(username);
 
         reviewList = reviewSearch.getReviews(user);
 
         for(int i=0; i<reviewList.size(); i++) {
-            movie = movieSearch.getMovieSimple(reviewList.get(i).getMovieName());
-            if (movie.isEmpty()) throw new MovieDataNotFoundException("A review was found for "+
-                "a non-existent movie.");
+            try {
+                movie = movieSearchValidator.getMovieSimple(reviewList.get(i).getMovieName());
+            } catch (MovieDataNotFoundException e) {
+                throw new MovieDataNotFoundException("A review was found for " +
+                        "a non-existent movie.");
+            }
             movieList.add(movie);
         }
 
@@ -67,9 +68,7 @@ public class UserMovieStats implements UserMovieProfile{
         List<ReviewObject> reviewList;
         UserObject user;
 
-        user = userSearch.getUserSimple(username);
-        if (user.isEmpty()) throw new UserDataNotFoundException("The user "+username+
-                " does not exist.");
+        user = userSearchValidator.getUserSimple(username);
 
         reviewList = reviewSearch.getReviews(user);
 
@@ -86,9 +85,7 @@ public class UserMovieStats implements UserMovieProfile{
         double rating;
         int notRated = 0;
 
-        user = userSearch.getUserSimple(username);
-        if (user.isEmpty()) throw new UserDataNotFoundException("The user "+username+
-                " does not exist.");
+        user = userSearchValidator.getUserSimple(username);
 
         reviewList = reviewSearch.getReviews(user);
 
